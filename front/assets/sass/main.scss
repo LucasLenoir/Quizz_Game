@@ -1,0 +1,84 @@
+@import "./base/reset";
+@import "./base/polices";
+@import "./utils/variables";
+@import "./utils/mixins";
+@import "./layouts/header";
+@import "./layouts/form";
+body {
+    background: $bg-primary;
+}
+#canvas1 {
+    position: absolute;
+    z-index: -100;
+}
+// ACCUEIL
+.main {
+    @include marginLR;
+    @include marginTop;
+    &__title {
+        @include styleTitle(65px);
+        @include centerText;
+        @include textShadow;
+        // letter-spacing: .5rem;
+    }
+    .list__categorie {
+        @include marginTop(0rem);
+        @include styleText(35px);
+        @include styleNone;
+        @include centerText;
+        @include flex(center, column, center);
+        &__btn {
+            @include marginTop;
+            @include boxShadow(49px);
+            @include paddingTB;
+            @include hoverTransitionElement(0.25s);
+            width: 50%;
+            &:hover {
+                @include boxShadow($radius: 49px, $color: $color-purple, $color-inside: $color-white);
+                color: $primary-color;
+                transform: translateY(-10px) scale(1.05);
+            }
+        }
+    }
+// GAME START
+
+    &__section{
+        text-align: center;
+        &__timer {
+            @include flex($item-align: center);
+            &__bar {
+                width: 90%;
+                height: 1.8rem;
+                @include boxShadow($radius: 2rem);
+            }
+        }
+        &__grid {
+            @include marginTop(6rem);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 2rem;
+            &__response {
+                @include boxShadow;
+                @include styleText;
+                @include paddingTB;
+                text-align: center;
+                @include hoverTransitionElement;
+                &:hover {
+                    transform: scale(1.05)
+                }
+            }
+        }
+        &__btn {
+            @include boxShadow;
+            @include styleTitle($color: $secondary-color);
+            @include hoverTransitionElement;
+            @include paddingTB(1rem, 1rem);
+            border: none;
+            margin: 0 auto;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+}

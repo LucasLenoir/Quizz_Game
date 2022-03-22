@@ -1,0 +1,373 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Game Sans Serif';
+  src: url("../../assets/font/game_sans_serif_7.ttf");
+}
+
+@font-face {
+  font-family: 'Many Years Higher';
+  src: url("../../assets/font/Many Years Higher.ttf");
+}
+
+@font-face {
+  font-family: 'Game Sans Serif';
+  src: url("../../assets/font/game_sans_serif_7.ttf");
+}
+
+@font-face {
+  font-family: 'Many Years Higher';
+  src: url("../../assets/font/Many Years Higher.ttf");
+}
+
+@font-face {
+  font-family: 'Game Sans Serif';
+  src: url("../../assets/font/game_sans_serif_7.ttf");
+}
+
+@font-face {
+  font-family: 'Many Years Higher';
+  src: url("../../assets/font/Many Years Higher.ttf");
+}
+
+header {
+  border-radius: 0;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+}
+
+header .header {
+  margin: 0 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: initial;
+  -webkit-box-direction: initial;
+      -ms-flex-direction: initial;
+          flex-direction: initial;
+  -webkit-box-align: initial;
+      -ms-flex-align: initial;
+          align-items: initial;
+}
+
+header .header__logo {
+  width: 350px;
+}
+
+header .header__logo img {
+  width: 100%;
+}
+
+header .header .nav {
+  width: 65%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header .header .nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: initial;
+  -webkit-box-direction: initial;
+      -ms-flex-direction: initial;
+          flex-direction: initial;
+  -webkit-box-align: initial;
+      -ms-flex-align: initial;
+          align-items: initial;
+}
+
+header .header .nav__link {
+  list-style: none;
+  text-decoration: none;
+  -webkit-transition: all .3s linear;
+  transition: all .3s linear;
+}
+
+header .header .nav__link a {
+  list-style: none;
+  text-decoration: none;
+  font-size: 25px;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  display: block;
+}
+
+header .header .nav__link:hover {
+  text-shadow: 0px 4px 12px #872E9F;
+  -webkit-transform: translateY(-10px) scale(1.3);
+          transform: translateY(-10px) scale(1.3);
+}
+
+@font-face {
+  font-family: 'Game Sans Serif';
+  src: url("../../assets/font/game_sans_serif_7.ttf");
+}
+
+@font-face {
+  font-family: 'Many Years Higher';
+  src: url("../../assets/font/Many Years Higher.ttf");
+}
+
+.main__form {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 25px;
+  font-family: "Game Sans Serif";
+  color: #fff;
+}
+
+.main__form input:invalid {
+  border-color: #D82148;
+}
+
+.main__form input:valid {
+  border-color: #00BD56;
+}
+
+.main__form #questions {
+  font-size: 2rem;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  border-radius: 0;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  background: transparent;
+  padding: 0.5rem;
+  width: 5%;
+  text-align: end;
+}
+
+.main__form__unit_container {
+  margin-top: 1rem;
+}
+
+.main__form__unit_container input {
+  font-size: 1.5rem;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  border-radius: 0;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  background: transparent;
+  padding: 0.5rem;
+  min-width: 30%;
+}
+
+.main__form__unit_container label {
+  display: inline-block;
+  min-width: 10%;
+  text-align: left;
+}
+
+.main__form__btn {
+  font-size: 45px;
+  font-family: "Many Years Higher";
+  color: #111;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin-top: 5rem;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  position: relative;
+  background: transparent;
+  width: 30%;
+  border: none;
+}
+
+.main__form__btn::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(#fff, #872E9F 150%);
+  -webkit-filter: blur(1.1rem);
+          filter: blur(1.1rem);
+}
+
+.main__form__btn--blue {
+  border-radius: 0;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+.main__form__btn--blue::after {
+  background: radial-gradient(#2824D3, #2824D3 200%);
+}
+
+.main__form__btn:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+body {
+  background: #111;
+}
+
+#canvas1 {
+  position: absolute;
+  z-index: -100;
+}
+
+.main {
+  margin: 0 10%;
+  margin-top: 2rem;
+}
+
+.main__title {
+  font-size: 65px;
+  font-family: "Many Years Higher";
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: 0px 4px 12px #872E9F;
+}
+
+.main .list__categorie {
+  margin-top: 0rem;
+  font-size: 35px;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  list-style: none;
+  text-decoration: none;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main .list__categorie__btn {
+  margin-top: 2rem;
+  border-radius: 49px;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  padding: 2rem 0;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+  cursor: pointer;
+  width: 50%;
+}
+
+.main .list__categorie__btn:hover {
+  border-radius: 49px;
+  -webkit-box-shadow: -2px 4px 20px -9px #872E9F, inset 3px 0px 7px 4px rgba(255, 255, 255, 0.7);
+          box-shadow: -2px 4px 20px -9px #872E9F, inset 3px 0px 7px 4px rgba(255, 255, 255, 0.7);
+  color: #fff;
+  -webkit-transform: translateY(-10px) scale(1.05);
+          transform: translateY(-10px) scale(1.05);
+}
+
+.main__section {
+  text-align: center;
+}
+
+.main__section__timer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: initial;
+  -webkit-box-direction: initial;
+      -ms-flex-direction: initial;
+          flex-direction: initial;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main__section__timer__bar {
+  width: 90%;
+  height: 1.8rem;
+  border-radius: 2rem;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+}
+
+.main__section__grid {
+  margin-top: 6rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-bottom: 2rem;
+}
+
+.main__section__grid__response {
+  border-radius: 0;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  font-size: 25px;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  padding: 2rem 0;
+  text-align: center;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+
+.main__section__grid__response:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.main__section__btn {
+  border-radius: 0;
+  -webkit-box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+          box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  font-size: 40px;
+  font-family: "Many Years Higher";
+  color: #111;
+  text-transform: uppercase;
+  font-weight: normal;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  padding: 1rem 1rem;
+  border: none;
+  margin: 0 auto;
+}
+
+.main__section__btn:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,36 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+
+header {
+    @include boxShadow;
+    .header {
+        @include marginLR;
+        &__logo {
+            width: 350px;
+            img {
+                width: 100%;
+            }
+        }
+        @include flex;
+        .nav {
+            width: 65%;
+            @include centerBlock;
+            ul {
+                @include flex;
+            }
+            &__link {
+                @include styleNone;
+                transition: all .3s linear;
+                a {
+                    @include styleNone;
+                    @include styleText;
+                    display: block;
+                }
+                &:hover {
+                    @include textShadow;
+                    transform: translateY(-10px)scale(1.3);
+                }
+            }
+        }
+    }
+}

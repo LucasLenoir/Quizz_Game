@@ -1,0 +1,22 @@
+{
+    "name": "quiz_game",
+    "version": "1.0.0",
+    "description": "3 weeks deadline project",
+    "main": "server.js",
+    "scripts": {
+        "sass": "sass --watch ./assets/sass/main.scss:./assets/css/style.css"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LucasLenoir/Quiz_Game.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/LucasLenoir/Quiz_Game/issues"
+    },
+    "homepage": "https://github.com/LucasLenoir/Quiz_Game#readme",
+    "dependencies": {
+        "sass": "^1.49.9"
+    }
+}

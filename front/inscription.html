@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script defer src="./front/assets/js/main.js"></script>
+</head>
+
+<body>
+    <main>
+        <form action="inscription" method="POST" name="inscription" id="inscription">
+            <H2 class="text-center">Inscription</H2>
+            <div class="form__group">
+                <input type="text" name="username" class="form-control" placeholder="username" required="required"
+                    autocomplete="off">
+            </div>
+            <div class="form__groupe">
+                <input type="email" name="email" id="email" required="required" autocomplete="off">
+            </div>
+            <div class="form__group">
+                <input type="password" name="password" id="password" class="control" placeholder="Password"
+                    required="required" autocomplete="off">
+            </div>
+            <div class="form__group">
+                <input type="password" name="password_retype" id="password_retype" class="control"
+                    placeholder="re-type Password" required="required" autocomplete="off">
+            </div>
+            <div class="form__group">
+                <button type="submit" class="btn">Inscription</button>
+            </div>
+        </form>
+
+
+
+    </main>
+</body>
+
+</html>

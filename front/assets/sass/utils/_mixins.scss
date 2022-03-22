@@ -1,0 +1,70 @@
+@import "./variables";
+@import "../base/polices";
+
+// MARGIN 
+@mixin marginLR {
+    margin: 0 10%;
+}
+@mixin marginTop($size: 2rem) {
+    margin-top: $size;
+    
+}
+// PADDING 
+@mixin paddingTB($height: 2rem, $width: 0) {
+    padding: $height $width;
+}
+
+// FLEX
+@mixin flex($align: space-between, $direction :initial, $item-align: initial) {
+    display: flex;
+    justify-content: $align;
+    flex-direction: $direction;
+    align-items: $item-align;
+}
+@mixin centerBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+@mixin centerText {
+    text-align: center;
+}
+// STYLE
+@mixin styleNone {
+    list-style: none;
+    text-decoration: none;
+}
+@mixin styleText($size: $text-size, $color: $primary-color) {
+    font-size: $size;
+    font-family: "Game Sans Serif";
+    color: $color;
+}
+@mixin styleTitle($size: $title-size, $color: $primary-color) {
+    font-size: $size;
+    font-family: "Many Years Higher";
+    color: $color;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+//INPUT
+@mixin styleInput($size-text: 2rem) {
+    @include styleText($size-text);
+    @include boxShadow();
+    background: transparent;;
+    padding: 0.5rem;
+}
+// SHADOW 
+@mixin boxShadow($radius: 0, $color: $color-white, $color-inside: #000000) {
+    border-radius: $radius;
+    box-shadow: -2px 4px 20px -9px $color,
+                inset 3px 0px 7px 4px rgba($color-inside, $alpha: 0.7);
+}
+@mixin textShadow($color: $color-purple) {
+    text-shadow: 0px 4px 12px $color;
+}
+
+// HOVER TRANSITION
+@mixin hoverTransitionElement($time: 0.3s) {
+    transition: all $time linear;
+    cursor: pointer;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Brain Quizz / Accueil</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <canvas id="canvas1"></canvas>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header">
+            <figure class="header__logo">
+                <img src="./assets/img/logo.png" alt="Logo site">
+            </figure>
+            <nav class="nav">
+                <ul>
+                    <li class="nav__link"><a href="assets/pages/inscription.html">Inscription</a></li>
+                    <li class="nav__link"><a href="./front/assets/pages/connexion.html">Connexion</a></li>
+                    <li class="nav__link"><a href="./index.html">List Quiz</a></li>
+                    <li class="nav__link"><a href="./front/assets/pages/contact.html">Contacts</a></li>
+                    <li class="nav__link nav__link--active"><a href="#">Accueil</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+        <h2 class="main__title">CHOOSE UR CATEGORY</h2>
+        <div class="main__container">
+            <ul class="list__categorie">
+                <li class="list__categorie__btn" data-number="3">Culture Du Point G</li>
+                <li class="list__categorie__btn" data-number="2">Sport</li>
+                <li class="list__categorie__btn" data-number="1">Cine</li>
+            </ul>
+        </div>
+        <form action="#" class="main__form">
+            <form action="#" class="main__form">
+                <div>
+                    <label for="questions">Number of questions : </label>
+                    <input type="number" name="questions" id="questions" placeholder="10" max="20">
+                </div>
+                <button type="submit" class="main__form__btn">PLAY</button>
+            </form>
+            </div>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="./app.js"></script>
+    <script src="./front/assets/js/main.js"></script>
+</body>
+
+</html>
