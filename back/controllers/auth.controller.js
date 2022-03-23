@@ -4,7 +4,6 @@ const { QueryTypes } = require("sequelize");
 
 module.exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
-  
 
   const checkUser = await sequelize.query(
     "SELECT * FROM users where username = :username or email = :email",
@@ -15,7 +14,9 @@ module.exports.signUp = async (req, res) => {
     }
   );
 
-  if (checkUser) {
+  
+  
+  if (checkUser.length > 0) {
     console.log("user already exists");
     console.log("email already exists");
     res.status(400).send("ERROR, user or email already exists");
@@ -39,13 +40,13 @@ module.exports.login = async (req, res) => {
   const checkUser = await sequelize.query(
     "SELECT * FROM users WHERE username = :username AND password = :password",
     {
-      // raw: true,
+      raw: true,
       replacements: { username, password },
       type: QueryTypes.SELECT,
     }
   );
-  console.log(checkUser);
-  if (checkUser) {
+
+  if (checkUser.length > 0) {
     res.status(201).send(checkUser);
     console.log("User found and logged");
     console.log(checkUser);
