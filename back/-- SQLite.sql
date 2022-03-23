@@ -61,9 +61,12 @@ CREATE TABLE IF NOT EXISTS responses (
 --
 DROP TABLE IF EXISTS stat_users;
 CREATE TABLE IF NOT EXISTS stat_users (
-    id_user INTEGER NOT NULL,
-    id_category INTEGER NOT NULL,
-    id_quizz INTEGER NOT NULL
+    id_stat INTEGER NOT NULL PRIMARY KEY,
+    id_user INTEGER ,
+    id_category INTEGER,
+    score INTEGER,
+    id_quizz INTEGER 
+    FOREIGN KEY (id_user) REFERENCES user (id_user) ON DELETE CASCADE
 );
 -- --------------------------------------------------------
 --

@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/dbConfig");
 const { isEmail } = require("validator");
 const bcrypt = require("bcrypt");
 
@@ -9,41 +9,50 @@ const userModel = sequelize.define(
     //Model attributes are defined here
     id_user: {
       type: DataTypes.INTEGER,
-      // autoIncrement: true,
       primaryKey: true,
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
-      lowercase: true,
-      validate: [isEmail],
+      // lowercase: true,
+      // validate: [isEmail],
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      required: true,
       max: 1024,
       minLength: 6,
     },
-    bio: {
-      type: DataTypes.STRING,
-      max: 1024,
-    },
-    picture: {
-      type: DataTypes.STRING,
-      default: "./front/asset??????",
-    },
+    // bio: {
+    //   type: DataTypes.STRING,
+    //   max: 1024,
+    // },
+    // picture: {
+    //   type: DataTypes.STRING,
+    // },
   },
   {
+    hooks: {
+      beforeCreate: (users) => {
+        console.log("salut");
+        const salt = bcrypt.genSaltSync();
+        users.password = bcrypt.hashSync(users.password, salt);
+      },
+    },
+
     timestamps: false,
     freezeTableName: true,
     tableName: "users",
   }
 );
+
+// userModel.beforeCreate(async () => {
+//   console.log(hash);
+//   user.password = hash;
+//   // }).catch(err =>{
+//   //   throw new Error();
+// });
 
 //play function before saving in DB
 // userModel.prototype.crypt = () => {
