@@ -4,7 +4,7 @@ const { QueryTypes } = require("sequelize");
 
 module.exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
-  console.log(req.body);
+  
 
   const checkUser = await sequelize.query(
     "SELECT * FROM users where username = :username or email = :email",
@@ -20,7 +20,7 @@ module.exports.signUp = async (req, res) => {
     console.log("email already exists");
     res.status(400).send("ERROR, user or email already exists");
   } else {
-    const insertUser = await sequelize.query(
+    const CreateUser = await sequelize.query(
       "INSERT INTO users (username, email, password) VALUES(:data)",
       {
         raw: true,
@@ -29,10 +29,28 @@ module.exports.signUp = async (req, res) => {
       }
     );
 
-    res.status(201).send(insertUser);
+    res.status(201).send(CreateUser);
   }
 };
 
-// module.exports.login = async (req, res) =>{
+module.exports.login = async (req, res) => {
+  const { username, password } = req.body;
 
-// }
+  const checkUser = await sequelize.query(
+    "SELECT * FROM users WHERE username = :username AND password = :password",
+    {
+      // raw: true,
+      replacements: { username, password },
+      type: QueryTypes.SELECT,
+    }
+  );
+  console.log(checkUser);
+  if (checkUser) {
+    res.status(201).send(checkUser);
+    console.log("User found and logged");
+    console.log(checkUser);
+  } else {
+    res.status(400);
+    console.log("user not found");
+  }
+};
