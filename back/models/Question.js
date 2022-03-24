@@ -1,14 +1,16 @@
 const sequelize = require("../config/dbConfig");
+
 const { DataTypes } = require("sequelize");
 
-const Question = sequelize.define(
+const questionModel = sequelize.define(
   "questions",
 
   {
     //Model attributes are defined here
     id_question: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       primaryKey: true,
+      
     },
     id_category: {
       type: DataTypes.INTEGER,
@@ -28,4 +30,4 @@ const Question = sequelize.define(
   },
   { freezeTableName: true }
 );
-module.exports = { Question };
+module.exports = questionModel;
