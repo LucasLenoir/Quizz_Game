@@ -65,7 +65,9 @@ CREATE TABLE IF NOT EXISTS stat_users (
     id_user INTEGER,
     id_category INTEGER,
     score INTEGER,
-    id_quizz INTEGER FOREIGN KEY (id_user) REFERENCES user (id_user) ON DELETE CASCADE
+    number_question INTEGER ,
+    FOREIGN KEY (id_user) REFERENCES users (id_user) ON DELETE CASCADE
+    FOREIGN KEY (id_category) REFERENCES categories (id_category) ON DELETE CASCADE
 );
 -- --------------------------------------------------------
 --
@@ -75,12 +77,12 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
     id_user INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     username INTEGER NOT NULL,
-    email varchar(200) NOT NULL,
-    password varchar(255) NOT NULL
+    email varchar(200) NOT NULL, 
+    password varchar(255) NOT NULL,
+    bio varchar(200),
+    picture varchar(250)
 );
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
-;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
-;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
-;
+INSERT INTO users (username, email, password, bio)
+VALUES ('luacs', 'lucas@lucas.fr', 'lucas', 'champion'),
+    ('antho', 'antho@antho.fr', 'antho', 'not a champion'),
+    ('dylan', 'dydy@dydy.fr', 'dydy', 'challenger');

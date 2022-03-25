@@ -4,6 +4,41 @@ const { QueryTypes } = require("sequelize");
 const questionModel = require("../models/Question");
 const responsesModel = require("../models/response");
 const quizzModel = require("../models/Quizz");
+const statsModel = require("../models/StatUsers");
+
+
+
+//Get all user's info to display
+module.exports.getUserInfo = async (req, res) => {
+  const data = req.body;
+
+  const infos = await userModel.findAll({ where: { id_user: id_user } });
+  if (quizz) {
+    res.status(200).send(infos);
+  } else {
+    res.status(401).send("ERROR COULDN'T FIND ANY INFO");
+  }
+};
+module.exports.updateUserInfo = async (req, res) => {
+  const datas = req.body;
+  const id_user = datas[0].id_user;
+  const username = datas[0].username;
+  const password = datas[0].password;
+  const picture = datas[0].picture;
+  const bio = datas[0].bio;
+
+  const udpatded = userModel.update({
+    username: username,
+    password: password,
+    picture: picture,
+    bio: bio,
+  });
+  if (udpatded) {
+    res.status(200).send("profile updated");
+  } else {
+    res.status(401).send("ERROR COULDN'T UPDATE INFO");
+  }
+};
 
 module.exports.getStats = async (req, res) => {
   const { user } = req.body;
@@ -16,6 +51,7 @@ module.exports.getStats = async (req, res) => {
       type: QueryTypes.SELECT,
     }
   );
+  res.send(200).send(profile);
 };
 
 module.exports.create = async (req, res) => {
@@ -69,5 +105,69 @@ module.exports.getQuestionsByQuizz = async (req, res) => {
     console.log("questions found");
   } else {
     res.status(400).send("ERROR COULDN'T LOAD THE QUIZZ");
+  }
+};
+
+module.exports.updateQuizz = async (req, res) => {
+  const datas = req.body;
+  for (i in datas) {
+    const id_quizz = datas[i].id_quizz;
+    const name = datas[i].name;
+    const id_question = datas[i].id_question;
+    const id_category = datas[i].id_category;
+    const question = datas[i].question;
+    const response_1 = datas[i].response_1;
+    const response_2 = datas[i].response_2;
+    const response_3 = datas[i].response_3;
+    const response_4 = datas[i].response_4;
+
+    const updatedQuizzInfo = await quizzModel.update(
+      { id_category: id_category, name: name },
+      { where: id_quizz }
+    );
+  }
+  if (updatedQuizzInfo) {
+    res.status(201).send("Quizz Info updated");
+  } else {
+    res.status(400).send("ERROR COULDN'T UPDATE QUIZZ INFO");
+  }
+
+  const updatedquizzQuestion = await questionModel.update(
+    { id_category: id_category, name: name },
+    { where: id_question }
+  );
+
+  if (updatedquizzQuestion) {
+    res.status(201).send("Quizz Question updated");
+  } else {
+    res.status(400).send("ERROR COULDN'T UPDATE QUIZZ QUESTION");
+  }
+
+  const updateResponseQuizz = await responsesModel.update({
+    response_1: response_1,
+    response_2: response_2,
+    response_3: response_3,
+    response_4: response_4,
+  });
+  if (updatedquizzQuestion) {
+    res.status(201).send("Quizz Responses updated");
+  } else {
+    res.status(400).send("ERROR COULDN'T UPDATE QUIZZ RESPONSES");
+  }
+};
+
+module.exports.updateStats = async (req, res) => {
+  const data = req.body;
+
+  const updateStatsRes = await statsModel.create({
+    id_user: id_user,
+    id_category: id_category,
+    score: score,
+    number_question: number_question,
+  });
+  if (updateStatsRes) {
+    res.status(201).send("score updated");
+  } else {
+    res.status(401).send("EROOR SCORE NOT UPDATED");
   }
 };
