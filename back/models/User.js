@@ -35,7 +35,6 @@ const userModel = sequelize.define(
   {
     hooks: {
       beforeCreate: (users) => {
-        console.log("salut");
         const salt = bcrypt.genSaltSync();
         users.password = bcrypt.hashSync(users.password, salt);
       },
