@@ -81,6 +81,12 @@ body {
             }
         }
     }
+    &__score {
+        position: absolute;
+        bottom: 0;
+        right: 20%;
+        @include styleTitle;
+    }
 }
 .next__question {
     position: absolute;

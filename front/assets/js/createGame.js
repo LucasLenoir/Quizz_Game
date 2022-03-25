@@ -1,23 +1,43 @@
+const path = 'http://localhost:8000/api/';
 
-const titleMain = document.querySelector(".main__title");
 const main = document.querySelector("main");
+const containerCat = document.querySelector(".main__container");
+const btnPlay = document.querySelector(".main__form__btn");
+const mainForm = document.querySelector('.main__form');
+const titleMain = document.querySelector(".main__title");
 const btnCategory = document.querySelectorAll(".list__categorie__btn");
-let arrayCtegories = [];
-let question = 0;
 
-btnCategory.forEach(el => {
-    el.addEventListener("click", () => {
-        if (!arrayCtegories.includes(el.dataset["number"])) {
-            arrayCtegories.push(el.dataset["number"]);
-        } else arrayCtegories.splice(arrayCtegories.indexOf(el.dataset["number"]), 1);
-        console.log(arrayCtegories);
+const divScore = document.createElement('div');
+let arrayCategories = [];
+let points = 0;
+
+const chooseCategories = () => {
+    btnCategory.forEach(el => {
+        el.addEventListener("click", () => {
+            if (!arrayCategories.includes(el.dataset["number"])) {
+                arrayCategories.push(el.dataset["number"]);
+            } else arrayCategories.splice(arrayCategories.indexOf(el.dataset["number"]), 1);
+            console.log(arrayCategories);
+        });
+
     });
+}
+const startGame = () => {
+    btnPlay.addEventListener("click", (e) => {
+        e.preventDefault();
+        !arrayCategories[0] ? alert('Choisi une catégorie') : runSession();
+    });
+}
+const runSession = () => {
+    main.removeChild(containerCat);
+    main.removeChild(mainForm);
+    reqQuestion(path);
 
-});
+}
 const reqQuestion = (path) => {
     //fetch
     const newCat = {
-        categories: arrayCtegories
+        categories: arrayCategories
     }
     const myInit = {
         method: "POST",
@@ -29,7 +49,6 @@ const reqQuestion = (path) => {
             return res.json();
         })
         .then(response => {
-
             const allQuestions = response;
             createSection(allQuestions);
         })
@@ -57,42 +76,60 @@ const createSection = (fetchResponse) => {
     divTime.appendChild(imgTimer);
     divTime.appendChild(timeBar);
     sectionMain.appendChild(divTime);
+    score();
+
+    //racine function
     createQuestion(titleMain, fetchResponse, sectionMain, divTime, newQuestion);
-
-
 }
 
-const verficationBtn = (btn, title, section, grid, array, timeBar, nextQuestion) => {
+const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion) => {
     btn.addEventListener("click", (e) => {
         console.log(timeBar)
         e.preventDefault();
         if (btn.dataset.id != 1) {
             console.log('not good bitch');
             btn.style.backgroundColor = 'red';
+            points -= 10;
+            setTimeout(() => {
+                divScore.innerHTML = `Score : ${points}`;
+            }, 1000);
             switchQuestion(title, section, grid, array, timeBar, nextQuestion);
         } else {
             console.log('good grosse burne');
             btn.style.backgroundColor = 'green';
+            points += 100;
+            setTimeout(() => {
+                divScore.innerHTML = `Score : ${points}`;
+            }, 1000);
             switchQuestion(title, section, grid, array, timeBar, nextQuestion);
 
         }
     })
 }
 const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
-    setTimeout(() => {
-        section.removeChild(timeBar);
-        section.removeChild(grid);
-        main.removeChild(title);
-        section.appendChild(nextQuestion);
-    }, 1000)
-    setTimeout(() => {
-        section.removeChild(nextQuestion);
-        section.appendChild(timeBar)
-        main.appendChild(title)
-        createQuestion(title, array, section, timeBar, nextQuestion)
-    }, 3000)
+    if (array.length == 0) {
+        setTimeout(() => {
+            title.innerHTML = `Score final : ${points}`;
+            console.log("session terminé");
+            main.removeChild(section);
+        }, 1000);
+    } else {
+
+        setTimeout(() => {
+            section.removeChild(timeBar);
+            section.removeChild(grid);
+            main.removeChild(title);
+            section.appendChild(nextQuestion);
+        }, 1000)
+        setTimeout(() => {
+            section.removeChild(nextQuestion);
+            section.appendChild(timeBar)
+            main.appendChild(title)
+            createQuestion(title, array, section, timeBar, nextQuestion)
+        }, 3000)
+    }
 }
-const suffleResponse = (arr) => {
+const shuffleResponse = (arr) => {
     arr.sort(() => Math.random() - 0.5);
 }
 const createQuestion = (title, array, section, timeBar, nextQuestion) => {
@@ -116,9 +153,9 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
         blockResponse.dataset.id = i;
         blockResponse.appendChild(pResponse);
         arrayResponse.push(blockResponse);
-        verficationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion);
+        verificationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion);
     }
-    suffleResponse(arrayResponse);
+    shuffleResponse(arrayResponse);
     arrayResponse.forEach(el => {
         grid.appendChild(el)
     })
@@ -128,4 +165,23 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
 
 }
 
-export { reqQuestion };
+const score = () => {
+    divScore.innerHTML = `Score : ${points}`;
+    divScore.className = "main__score"
+    main.appendChild(divScore);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+export { chooseCategories };
+export { startGame };
