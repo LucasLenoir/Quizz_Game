@@ -41,41 +41,61 @@ const createSection = (fetchResponse) => {
     const imgTimer = document.createElement("img");
     const timeBar = document.createElement("div");
     const grid = document.createElement("div");
+    const newQuestion = document.createElement('div');
+
+    // Add text
+    newQuestion.innerHTML = "Next question";
 
     //Add class
     divTime.className = "main__section__timer";
     sectionMain.className = "main__section";
     timeBar.className = "main__section__timer__bar";
+    newQuestion.className = 'next__question';
 
     //add to DOM
     imgTimer.src = "./assets/img/ClockTimer.png";
     divTime.appendChild(imgTimer);
     divTime.appendChild(timeBar);
     sectionMain.appendChild(divTime);
-    createQuestion(titleMain, fetchResponse, sectionMain, grid);
+    createQuestion(titleMain, fetchResponse, sectionMain, divTime, newQuestion);
 
 
 }
-const nextQuestion = (btn, title, section, grid, array) => {
-    btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        section.removeChild(grid);
-        createQuestion(title, array, section, grid);
 
-        // if (btn.dataset.id != 1) {
-        //     console.log('not good bitch');
-        // } else {
-        //     console.log('good grosse burne');
-        // }
+const verficationBtn = (btn, title, section, grid, array, timeBar, nextQuestion) => {
+    btn.addEventListener("click", (e) => {
+        console.log(timeBar)
+        e.preventDefault();
+        if (btn.dataset.id != 1) {
+            console.log('not good bitch');
+            btn.style.backgroundColor = 'red';
+            switchQuestion(title, section, grid, array, timeBar, nextQuestion);
+        } else {
+            console.log('good grosse burne');
+            btn.style.backgroundColor = 'green';
+            switchQuestion(title, section, grid, array, timeBar, nextQuestion);
+
+        }
     })
 }
-
+const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
+    setTimeout(() => {
+        section.removeChild(timeBar);
+        section.removeChild(grid);
+        main.removeChild(title);
+        section.appendChild(nextQuestion);
+    }, 1000)
+    setTimeout(() => {
+        section.removeChild(nextQuestion);
+        section.appendChild(timeBar)
+        main.appendChild(title)
+        createQuestion(title, array, section, timeBar, nextQuestion)
+    }, 3000)
+}
 const suffleResponse = (arr) => {
     arr.sort(() => Math.random() - 0.5);
 }
-
-
-const createQuestion = (title, array, section) => {
+const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     let arrayResponse = [];
     let testArr = Object.values(array[0]);
     title.innerHTML = testArr[0];
@@ -96,7 +116,7 @@ const createQuestion = (title, array, section) => {
         blockResponse.dataset.id = i;
         blockResponse.appendChild(pResponse);
         arrayResponse.push(blockResponse);
-        nextQuestion(blockResponse, title, section, grid, array);
+        verficationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion);
     }
     suffleResponse(arrayResponse);
     arrayResponse.forEach(el => {
@@ -104,7 +124,6 @@ const createQuestion = (title, array, section) => {
     })
     section.appendChild(grid);
     main.appendChild(section);
-    console.log(array);
     array.splice('0', 1);
 
 }
