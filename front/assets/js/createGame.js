@@ -1,5 +1,4 @@
 const path = 'http://localhost:8000/api/';
-
 const main = document.querySelector("main");
 const containerCat = document.querySelector(".main__container");
 const btnPlay = document.querySelector(".main__form__btn");

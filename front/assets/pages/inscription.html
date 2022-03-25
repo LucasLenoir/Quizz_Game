@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>Big Brain Quizz / Inscription</title>
-    <script defer src="../js/main.js"></script>
 </head>
 
 <body>
@@ -15,15 +14,16 @@
     <header>
         <div class="header">
             <figure class="header__logo">
+                <a href="../../index.html"></a>
                 <img src="../img/logo.png" alt="Logo site">
             </figure>
             <nav class="nav">
                 <ul>
-                    <li class="nav__link"><a href="">Inscription</a></li>
+                    <li class="nav__link"><a href="./inscription.html">Inscription</a></li>
                     <li class="nav__link"><a href="./connexion.html">Connexion</a></li>
                     <li class="nav__link"><a href="#">List Quiz</a></li>
                     <li class="nav__link"><a href="./contact.html">Contacts</a></li>
-                    <li class="nav__link nav__link--active"><a href="../../../index.html">Accueil</a></li>
+                    <li class="nav__link nav__link--active"><a href="../../index.html">Accueil</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,7 +33,7 @@
     <main class="main">
         <h1 class="main__title">Inscrit toi mon cochon !</h1>
         </div>
-        <form action="#" method="POST" class="main__form">
+        <form class="main__form" id="my_form">
             <div class="main__form__unit_container">
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" placeholder="Jean Gerard" required>
@@ -44,12 +44,13 @@
             </div>
             <div class="main__form__unit_container">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Zeé34@~#'%*$q,fr65FZEfsdf" required>
+                <input type="password" name="password" id="password" placeholder="Zeé34@~#'%*$q,fr65FZEfsdf"
+                    autocomplete="off" required>
             </div>
             <button type="submit" class="main__form__btn main__form__btn--blue" id="inscriptionBtn">Valider</button>
         </form>
     </main>
-
+    <script type="module" src="../js/register.js"></script>
 </body>
 
 </html>
