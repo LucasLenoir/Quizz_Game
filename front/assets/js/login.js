@@ -16,7 +16,6 @@ const req = (input) => {
         .then(res => {
             const id = res.id_user
             return window.location.assign(`../pages/user.html?id=${id}`);
-            // console.log(res.id_user);
         })
 }
 myForm.addEventListener('submit', (e) => {
