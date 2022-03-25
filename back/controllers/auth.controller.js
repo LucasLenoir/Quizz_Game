@@ -23,11 +23,7 @@ module.exports.signUp = async (req, res) => {
     res.status(400).send("ERROR, user or email already exists");
   } else {
     UserModel.create({ username, email, password });
-<<<<<<< HEAD
-    res.status(201).send("USER PROFILE CREATED")
-=======
     res.status(201).send("USER PROFILE CREATED");
->>>>>>> 6234586e8aeb8fd0d885d9ec178c60218b6e0957
   }
 };
 
