@@ -1,39 +1,35 @@
-const { Sequilize, string } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory");
+const sequelize = require("../config/dbConfig");
+const { DataTypes } = require("sequelize");
 
-const response = sequilize.define(
+const Responses = sequelize.define(
   "responses",
   {
     //Model attributes are defined here
-    id_responses: {
+    id_response: {
       type: DataTypes.INTEGER,
-      primarykey: true,
+      primaryKey: true,
     },
     id_question: {
       type: DataTypes.INTEGER,
     },
-    response_True: {
+    response_1: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     response_2: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     response_3: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     response_4: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
   },
   {
     tableName: "responses",
     timestamps: false,
-  },
-  { freezeTableName: true }
+    freezeTableName: true,
+  }
 );
 
-module.exports = { response };
+module.exports = Responses;

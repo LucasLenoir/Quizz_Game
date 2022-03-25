@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
-const sequelize = new Sequelize("sqlite::QuizzGame");
+
+const { DataTypes } = require("sequelize");
 
 const Categorie = sequelize.define(
   "categories",
