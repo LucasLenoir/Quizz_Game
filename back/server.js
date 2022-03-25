@@ -3,11 +3,12 @@ require("dotenv").config({ path: "./config/.env" });
 const app = express();
 const categoriesRoutes = require("./routes/categories.routes");
 const userRoutes = require("./routes/user.routes");
-const bodyParser = require("body-parser");
 app.use(express.json());
-
+const cors = require('cors')
 //routes
-app.use("/api/", categoriesRoutes);
+
+app.use(cors())
+app.use("/api", categoriesRoutes);
 app.use("/api/user", userRoutes);
 
 //server

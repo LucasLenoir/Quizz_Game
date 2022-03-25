@@ -23,7 +23,7 @@ btnCategory.forEach((el) => {
     } else categories.splice(categories.indexOf(el.dataset["number"]), 1);
     console.log(categories);
   });
- 
+
 });
 
 btnPlay.addEventListener("click", () => {
@@ -58,9 +58,8 @@ getNewQuestion = () => {
   }
 
   progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
-  progressBarFull.getElementsByClassName.width = `${
-    (questionCounter / MAX_QUESTIONS) * 100
-  }%`;
+  progressBarFull.getElementsByClassName.width = `${(questionCounter / MAX_QUESTIONS) * 100
+    }%`;
 
   const questionIndex = Math.floor(Math.random() * questions.length);
   console.log(questions.length);
