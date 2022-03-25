@@ -4,7 +4,7 @@ const { QueryTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const userModel = require("../models/User");
 
-//check user in DB And create One
+//!check user in DB And create One
 module.exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -23,10 +23,11 @@ module.exports.signUp = async (req, res) => {
     res.status(400).send("ERROR, user or email already exists");
   } else {
     UserModel.create({ username, email, password });
+    res.status(201).send("USER PROFILE CREATED");
   }
 };
 
-//check user in DB And logs One
+//!check user in DB And logs One
 module.exports.login = async (req, res) => {
   const { username, password } = req.body;
   const user = await userModel.findOne({ where: { username } });

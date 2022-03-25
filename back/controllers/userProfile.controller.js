@@ -6,54 +6,87 @@ const responsesModel = require("../models/response");
 const quizzModel = require("../models/Quizz");
 const statsModel = require("../models/StatUsers");
 
-
-
-//Get all user's info to display
+//!Get all user's info to display
 module.exports.getUserInfo = async (req, res) => {
-  const data = req.body;
+  const id_user = req.body[0].id_user;
 
   const infos = await userModel.findAll({ where: { id_user: id_user } });
-  if (quizz) {
+  if (infos) {
     res.status(200).send(infos);
   } else {
     res.status(401).send("ERROR COULDN'T FIND ANY INFO");
   }
 };
+
+//!update User Info
 module.exports.updateUserInfo = async (req, res) => {
   const datas = req.body;
+  console.log(datas);
   const id_user = datas[0].id_user;
   const username = datas[0].username;
   const password = datas[0].password;
   const picture = datas[0].picture;
   const bio = datas[0].bio;
+  console.log(id_user);
 
-  const udpatded = userModel.update({
-    username: username,
-    password: password,
-    picture: picture,
-    bio: bio,
-  });
+  const udpatded = userModel.update(
+    {
+      username: username,
+      password: password,
+      picture: picture,
+      bio: bio,
+    },
+    { where: { id_user } }
+  );
   if (udpatded) {
     res.status(200).send("profile updated");
   } else {
     res.status(401).send("ERROR COULDN'T UPDATE INFO");
   }
 };
-
+//!Get user's stats
 module.exports.getStats = async (req, res) => {
-  const { user } = req.body;
-  const profile = await sequelize.query(
-    "SELECT * FROM users u JOIN stats_users su ON u.id_user = su.id_user where id IN :user ",
-
-    {
-      raw: true,
-      replacements: { user: user },
-      type: QueryTypes.SELECT,
-    }
-  );
-  res.send(200).send(profile);
+  const id_user = req.body[0].id_user;
+  console.log(id_user);
+  const profile = await statsModel.findAll({
+    attributes: [
+      "id_user",
+      "id_category",
+      "score",
+      "number_question",
+      "id_quizz",
+    ],
+    where: { id_user: id_user },
+  });
+  if (profile) {
+    res.status(200).send(profile);
+  } else {
+    res.status(401).send("stats not found");
+  }
 };
 
+//!Update Users after a game
+module.exports.updateStats = async (req, res) => {
+  const data = req.body;
+  const id_user = req.body.id_user;
+  const id_category = req.body.id_category;
+  const score = req.body.score;
+  const number_question = req.body.number_question;
+
+  const updateStatsRes = await statsModel.create({
+    id_user: id_user,
+    id_category: id_category,
+    score: score,
+    number_question: number_question,
+  });
+  if (updateStatsRes) {
+    res.status(201).send("score updated");
+  } else {
+    res.status(401).send("ERROR SCORE NOT UPDATED");
+  }
+};
+
+//!Create a Quizz
 module.exports.create = async (req, res) => {
   const datas = req.body;
 
@@ -83,7 +116,7 @@ module.exports.create = async (req, res) => {
   }
   res.status(201).send("Question validated");
 };
-
+//!Fetch all user's quizz already created
 module.exports.getAllQuizz = async (req, res) => {
   const id_user = req.body;
 
@@ -95,7 +128,7 @@ module.exports.getAllQuizz = async (req, res) => {
     res.status(401).send("ERROR COULDN'T FIND ANY QUIZZ");
   }
 };
-
+//!fetch all the question related to one quizz
 module.exports.getQuestionsByQuizz = async (req, res) => {
   const id_quizz = req.body;
 
@@ -107,7 +140,7 @@ module.exports.getQuestionsByQuizz = async (req, res) => {
     res.status(400).send("ERROR COULDN'T LOAD THE QUIZZ");
   }
 };
-
+//!update Quizz Info, Quizz Q and Quizz R
 module.exports.updateQuizz = async (req, res) => {
   const datas = req.body;
   for (i in datas) {
@@ -153,21 +186,5 @@ module.exports.updateQuizz = async (req, res) => {
     res.status(201).send("Quizz Responses updated");
   } else {
     res.status(400).send("ERROR COULDN'T UPDATE QUIZZ RESPONSES");
-  }
-};
-
-module.exports.updateStats = async (req, res) => {
-  const data = req.body;
-
-  const updateStatsRes = await statsModel.create({
-    id_user: id_user,
-    id_category: id_category,
-    score: score,
-    number_question: number_question,
-  });
-  if (updateStatsRes) {
-    res.status(201).send("score updated");
-  } else {
-    res.status(401).send("EROOR SCORE NOT UPDATED");
   }
 };

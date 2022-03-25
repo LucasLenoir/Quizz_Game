@@ -66,9 +66,18 @@ CREATE TABLE IF NOT EXISTS stat_users (
     id_category INTEGER,
     score INTEGER,
     number_question INTEGER ,
+    id_quizz INTEGER,
     FOREIGN KEY (id_user) REFERENCES users (id_user) ON DELETE CASCADE
     FOREIGN KEY (id_category) REFERENCES categories (id_category) ON DELETE CASCADE
 );
+INSERT INTO stat_users (id_user, id_category, score,number_question, id_quizz)
+VALUES ('1', '1', '600', '12','1'),
+    ('1', '1', '900', '10','1'),
+    ('1', '1', '900', '10','2'),
+    ('1', '3', '1000', '10','2'),
+    ('1', '2', '1000', '10','2');
+
+
 -- --------------------------------------------------------
 --
 -- Structure de la table `users`
