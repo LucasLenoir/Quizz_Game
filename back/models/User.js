@@ -24,13 +24,13 @@ const userModel = sequelize.define(
       max: 1024,
       minLength: 6,
     },
-    // bio: {
-    //   type: DataTypes.STRING,
-    //   max: 1024,
-    // },
-    // picture: {
-    //   type: DataTypes.STRING,
-    // },
+    bio: {
+      type: DataTypes.STRING,
+      max: 1024,
+    },
+    picture: {
+      type: DataTypes.STRING,
+    },
   },
   {
     hooks: {
@@ -46,19 +46,6 @@ const userModel = sequelize.define(
   }
 );
 
-// userModel.beforeCreate(async () => {
-//   console.log(hash);
-//   user.password = hash;
-//   // }).catch(err =>{
-//   //   throw new Error();
-// });
 
-//play function before saving in DB
-// userModel.prototype.crypt = () => {
-//   const salt = bcrypt.genSaltSync();
-//   this.password = bcrypt.hashSync(this.password, salt);
-
-//   console.log(this.password);
-// };
 
 module.exports = userModel;

@@ -27,7 +27,8 @@ const questionModel = sequelize.define(
   {
     tableName: "questions",
     timestamps: false,
+    freezeTableName: true
   },
-  { freezeTableName: true }
+  
 );
 module.exports = questionModel;
