@@ -1,0 +1,15 @@
+@import "./variables";
+
+$breakpoints: (
+    "phone": 599px,
+    "pad": 780px,
+    "min-desktop": 1200px,
+    "middle-desktop": 1600px,
+    "max-desktop": 1800px
+);
+
+@mixin max-media($_key) {
+    @media screen and (max-width: map-get($breakpoints, $_key)) {
+        @content;
+    }
+}

@@ -16,6 +16,5 @@ module.exports.getCategories = async (req, res) => {
       type: QueryTypes.SELECT,
     }
   );
-
   res.send(resQuestions);
 };

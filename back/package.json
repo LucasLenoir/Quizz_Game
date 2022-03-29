@@ -28,7 +28,6 @@
     "mysql": "github:mysqljs/mysql",
     "mysql-model": "",
     "nodemon": "^2.0.15",
-    "sass": "^1.49.9",
     "save": "^2.4.0",
     "sequelize": "^6.17.0",
     "sqlite3": "^5.0.2",
