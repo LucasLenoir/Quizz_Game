@@ -42,6 +42,11 @@ header .header {
 header .header__logo {
   width: 350px;
 }
+@media screen and (max-width: 1600px) {
+  header .header__logo {
+    width: 250px;
+  }
+}
 header .header__logo img {
   width: 100%;
 }
@@ -69,6 +74,11 @@ header .header .nav__link a {
   font-family: "Game Sans Serif";
   color: #fff;
   display: block;
+}
+@media screen and (max-width: 1600px) {
+  header .header .nav__link a {
+    font-size: 1.2rem;
+  }
 }
 header .header .nav__link:hover {
   text-shadow: 0px 4px 12px #872E9F;
@@ -184,6 +194,11 @@ body {
   text-align: center;
   text-shadow: 0px 4px 12px #872E9F;
 }
+@media screen and (max-width: 1600px) {
+  .main__title {
+    font-size: 3rem;
+  }
+}
 .main .list__categorie {
   margin-top: 0rem;
   font-size: 35px;
@@ -197,6 +212,11 @@ body {
   flex-direction: column;
   align-items: center;
 }
+@media screen and (max-width: 1600px) {
+  .main .list__categorie {
+    font-size: 2rem;
+  }
+}
 .main .list__categorie__btn {
   margin-top: 2rem;
   border-radius: 49px;
@@ -205,6 +225,11 @@ body {
   transition: all 0.25s linear;
   cursor: pointer;
   width: 50%;
+}
+@media screen and (max-width: 1600px) {
+  .main .list__categorie__btn {
+    padding: 10px;
+  }
 }
 .main .list__categorie__btn:hover {
   border-radius: 49px;

@@ -1,5 +1,6 @@
 @import "../utils/mixins";
 @import "../utils/variables";
+@import "../utils/queries";
 
 header {
     @include boxShadow;
@@ -7,6 +8,9 @@ header {
         @include marginLR;
         &__logo {
             width: 350px;
+            @include max-media("middle-desktop"){
+                width: 250px;
+            }
             img {
                 width: 100%;
             }
@@ -25,6 +29,9 @@ header {
                     @include styleNone;
                     @include styleText;
                     display: block;
+                    @include max-media("middle-desktop"){
+                        font-size: 1.2rem;
+                    }
                 }
                 &:hover {
                     @include textShadow;
