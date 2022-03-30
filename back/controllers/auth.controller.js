@@ -5,6 +5,13 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "./config/.env" });
+const maxAge = 1 * 24 * 60 * 60 * 1000;
+
+const createToken = (id_user) => {
+  return jwt.sign(id_user, process.env.TOKEN_SECRET, {
+    expiresIn: maxAge,
+  });
+};
 
 //!check user in DB And create One
 module.exports.signUp = async (req, res) => {
@@ -31,25 +38,23 @@ module.exports.signUp = async (req, res) => {
 
 //!check user in DB And logs One
 module.exports.signIn = async (req, res) => {
-  const username = req.body[0].username;
-  const password = req.body[0].password;
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log(username);
 
   const user = await userModel.findOne({ where: { username } });
-  let id_user = user.dataValues.id_user;
-
+  const { id_user } = user.dataValues;
+  console.log(id_user);
   if (user) {
     //! compare the password from the front to the hashed one in the DB
     if (bcrypt.compareSync(password, user.password)) {
-      const maxAge = 1 * 24 * 60 * 60 * 1000;
-      const createToken = (id_user) => {
-        return jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
-          expiresIn: maxAge,
-        });
-      };
-      const token = createToken(user.id_user);
-
+      const token = jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
+        expiresIn: maxAge,
+      });
+      console.log(token);
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
-      const cookie = res.cookie("jwt", token, { httpOnly: true, maxAge });
+
+      res.cookie("jwt", token, { httpOnly: true, maxAge });
       res.status(200).json({ user: user.id_user });
       console.log("User found and logged");
     } else {

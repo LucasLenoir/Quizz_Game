@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 const sequelize = require("../config/dbConfig");
 const { QueryTypes } = require("sequelize");
 
-
 //!Get Questions by Categories
 module.exports.getCategories = async (req, res) => {
   const { categories } = req.body;
@@ -16,5 +15,6 @@ module.exports.getCategories = async (req, res) => {
       type: QueryTypes.SELECT,
     }
   );
+
   res.send(resQuestions);
 };
