@@ -138,9 +138,11 @@ body {
     }
     &__create__quizz {
         @include styleInput;
+        @include styleTitle;
         @include hoverTransitionElement;
         border-radius: 2rem;
-        display: inline-block;
+        height: 8rem;
+        margin: auto 0;
         &:hover {
             transform: scale(1.02);
         }
@@ -159,9 +161,12 @@ body {
         &__link {
             @include hoverTransitionElement;
             position: relative;
-            &--active::before {
+            &--active{
+                color: $secondary-color;
+                &::before {
                 @include hoverTransitionElement;
-                @include boxShadow;
+                @include boxShadow();
+                background-color: $color-white;
                 content: "";
                 z-index: -1;
                 position: absolute;
@@ -170,6 +175,8 @@ body {
                 width: 100%;
                 height: 100%;
                 padding: .5rem;
+                filter: blur(.3rem);
+            }
             }
             &:hover {
                 transform: scale(1.05);
@@ -203,16 +210,45 @@ body {
         @include paddingTB;
         h3 {
             font-weight: normal;
-            margin: auto;
+            margin: auto 0;
         }
         p {
-            margin: auto;
+            margin: auto 0;
         }
-        button {
-            @include styleInput(1.5rem);
-            @include hoverTransitionElement;
-            border-radius: 1rem;
-            padding: 1rem;
+    }
+    &__btn { 
+        @include styleTitle(30px, $secondary-color);
+        @include hoverTransitionElement(0.2s);
+        border: none;
+        position: relative;
+        background: transparent;
+        &--play::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $btn-color-play;
+            filter: blur(.9rem)
+        }
+        &--edit{
+            color: $primary-color;
+            &::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $btn-color-edit;
+            filter: blur(.9rem)
+            }
+        }
+        &:hover{
+            transform: scale(1.05);
         }
     }
 }

@@ -358,10 +358,16 @@ body {
   box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
   background: transparent;
   padding: 0.5rem;
+  font-size: 40px;
+  font-family: "Many Years Higher";
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: normal;
   transition: all 0.3s linear;
   cursor: pointer;
   border-radius: 2rem;
-  display: inline-block;
+  height: 8rem;
+  margin: auto 0;
 }
 .profil__create__quizz:hover {
   transform: scale(1.02);
@@ -391,11 +397,15 @@ body {
   cursor: pointer;
   position: relative;
 }
+.profil__nav__link--active {
+  color: #111;
+}
 .profil__nav__link--active::before {
   transition: all 0.3s linear;
   cursor: pointer;
   border-radius: 0;
   box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  background-color: #fff;
   content: "";
   z-index: -1;
   position: absolute;
@@ -404,6 +414,7 @@ body {
   width: 100%;
   height: 100%;
   padding: 0.5rem;
+  filter: blur(0.3rem);
 }
 .profil__nav__link:hover {
   transform: scale(1.05);
@@ -440,23 +451,50 @@ body {
 }
 .profil__quiz__article h3 {
   font-weight: normal;
-  margin: auto;
+  margin: auto 0;
 }
 .profil__quiz__article p {
-  margin: auto;
+  margin: auto 0;
 }
-.profil__quiz__article button {
-  font-size: 1.5rem;
-  font-family: "Game Sans Serif";
-  color: #fff;
-  border-radius: 0;
-  box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
-  background: transparent;
-  padding: 0.5rem;
-  transition: all 0.3s linear;
+.profil__btn {
+  font-size: 30px;
+  font-family: "Many Years Higher";
+  color: #111;
+  text-transform: uppercase;
+  font-weight: normal;
+  transition: all 0.2s linear;
   cursor: pointer;
-  border-radius: 1rem;
-  padding: 1rem;
+  border: none;
+  position: relative;
+  background: transparent;
+}
+.profil__btn--play::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #25E2A1;
+  filter: blur(0.9rem);
+}
+.profil__btn--edit {
+  color: #fff;
+}
+.profil__btn--edit::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2824D3;
+  filter: blur(0.9rem);
+}
+.profil__btn:hover {
+  transform: scale(1.05);
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -59,7 +59,6 @@
             }
         }
         &:hover {
-            // @include boxShadow(0, #000, $color-white);
             transform: scale(1.1);
         }
     }
