@@ -80,6 +80,11 @@ header .header .nav__link a {
     font-size: 1.2rem;
   }
 }
+@media screen and (max-width: 850px) {
+  header .header .nav__link a {
+    font-size: 0.9rem;
+  }
+}
 header .header .nav__link:hover {
   text-shadow: 0px 4px 12px #872E9F;
   transform: translateY(-10px) scale(1.3);
@@ -237,6 +242,9 @@ body {
   color: #fff;
   transform: translateY(-10px) scale(1.05);
 }
+.main__user {
+  margin: 0 10%;
+}
 .main__section {
   text-align: center;
 }
@@ -311,6 +319,144 @@ body {
   color: #fff;
   text-transform: uppercase;
   font-weight: normal;
+}
+
+.profil {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: initial;
+  align-items: initial;
+  padding: 2rem 0;
+}
+.profil__avatar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: initial;
+  align-items: center;
+}
+.profil__avatar p {
+  padding-left: 10px;
+  font-size: 25px;
+  font-family: "Game Sans Serif";
+  color: #fff;
+}
+.profil__avatar__img {
+  width: 200px;
+  border-radius: 50%;
+  box-shadow: -18px 12px 24px -6px rgba(17, 17, 17, 0.7), inset 0px 4px 48px 15px #000000;
+}
+.profil__avatar__img img {
+  width: 100%;
+  display: block;
+  border-radius: 50%;
+}
+.profil__create__quizz {
+  font-size: 2rem;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  border-radius: 0;
+  box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  background: transparent;
+  padding: 0.5rem;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  border-radius: 2rem;
+  display: inline-block;
+}
+.profil__create__quizz:hover {
+  transform: scale(1.02);
+}
+.profil__nav {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: initial;
+  align-items: initial;
+  font-size: 25px;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  list-style: none;
+  text-decoration: none;
+  padding: 1rem 0;
+  position: relative;
+  width: 80%;
+}
+.profil__nav__container {
+  display: flex;
+  justify-content: center;
+  flex-direction: initial;
+  align-items: initial;
+}
+.profil__nav__link {
+  transition: all 0.3s linear;
+  cursor: pointer;
+  position: relative;
+}
+.profil__nav__link--active::before {
+  transition: all 0.3s linear;
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: -25%;
+  left: -10%;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+}
+.profil__nav__link:hover {
+  transform: scale(1.05);
+}
+.profil__nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -5%;
+  width: 110%;
+  height: 2px;
+  box-shadow: 0px 2px 5px #fff;
+  background: #fff;
+}
+.profil__nav::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  width: 110%;
+  height: 2px;
+  box-shadow: 0px -2px 5px #fff;
+  background: #fff;
+}
+.profil__quiz__article {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: initial;
+  align-items: initial;
+  font-size: 25px;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  padding: 2rem 0;
+}
+.profil__quiz__article h3 {
+  font-weight: normal;
+  margin: auto;
+}
+.profil__quiz__article p {
+  margin: auto;
+}
+.profil__quiz__article button {
+  font-size: 1.5rem;
+  font-family: "Game Sans Serif";
+  color: #fff;
+  border-radius: 0;
+  box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  background: transparent;
+  padding: 0.5rem;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */

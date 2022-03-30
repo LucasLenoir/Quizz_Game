@@ -14,15 +14,19 @@ const req = (input) => {
             return response.json();
         })
         .then(res => {
-            const id = res.id_user
+            const id = res.user.id_user;
             return window.location.assign(`../pages/user.html?id=${id}`);
         })
 }
 myForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const myForm = {
-        username: username.value,
-        password: password.value
-    }
-    req(myForm);
+    const model = [
+        {
+
+            username: username.value,
+            password: password.value
+        }
+    ]
+
+    req(model);
 })

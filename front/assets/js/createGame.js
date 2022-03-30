@@ -160,7 +160,20 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     })
     section.appendChild(grid);
     main.appendChild(section);
+    let timeColor = "green";
+    let progress = 100;
     array.splice('0', 1);
+    setTimeout(() => {
+        let lolo = setInterval(() => {
+            if (progress <= 0) {
+                clearInterval(lolo);
+                switchQuestion(title, section, grid, array, timeBar, nextQuestion)
+            } else {
+                progress -= 0.10;
+                timesUp(progress, timeColor);
+            }
+        }, 10);
+    }, 1000)
 
 }
 
@@ -170,16 +183,19 @@ const score = () => {
     main.appendChild(divScore);
 }
 
+const timesUp = (progress, timeColor) => {
 
 
+    const timeBar = document.querySelector('.main__section__timer__bar');
+    if (progress < 65 && progress > 30) {
+        timeColor = "orange";
+    } else if (progress < 30) {
+        timeColor = "red";
+    }
+    timeBar.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
+    console.log(timeBar);
 
-
-
-
-
-
-
-
+}
 
 
 export { chooseCategories };

@@ -49,8 +49,8 @@ module.exports.signIn = async (req, res) => {
       const token = createToken(user.id_user);
 
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
-      const cookie = res.cookie("jwt", token, { httpOnly: true, maxAge });
-      res.status(200).json({ user: user.id_user });
+      const cookies = res.cookie("jwt", token, { httpOnly: true, maxAge });
+      res.status(200).json({ user: user });
       console.log("User found and logged");
     } else {
       res.status(401).send("error, password didn't match");

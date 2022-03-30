@@ -6,10 +6,13 @@ const categoriesRoutes = require("./routes/categories.routes");
 const userRoutes = require("./routes/user.routes");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const { application } = require("express");
+const cors = require("cors");
 
 //!Middleware
+app.use(cors());
 app.use(express.json());
-app.use(cookieParser()); app.post("*", checkUser);
+app.use(cookieParser());
+app.post("*", checkUser);
 app.post("/jwtid", requireAuth, (req, res) => {
   console.log(res.locals.user);
   res.status(200).json(res.locals.user);
