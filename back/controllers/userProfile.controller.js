@@ -8,7 +8,7 @@ const statsModel = require("../models/StatUsers");
 
 //!Get all user's info to display
 module.exports.getUserInfo = async (req, res) => {
-  const id_user = req.body[0].id_user;
+  const id_user = req.body.id_user;
 
   const infos = await userModel.findAll({ where: { id_user: id_user } });
   if (infos) {
@@ -87,18 +87,35 @@ module.exports.updateStats = async (req, res) => {
 };
 
 //!Create a Quizz
-module.exports.create = async (req, res) => {
+module.exports.createQuizz = async (req, res) => {
   const datas = req.body;
+
+  id_category = datas[0].id_category;
+  id_user = datas[0].id_user;
+  name = datas[0].name;
+  console.log(id_category);
+  const reqQuizz = await quizzModel.create({
+    id_category: id_category,
+    name: name,
+    id_user: id_user,
+  });
+  console.log(reqQuizz);
+  const { id_quizz } = await quizzModel.findOne({
+    attributes: ["id_quizz"],
+    where: { name: name },
+  });
 
   for (i in datas) {
     question = datas[i].question;
-    id_category = datas[i].category;
-    id_quizz = datas[i].id_quizz;
+    id_category = datas[i].id_category;
+    id_user = datas[i].id_user;
+    name = datas[i].name;
 
     await questionModel.create({
       id_category: id_category,
       question: question,
       id_quizz: id_quizz,
+      id_user: id_user,
     });
 
     const { id_question } = await questionModel.findOne({

@@ -40,22 +40,29 @@ module.exports.signUp = async (req, res) => {
 module.exports.signIn = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  console.log(username);
+  
 
   const user = await userModel.findOne({ where: { username } });
   const { id_user } = user.dataValues;
-  console.log(id_user);
+
   if (user) {
     //! compare the password from the front to the hashed one in the DB
     if (bcrypt.compareSync(password, user.password)) {
       const token = jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
         expiresIn: maxAge,
       });
-      console.log(token);
+     
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
 
       res.cookie("jwt", token, { httpOnly: true, maxAge });
-      res.status(200).json({ user: user.id_user });
+      resToken = {
+        id_user: id_user,
+        name: "jwt",
+        value: token,
+        expires: maxAge,
+        httpOnly: true,
+      };
+      res.status(200).json(resToken);
       console.log("User found and logged");
     } else {
       res.status(401).send("error, password didn't match");
