@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Big Brain Quizz / User</title>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <figure class="header__logo">
+                <a href="../../index.html"></a>
+                <img src="../img/logo.png" alt="Logo site">
+            </figure>
+            <nav class="nav">
+                <ul>
+                    <li class="nav__link"><a href="#">Deconnexion</a></li>
+                    <li class="nav__link"><a href="#">List Quiz</a></li>
+                    <li class="nav__link"><a href="./contact.html">Contacts</a></li>
+                    <li class="nav__link nav__link--active"><a href="../../index.html">Accueil</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="main__form">
+        <h1 class="main__title">Creer ton Quiz</h1>
+        <form>
+            <div class="main__form__unit_container">
+                <label for="nameQuiz">Nom du Quiz</label>
+                <input type="text" name="nameQuiz" id="nameQuiz" placeholder="Le joli Quiz" required>
+            </div>
+            <div class="main__form__unit_container">
+                <label for="categorie">Categorie</label>
+                <input type="text" name="categorie" id="categorie" placeholder="animal" required>
+            </div>
+            <div class="block__question">
+                <div class="main__form__unit_container">
+                    <label for="question">Question 1</label>
+                    <input type="text" name="question" id="question"
+                        placeholder="Quelle est la couleur du poussin jaune?" required>
+                </div>
+                <div class="main__form__unit_container__response main__form__unit_container">
+                    <div>
+                        <div class=" main__form__unit_container">
+                            <label for="response_1">Response 1</label>
+                            <input type="text" name="response_1" id="response_1" placeholder="Jaune" required>
+                        </div>
+                        <div class=" main__form__unit_container">
+                            <label for="response_2">Response 2</label>
+                            <input type="text" name="response_2" id="response_2" placeholder="Jaune" required>
+                        </div>
+                    </div>
+                    <div>
+                        <div class=" main__form__unit_container">
+                            <label for="response_3">Response 3</label>
+                            <input type="text" name="response_3" id="response_3" placeholder="Jaune" required>
+                        </div>
+                        <div class=" main__form__unit_container">
+                            <label for="response_4">Response 4</label>
+                            <input type="text" name="response_4" id="response_4" placeholder="Jaune" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn__container">
+                <button id="next__question" class="main__form__btn">Question suivante</button>
+                <button type="submit" class="main__form__btn main__form__btn--blue" id="validateQuiz">Valider
+                    Quiz</button>
+            </div>
+        </form>
+    </main>
+
+</body>
+<script src="../js/createQuiz.js"></script>
+
+</html>

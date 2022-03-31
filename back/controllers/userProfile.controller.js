@@ -92,13 +92,15 @@ module.exports.create = async (req, res) => {
 
   for (i in datas) {
     question = datas[i].question;
-    id_category = datas[i].category;
+    id_category = datas[i].id_category;
     id_quizz = datas[i].id_quizz;
+    id_user = datas[i].id_user;
 
     await questionModel.create({
       id_category: id_category,
       question: question,
       id_quizz: id_quizz,
+      id_user: id_user,
     });
 
     const { id_question } = await questionModel.findOne({
