@@ -41,7 +41,6 @@ module.exports.signIn = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-
   const user = await userModel.findOne({ where: { username } });
   const { id_user } = user.dataValues;
 

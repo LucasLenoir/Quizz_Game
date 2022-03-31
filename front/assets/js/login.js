@@ -23,13 +23,15 @@ const req = (input) => {
       console.log(res.name);
       const newCookie = (` ${name}`, `${value}`, ` ${expires}`);
       document.cookie = newCookie;
-      console.log(res);
       const id = res.id_user;
+
       ("jwt=tamere; Max-Age=86400;HttpOnly:true");
 
       document.cookie = token;
       //   document.cookie.name = "jwt";
+
       return window.location.assign(`../pages/user.html?id=${id}`);
+
     });
 };
 myForm.addEventListener("submit", (e) => {
