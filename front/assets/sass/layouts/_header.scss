@@ -32,6 +32,9 @@ header {
                     @include max-media("middle-desktop"){
                         font-size: 1.2rem;
                     }
+                    @include max-media("pad") {
+                        font-size: .9rem
+                    }
                 }
                 &:hover {
                     @include textShadow;

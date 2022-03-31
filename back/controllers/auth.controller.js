@@ -40,7 +40,6 @@ module.exports.signUp = async (req, res) => {
 module.exports.signIn = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  
 
   const user = await userModel.findOne({ where: { username } });
   const { id_user } = user.dataValues;
@@ -51,7 +50,7 @@ module.exports.signIn = async (req, res) => {
       const token = jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
         expiresIn: maxAge,
       });
-     
+
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
 
       res.cookie("jwt", token, { httpOnly: true, maxAge });

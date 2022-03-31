@@ -58,7 +58,6 @@ const createSection = (fetchResponse) => {
     const divTime = document.createElement("div");
     const imgTimer = document.createElement("img");
     const timeBar = document.createElement("div");
-    const grid = document.createElement("div");
     const newQuestion = document.createElement('div');
 
     // Add text
@@ -71,6 +70,7 @@ const createSection = (fetchResponse) => {
     newQuestion.className = 'next__question';
 
     //add to DOM
+    timeBar.style.backgroundColor = "green";
     imgTimer.src = "./assets/img/ClockTimer.png";
     divTime.appendChild(imgTimer);
     divTime.appendChild(timeBar);
@@ -81,12 +81,13 @@ const createSection = (fetchResponse) => {
     createQuestion(titleMain, fetchResponse, sectionMain, divTime, newQuestion);
 }
 
-const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion) => {
+const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion, lolo) => {
     btn.addEventListener("click", (e) => {
-        console.log(timeBar)
+        clearInterval(lolo);
+        const barTime = document.querySelector('.main__section__timer__bar');
+        barTime.style.backgroundColor = "green";
         e.preventDefault();
         if (btn.dataset.id != 1) {
-            console.log('not good bitch');
             btn.style.backgroundColor = 'red';
             points -= 10;
             setTimeout(() => {
@@ -94,7 +95,6 @@ const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion
             }, 1000);
             switchQuestion(title, section, grid, array, timeBar, nextQuestion);
         } else {
-            console.log('good grosse burne');
             btn.style.backgroundColor = 'green';
             points += 100;
             setTimeout(() => {
@@ -139,27 +139,42 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
 
     const grid = document.createElement("div");
     grid.className = `main__section__grid`;
-    grid.setAttribute('id', `${j}`)
-    j++
+    grid.setAttribute('id', `${j}`);
+    j++;
+    let timeColor = "green";
+    let progress = 100;
+    setTimeout(() => {
+        let lolo = setInterval(() => {
+            if (progress <= 0) {
+                clearInterval(lolo);
+                switchQuestion(title, section, grid, array, timeBar, nextQuestion);
+            } else {
+                progress -= 0.10;
+                timesUp(progress, timeColor);
+            }
+        }, 10);
+        for (let i = 1; i < testArr.length; i++) {
+            const blockResponse = document.createElement("div");
+            const pResponse = document.createElement("p");
+            pResponse.innerHTML = testArr[i];
+            blockResponse.className = "main__section__grid__response";
+            pResponse.innerHTML = testArr[i];
+            blockResponse.dataset.id = i;
+            blockResponse.appendChild(pResponse);
+            arrayResponse.push(blockResponse);
+            verificationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion, lolo);
+        }
+        shuffleResponse(arrayResponse);
+        arrayResponse.forEach(el => {
+            grid.appendChild(el)
+        })
+    }, 1000)
     //Implémente les réponses et créer les block en fonction du nombre de réponse
 
-    for (let i = 1; i < testArr.length; i++) {
-        const blockResponse = document.createElement("div");
-        const pResponse = document.createElement("p");
-        pResponse.innerHTML = testArr[i];
-        blockResponse.className = "main__section__grid__response";
-        pResponse.innerHTML = testArr[i];
-        blockResponse.dataset.id = i;
-        blockResponse.appendChild(pResponse);
-        arrayResponse.push(blockResponse);
-        verificationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion);
-    }
-    shuffleResponse(arrayResponse);
-    arrayResponse.forEach(el => {
-        grid.appendChild(el)
-    })
     section.appendChild(grid);
     main.appendChild(section);
+    const barTime = document.querySelector('.main__section__timer__bar');
+    barTime.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
     array.splice('0', 1);
 
 }
@@ -170,16 +185,18 @@ const score = () => {
     main.appendChild(divScore);
 }
 
+const timesUp = (progress, timeColor) => {
 
 
+    const timeBar = document.querySelector('.main__section__timer__bar');
+    if (progress < 65 && progress > 30) {
+        timeColor = "orange";
+    } else if (progress < 30) {
+        timeColor = "red";
+    }
+    timeBar.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
 
-
-
-
-
-
-
-
+}
 
 
 export { chooseCategories };

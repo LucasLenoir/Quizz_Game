@@ -12,10 +12,12 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 //!Middleware
-app.use("/", cors(corsOptions));
+
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use( checkUser);
+app.use(checkUser);
+
 // app.use("/", requireAuth, (req, res) => {
 //   console.log(res.lcals.user);
 //   res.status(200).json(res.olocals.user);
