@@ -4,34 +4,6 @@ const username = document.getElementById("username");
 const password = document.getElementById("password");
 
 const req = (input) => {
-<<<<<<< HEAD
-    const myInit = {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(input),
-    }
-    fetch(`${path}user/login`, myInit)
-        .then(response => {
-            return response.json();
-        })
-        .then(res => {
-            const id = res.user.id_user;
-            return window.location.assign(`../pages/user.html?id=${id}`);
-        })
-}
-myForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const model = [
-        {
-
-            username: username.value,
-            password: password.value
-        }
-    ]
-
-    req(model);
-})
-=======
   const myInit = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -51,12 +23,13 @@ myForm.addEventListener('submit', (e) => {
       console.log(res.name);
       const newCookie = (` ${name}`, `${value}`, ` ${expires}`);
       document.cookie = newCookie;
-
+      console.log(res);
+      const id = res.id_user;
       ("jwt=tamere; Max-Age=86400;HttpOnly:true");
 
       document.cookie = token;
       //   document.cookie.name = "jwt";
-      //   return window.location.assign(`../pages/user.html?id=${id}`);
+      return window.location.assign(`../pages/user.html?id=${id}`);
     });
 };
 myForm.addEventListener("submit", (e) => {
@@ -67,4 +40,3 @@ myForm.addEventListener("submit", (e) => {
   };
   req(myForm);
 });
->>>>>>> 9305b096dd334a4e6e42d595c1e264392df61562

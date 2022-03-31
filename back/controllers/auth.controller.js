@@ -40,7 +40,7 @@ module.exports.signUp = async (req, res) => {
 module.exports.signIn = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  
+
 
   const user = await userModel.findOne({ where: { username } });
   const { id_user } = user.dataValues;
@@ -51,12 +51,8 @@ module.exports.signIn = async (req, res) => {
       const token = jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
         expiresIn: maxAge,
       });
-     
+
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
-<<<<<<< HEAD
-      const cookies = res.cookie("jwt", token, { httpOnly: true, maxAge });
-      res.status(200).json({ user: user });
-=======
 
       res.cookie("jwt", token, { httpOnly: true, maxAge });
       resToken = {
@@ -67,7 +63,6 @@ module.exports.signIn = async (req, res) => {
         httpOnly: true,
       };
       res.status(200).json(resToken);
->>>>>>> 9305b096dd334a4e6e42d595c1e264392df61562
       console.log("User found and logged");
     } else {
       res.status(401).send("error, password didn't match");

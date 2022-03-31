@@ -9,13 +9,11 @@ const myStats = navUser[1];
 const edit = navUser[2];
 const table = 3;
 const idUser = params.get('id');
-
 const req = () => {
-    const myUser = [
-        {
-            id_user: idUser
-        }
-    ];
+    const myUser =
+    {
+        id_user: idUser
+    };
     const myInit = {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
