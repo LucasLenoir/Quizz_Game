@@ -5,6 +5,13 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "./config/.env" });
+const maxAge = 1 * 24 * 60 * 60 * 1000;
+
+const createToken = (id_user) => {
+  return jwt.sign(id_user, process.env.TOKEN_SECRET, {
+    expiresIn: maxAge,
+  });
+};
 
 //!check user in DB And create One
 module.exports.signUp = async (req, res) => {
@@ -31,26 +38,36 @@ module.exports.signUp = async (req, res) => {
 
 //!check user in DB And logs One
 module.exports.signIn = async (req, res) => {
-  const username = req.body[0].username;
-  const password = req.body[0].password;
+  const username = req.body.username;
+  const password = req.body.password;
+  
 
   const user = await userModel.findOne({ where: { username } });
-  let id_user = user.dataValues.id_user;
+  const { id_user } = user.dataValues;
 
   if (user) {
     //! compare the password from the front to the hashed one in the DB
     if (bcrypt.compareSync(password, user.password)) {
-      const maxAge = 1 * 24 * 60 * 60 * 1000;
-      const createToken = (id_user) => {
-        return jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
-          expiresIn: maxAge,
-        });
-      };
-      const token = createToken(user.id_user);
-
+      const token = jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
+        expiresIn: maxAge,
+      });
+     
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
+<<<<<<< HEAD
       const cookies = res.cookie("jwt", token, { httpOnly: true, maxAge });
       res.status(200).json({ user: user });
+=======
+
+      res.cookie("jwt", token, { httpOnly: true, maxAge });
+      resToken = {
+        id_user: id_user,
+        name: "jwt",
+        value: token,
+        expires: maxAge,
+        httpOnly: true,
+      };
+      res.status(200).json(resToken);
+>>>>>>> 9305b096dd334a4e6e42d595c1e264392df61562
       console.log("User found and logged");
     } else {
       res.status(401).send("error, password didn't match");

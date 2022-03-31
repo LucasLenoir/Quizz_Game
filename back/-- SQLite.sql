@@ -22,9 +22,8 @@ CREATE TABLE IF NOT EXISTS questions (
     id_question INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     id_category INTEGER,
     question varchar(255) NOT NULL,
-    id_quizz INTEGER,
-    --   FOREIGN KEY (id_quizz) REFERENCES quizz (id_quizz) ON DELETE CASCADE  
-    --   FOREIGN KEY (id_category) REFERENCES categories (id_category) ON DELETE CASCADE
+    id_quizz INTEGER
+    
 );
 -- --------------------------------------------------------
 --

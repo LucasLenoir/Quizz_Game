@@ -9,8 +9,16 @@ const Quizz = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
+    id_category: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
 
     id_user: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    id_category: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

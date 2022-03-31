@@ -140,6 +140,12 @@ header .header .nav__link:hover {
   min-width: 10%;
   text-align: left;
 }
+.main__form__unit_container__response {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: initial;
+  align-items: initial;
+}
 .main__form__btn {
   font-size: 45px;
   font-family: "Many Years Higher";
@@ -175,6 +181,13 @@ header .header .nav__link:hover {
 }
 .main__form__btn:hover {
   transform: scale(1.1);
+}
+
+.btn__container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: initial;
+  align-items: initial;
 }
 
 body {
@@ -339,6 +352,11 @@ body {
   font-size: 25px;
   font-family: "Game Sans Serif";
   color: #fff;
+}
+.profil__avatar #email {
+  padding-top: 1rem;
+  opacity: 0.5;
+  font-size: 1rem;
 }
 .profil__avatar__img {
   width: 200px;

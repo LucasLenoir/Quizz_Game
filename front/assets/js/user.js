@@ -1,11 +1,40 @@
 const params = new URLSearchParams(location.search);
 const section = document.querySelector('.profil__quiz__container');
+const createQuiz = document.querySelector('.profil__create__quizz');
 const navUser = document.querySelectorAll('.profil__nav__link');
+const username = document.getElementById('username');
+const emailUser = document.getElementById('email');
 const myQuiz = navUser[0];
 const myStats = navUser[1];
 const edit = navUser[2];
 const table = 3;
+const idUser = params.get('id');
 
+const req = () => {
+    const myUser = [
+        {
+            id_user: idUser
+        }
+    ];
+    const myInit = {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(myUser)
+    };
+    const path = "http://localhost:8000/api/user/profile/user";
+    fetch(path, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(response => {
+            return response[0];
+        })
+        .then(arrayUser => {
+            console.log(arrayUser);
+            username.innerHTML = arrayUser.username;
+            emailUser.innerHTML = arrayUser.email;
+        })
+}
 //CREATE ARTICLE FOR ANY QUIZZ OF USER
 const myQuizz = () => {
     myStats.classList.remove('profil__nav__link--active');
@@ -53,7 +82,6 @@ const myStat = () => {
     }
 }
 //CREATE EDIT QUIZ FOREACH USER QUIZ
-
 const myEdit = () => {
     myStats.classList.remove('profil__nav__link--active');
     myQuiz.classList.remove('profil__nav__link--active');
@@ -78,7 +106,11 @@ const myEdit = () => {
         section.appendChild(article);
     }
 }
+req();
 myQuizz();
 myQuiz.addEventListener("click", myQuizz);
 myStats.addEventListener("click", myStat);
 edit.addEventListener("click", myEdit);
+createQuiz.addEventListener("click", () => {
+    return window.location.assign(`./createQuiz.html?id=${idUser}`);
+})

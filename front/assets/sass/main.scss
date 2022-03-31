@@ -123,6 +123,11 @@ body {
             padding-left: 10px;
             @include styleText(25px);
         }
+        #email {
+            padding-top: 1rem;
+            opacity: 0.5;
+            font-size: 1rem;
+        }
         &__img {
 
             width: 200px;
