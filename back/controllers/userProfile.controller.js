@@ -108,8 +108,8 @@ module.exports.createQuizz = async (req, res) => {
   for (i in datas) {
     question = datas[i].question;
     id_category = datas[i].id_category;
+    id_quizz = datas[i].id_quizz;
     id_user = datas[i].id_user;
-    name = datas[i].name;
 
     await questionModel.create({
       id_category: id_category,
