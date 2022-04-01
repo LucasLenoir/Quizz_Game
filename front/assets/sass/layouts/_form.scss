@@ -2,128 +2,81 @@
 @import "../utils/variables";
 
 .main__form {
-    @include marginTop;
-    @include centerText;
-    @include styleText;
+  @include marginTop;
+  @include centerText;
+  @include styleText;
+
+  input {
+    &:invalid {
+      border-color: $color-warning;
+    }
+
+    &:valid {
+      border-color: $color-validate;
+    }
+  }
+  #questions {
+    @include styleInput;
+    width: 5%;
+    text-align: end;
+  }
+
+  // FORM CONNEXION / INSCRIPTION
+  &__unit_container {
+    @include marginTop(1rem);
 
     input {
-        &:invalid {
-            border-color: $color-warning;
-        }
-
-        &:valid {
-            border-color: $color-validate;
-        }
+      @include styleInput(1.5rem);
+      min-width: 30%;
     }
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ...................../´¯¯/)
-// ...................,/¯.../
-// .................../..../
-// .............../´¯/'..'/´¯¯`·¸
-// .........../'/.../..../....../¨¯\
-// ..........('(....´...´... ¯~/'..')
-// ...........\..............'...../
-// ............\....\.........._.·´
-// .............\..............(
-// ..............\..............\
-    #questions {
-        @include styleInput;
-        width: 5%;
-        text-align: end;
+    label {
+      display: inline-block;
+      min-width: 10%;
+      text-align: left;
     }
 
-    // FORM CONNEXION / INSCRIPTION
-    &__unit_container {
-        @include marginTop(1rem);
+    &__response {
+      @include flex(space-around);
+    }
+  }
 
-        input {
-            @include styleInput(1.5rem);
-            min-width: 30%;
-        }
+  &__btn {
+    @include styleTitle(45px, $secondary-color);
+    @include marginTop(5rem);
+    @include hoverTransitionElement(0.2s);
+    position: relative;
+    background: transparent;
+    width: 30%;
+    border: none;
 
-        label {
-            display: inline-block;
-            min-width: 10%;
-            text-align: left;
-        }
-
-        &__response {
-            @include flex(space-around);
-        }
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient($color-white, $color-purple 150%);
+      filter: blur(1.1rem);
     }
 
-    &__btn {
-        @include styleTitle(45px, $secondary-color);
-        @include marginTop(5rem);
-        @include hoverTransitionElement(0.2s);
-        position: relative;
-        background: transparent;
-        width: 30%;
-        border: none;
+    &--blue {
+      @include boxShadow;
+      color: $primary-color;
 
-        &::after {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient($color-white, $color-purple 150%);
-            filter: blur(1.1rem)
-        }
-
-        &--blue {
-            @include boxShadow;
-            color: $primary-color;
-
-            &::after {
-                background: radial-gradient($color-blue, $color-blue 200%);
-            }
-        }
-
-        &:hover {
-            transform: scale(1.1);
-        }
+      &::after {
+        background: radial-gradient($color-blue, $color-blue 200%);
+      }
     }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }
 
 .btn__container {
-    @include flex(space-around);
+  @include flex(space-around);
 }
