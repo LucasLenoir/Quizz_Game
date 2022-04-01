@@ -9,6 +9,8 @@ const mainForm = document.querySelector('.main__form');
 const titleMain = document.querySelector(".main__title");
 const btnCategory = document.querySelectorAll(".list__categorie__btn");
 const divScore = document.createElement('div');
+const btnNumber = document.getElementById('questions');
+let valueNumber = 5;
 //ARRAY
 let arrayCategories = [];
 let points = 0;
@@ -28,21 +30,22 @@ const chooseCategories = () => {
         });
 
     });
-}
+};
 // FUNCTION RUN GAME
 const startGame = () => {
     btnPlay.addEventListener("click", (e) => {
         e.preventDefault();
+        valueNumber = btnNumber.value;
         !arrayCategories[0] ? alert('Choisi une catégorie') : runSession();
     });
-}
+};
 const runSession = () => {
     main.removeChild(containerCat);
     main.removeChild(mainForm);
     reqQuestion(path);
 
-}
-// FUNCTION FETCH QUESTION
+};
+// FUNCTION REQUEST
 const reqQuestion = (path) => {
     //fetch
     const newCat = {
@@ -59,9 +62,19 @@ const reqQuestion = (path) => {
         })
         .then(response => {
             const allQuestions = response;
+            shuffleArray(allQuestions);
+            allQuestions.splice(valueNumber);
             createSection(allQuestions);
         })
-}
+};
+const postScore = () => {
+    const myInit = {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(arrayPoint)
+    }
+    fetch(`${path}user/profile/endGame`, myInit);
+};
 //FUNCTION CREATE GAME
 const createSection = (fetchResponse) => {
     // add objet in arrayPoint
@@ -69,8 +82,8 @@ const createSection = (fetchResponse) => {
         const objPoint = {
             id_user: idUser,
             id_category: el,
+            score: 0,
             number_question: 0,
-            score: 0
         }
         arrayPoint.push(objPoint);
     });
@@ -100,7 +113,7 @@ const createSection = (fetchResponse) => {
 
     //racine function
     createQuestion(titleMain, fetchResponse, sectionMain, divTime, newQuestion);
-}
+};
 const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     let arrayResponse = [];
     let testArr = Object.values(array[0]);
@@ -138,11 +151,11 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
             arrayResponse.push(blockResponse);
             verificationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion, timeDown, idCategorie);
         }
-        shuffleResponse(arrayResponse);
+        shuffleArray(arrayResponse);
         arrayResponse.forEach(el => {
             grid.appendChild(el)
         })
-    }, 2000)
+    }, 1000)
     //Implémente les réponses et créer les block en fonction du nombre de réponse
 
     section.appendChild(grid);
@@ -151,7 +164,7 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     barTime.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
     array.splice('0', 1);
 
-}
+};
 // FUNCTION BTN
 const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion, timeDown, idCategorie) => {
     btn.addEventListener("click", (e) => {
@@ -178,14 +191,16 @@ const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion
 
         }
     })
-}
+};
 //FUNCTION NEXT QUESTION
 const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
     if (array.length == 0) {
         setTimeout(() => {
+            idUser != null ? postScore() : console.log("user don't found");
             title.innerHTML = `Score final : ${points}`;
             console.log("session terminé");
             main.removeChild(section);
+            seeScore();
         }, 1000);
     } else {
 
@@ -202,10 +217,11 @@ const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
             createQuestion(title, array, section, timeBar, nextQuestion)
         }, 3000)
     }
-}
-const shuffleResponse = (arr) => {
+};
+// FUNCTION RANDOM ARRAY
+const shuffleArray = (arr) => {
     arr.sort(() => Math.random() - 0.5);
-}
+};
 // FUNCTION TIMEBAR
 const timesUp = (progress, timeColor) => {
 
@@ -233,15 +249,17 @@ const pushScoreUp = (idCategorie) => {
     arrayPoint.forEach(el => {
         if (idCategorie == el.id_category) el.score += 100;
     });
-    console.log(arrayPoint);
 };
 const pushScoreDown = (idCategorie) => {
     arrayPoint.forEach(el => {
         if (idCategorie == el.id_category) el.score -= 10;
     });
-    console.log(arrayPoint);
 };
-
+const seeScore = (section) => {
+    arrayPoint.forEach(el => {
+        console.log(el);
+    })
+}
 // EXPORT FUNCTION
 export { chooseCategories };
 export { startGame };
