@@ -203,12 +203,19 @@ const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
             seeScore();
         }, 1000);
     } else {
-        btn.style.backgroundColor = "green";
-        points += 100;
+
         setTimeout(() => {
-            divScore.innerHTML = `Score : ${points}`;
-        }, 1000);
-        switchQuestion(title, section, grid, array, timeBar, nextQuestion);
+            section.removeChild(timeBar);
+            section.removeChild(grid);
+            main.removeChild(title);
+            section.appendChild(nextQuestion);
+        }, 1000)
+        setTimeout(() => {
+            section.removeChild(nextQuestion);
+            section.appendChild(timeBar)
+            main.appendChild(title)
+            createQuestion(title, array, section, timeBar, nextQuestion)
+        }, 3000)
     }
 };
 // FUNCTION RANDOM ARRAY
