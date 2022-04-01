@@ -1,4 +1,5 @@
 const params = new URLSearchParams(location.search);
+const btnAccueil = document.getElementById('accueil');
 const section = document.querySelector('.profil__quiz__container');
 const createQuiz = document.querySelector('.profil__create__quizz');
 const navUser = document.querySelectorAll('.profil__nav__link');
@@ -111,4 +112,7 @@ myStats.addEventListener("click", myStat);
 edit.addEventListener("click", myEdit);
 createQuiz.addEventListener("click", () => {
     return window.location.assign(`./createQuiz.html?id=${idUser}`);
+});
+btnAccueil.addEventListener("click", () => {
+    return window.location.assign(`../../index.html?id=${idUser}`);
 })

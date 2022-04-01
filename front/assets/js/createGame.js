@@ -1,15 +1,19 @@
+// VARIABLE
 const path = 'http://localhost:8000/api/';
+const params = new URLSearchParams(location.search);
+const idUser = params.get('id');
 const main = document.querySelector("main");
 const containerCat = document.querySelector(".main__container");
 const btnPlay = document.querySelector(".main__form__btn");
 const mainForm = document.querySelector('.main__form');
 const titleMain = document.querySelector(".main__title");
 const btnCategory = document.querySelectorAll(".list__categorie__btn");
-
 const divScore = document.createElement('div');
+//ARRAY
 let arrayCategories = [];
 let points = 0;
-
+let arrayPoint = [];
+// FUNCTION CHOICE CATEGORIE
 const chooseCategories = () => {
     btnCategory.forEach(el => {
         el.addEventListener("click", () => {
@@ -25,6 +29,7 @@ const chooseCategories = () => {
 
     });
 }
+// FUNCTION RUN GAME
 const startGame = () => {
     btnPlay.addEventListener("click", (e) => {
         e.preventDefault();
@@ -37,6 +42,7 @@ const runSession = () => {
     reqQuestion(path);
 
 }
+// FUNCTION FETCH QUESTION
 const reqQuestion = (path) => {
     //fetch
     const newCat = {
@@ -56,7 +62,18 @@ const reqQuestion = (path) => {
             createSection(allQuestions);
         })
 }
+//FUNCTION CREATE GAME
 const createSection = (fetchResponse) => {
+    // add objet in arrayPoint
+    arrayCategories.forEach(el => {
+        const objPoint = {
+            id_user: idUser,
+            id_category: el,
+            number_question: 0,
+            score: 0
+        }
+        arrayPoint.push(objPoint);
+    });
     //create block
     const sectionMain = document.createElement("section");
     const divTime = document.createElement("div");
@@ -84,17 +101,68 @@ const createSection = (fetchResponse) => {
     //racine function
     createQuestion(titleMain, fetchResponse, sectionMain, divTime, newQuestion);
 }
+const createQuestion = (title, array, section, timeBar, nextQuestion) => {
+    let arrayResponse = [];
+    let testArr = Object.values(array[0]);
+    title.innerHTML = testArr[1];
+    let j = 0;
+    const idCategorie = testArr[0];
+    pushQuestionCat(idCategorie);
+    const grid = document.createElement("div");
+    grid.className = `main__section__grid`;
+    grid.setAttribute('id', `${j}`);
+    j++;
+    let timeColor = "green";
+    let progress = 100;
+    setTimeout(() => {
+        let timeDown = setInterval(() => {
+            if (progress <= 0) {
+                clearInterval(timeDown);
+                pushScoreDown(idCategorie);
+                points -= 10;
+                divScore.innerHTML = `Score : ${points}`;
+                switchQuestion(title, section, grid, array, timeBar, nextQuestion);
+            } else {
+                progress -= 0.10;
+                timesUp(progress, timeColor);
+            }
+        }, 10);
+        for (let i = 2; i < testArr.length; i++) {
+            const blockResponse = document.createElement("div");
+            const pResponse = document.createElement("p");
+            pResponse.innerHTML = testArr[i];
+            blockResponse.className = "main__section__grid__response";
+            pResponse.innerHTML = testArr[i];
+            blockResponse.dataset.id = i - 1;
+            blockResponse.appendChild(pResponse);
+            arrayResponse.push(blockResponse);
+            verificationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion, timeDown, idCategorie);
+        }
+        shuffleResponse(arrayResponse);
+        arrayResponse.forEach(el => {
+            grid.appendChild(el)
+        })
+    }, 2000)
+    //Implémente les réponses et créer les block en fonction du nombre de réponse
 
-const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion, lolo) => {
+    section.appendChild(grid);
+    main.appendChild(section);
+    const barTime = document.querySelector('.main__section__timer__bar');
+    barTime.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
+    array.splice('0', 1);
+
+}
+// FUNCTION BTN
+const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion, timeDown, idCategorie) => {
     btn.addEventListener("click", (e) => {
-        console.log(array[0]);
-        clearInterval(lolo);
+        clearInterval(timeDown);
         const barTime = document.querySelector('.main__section__timer__bar');
         barTime.style.backgroundColor = "green";
         e.preventDefault();
         if (btn.dataset.id != 1) {
             btn.style.backgroundColor = 'red';
             points -= 10;
+            pushScoreDown(idCategorie);
             setTimeout(() => {
                 divScore.innerHTML = `Score : ${points}`;
             }, 1000);
@@ -102,6 +170,7 @@ const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion
         } else {
             btn.style.backgroundColor = 'green';
             points += 100;
+            pushScoreUp(idCategorie);
             setTimeout(() => {
                 divScore.innerHTML = `Score : ${points}`;
             }, 1000);
@@ -110,6 +179,7 @@ const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion
         }
     })
 }
+//FUNCTION NEXT QUESTION
 const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
     if (array.length == 0) {
         setTimeout(() => {
@@ -136,63 +206,7 @@ const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
 const shuffleResponse = (arr) => {
     arr.sort(() => Math.random() - 0.5);
 }
-const createQuestion = (title, array, section, timeBar, nextQuestion) => {
-    let arrayResponse = [];
-    let testArr = Object.values(array[0]);
-    title.innerHTML = testArr[1];
-    let j = 0;
-
-    const grid = document.createElement("div");
-    grid.className = `main__section__grid`;
-    grid.setAttribute('id', `${j}`);
-    j++;
-    let timeColor = "green";
-    let progress = 100;
-    setTimeout(() => {
-        let lolo = setInterval(() => {
-            if (progress <= 0) {
-                clearInterval(lolo);
-                points -= 10;
-                divScore.innerHTML = `Score : ${points}`;
-                switchQuestion(title, section, grid, array, timeBar, nextQuestion);
-            } else {
-                progress -= 0.10;
-                timesUp(progress, timeColor);
-            }
-        }, 10);
-        for (let i = 2; i < testArr.length; i++) {
-            console.log(testArr[0]);
-            const blockResponse = document.createElement("div");
-            const pResponse = document.createElement("p");
-            pResponse.innerHTML = testArr[i];
-            blockResponse.className = "main__section__grid__response";
-            pResponse.innerHTML = testArr[i];
-            blockResponse.dataset.id = i;
-            blockResponse.appendChild(pResponse);
-            arrayResponse.push(blockResponse);
-            verificationBtn(blockResponse, title, section, grid, array, timeBar, nextQuestion, lolo);
-        }
-        shuffleResponse(arrayResponse);
-        arrayResponse.forEach(el => {
-            grid.appendChild(el)
-        })
-    }, 2000)
-    //Implémente les réponses et créer les block en fonction du nombre de réponse
-
-    section.appendChild(grid);
-    main.appendChild(section);
-    const barTime = document.querySelector('.main__section__timer__bar');
-    barTime.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
-    array.splice('0', 1);
-
-}
-
-const score = () => {
-    divScore.innerHTML = `Score : ${points}`;
-    divScore.className = "main__score"
-    main.appendChild(divScore);
-}
-
+// FUNCTION TIMEBAR
 const timesUp = (progress, timeColor) => {
 
 
@@ -203,9 +217,31 @@ const timesUp = (progress, timeColor) => {
         timeColor = "red";
     }
     timeBar.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
+};
+// SCORE FUNCTION
+const score = () => {
+    divScore.innerHTML = `Score : ${points}`;
+    divScore.className = "main__score"
+    main.appendChild(divScore);
+};
+const pushQuestionCat = (idCategorie) => {
+    arrayPoint.forEach(el => {
+        if (idCategorie == el.id_category) el.number_question += 1;
+    });
+};
+const pushScoreUp = (idCategorie) => {
+    arrayPoint.forEach(el => {
+        if (idCategorie == el.id_category) el.score += 100;
+    });
+    console.log(arrayPoint);
+};
+const pushScoreDown = (idCategorie) => {
+    arrayPoint.forEach(el => {
+        if (idCategorie == el.id_category) el.score -= 10;
+    });
+    console.log(arrayPoint);
+};
 
-}
-
-
+// EXPORT FUNCTION
 export { chooseCategories };
 export { startGame };
