@@ -15,7 +15,11 @@ const chooseCategories = () => {
         el.addEventListener("click", () => {
             if (!arrayCategories.includes(el.dataset["number"])) {
                 arrayCategories.push(el.dataset["number"]);
-            } else arrayCategories.splice(arrayCategories.indexOf(el.dataset["number"]), 1);
+                el.classList.add('list__categorie__btn--active');
+            } else {
+                el.classList.remove('list__categorie__btn--active');
+                arrayCategories.splice(arrayCategories.indexOf(el.dataset["number"]), 1);
+            }
             console.log(arrayCategories);
         });
 
@@ -83,6 +87,7 @@ const createSection = (fetchResponse) => {
 
 const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion, lolo) => {
     btn.addEventListener("click", (e) => {
+        console.log(array[0]);
         clearInterval(lolo);
         const barTime = document.querySelector('.main__section__timer__bar');
         barTime.style.backgroundColor = "green";
@@ -134,7 +139,7 @@ const shuffleResponse = (arr) => {
 const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     let arrayResponse = [];
     let testArr = Object.values(array[0]);
-    title.innerHTML = testArr[0];
+    title.innerHTML = testArr[1];
     let j = 0;
 
     const grid = document.createElement("div");
@@ -147,13 +152,16 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
         let lolo = setInterval(() => {
             if (progress <= 0) {
                 clearInterval(lolo);
+                points -= 10;
+                divScore.innerHTML = `Score : ${points}`;
                 switchQuestion(title, section, grid, array, timeBar, nextQuestion);
             } else {
                 progress -= 0.10;
                 timesUp(progress, timeColor);
             }
         }, 10);
-        for (let i = 1; i < testArr.length; i++) {
+        for (let i = 2; i < testArr.length; i++) {
+            console.log(testArr[0]);
             const blockResponse = document.createElement("div");
             const pResponse = document.createElement("p");
             pResponse.innerHTML = testArr[i];
@@ -168,7 +176,7 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
         arrayResponse.forEach(el => {
             grid.appendChild(el)
         })
-    }, 1000)
+    }, 2000)
     //Implémente les réponses et créer les block en fonction du nombre de réponse
 
     section.appendChild(grid);
