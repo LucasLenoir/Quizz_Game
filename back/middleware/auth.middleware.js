@@ -4,6 +4,7 @@ require("dotenv").config({ path: "./config/.env" });
 
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
+
   if (token) {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
@@ -22,24 +23,6 @@ module.exports.checkUser = (req, res, next) => {
     });
   } else {
     res.locals.user = null;
-    next();
-  }
-};
-
-module.exports.requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(decodedToken.id_user);
-        res.locals.user = decodedToken.id_user;
-        next();
-      }
-    });
-  } else {
-    console.log("NO TOKEN");
     next();
   }
 };

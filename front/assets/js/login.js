@@ -7,7 +7,6 @@ const req = (input) => {
   const myInit = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    // credentials: "include",
 
     body: JSON.stringify(input),
   };
@@ -16,22 +15,11 @@ const req = (input) => {
       return response.json();
     })
     .then((res) => {
-      const token = res;
-      const name = res.name;
-      const value = res.value;
-      const expires = res.expires;
-      console.log(res.name);
-      const newCookie = (` ${name}`, `${value}`, ` ${expires}`);
-      document.cookie = newCookie;
-      const id = res.id_user;
-
-      ("jwt=tamere; Max-Age=86400;HttpOnly:true");
-
+      const { id_user, token } = res;
       document.cookie = token;
-      //   document.cookie.name = "jwt";
+      console.log(token);
 
-      return window.location.assign(`../pages/user.html?id=${id}`);
-
+       return window.location.assign(`../pages/user.html?id=${id_user}`);
     });
 };
 myForm.addEventListener("submit", (e) => {
