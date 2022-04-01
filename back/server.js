@@ -12,7 +12,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 //!Middleware
-app.use("/", cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use("profile/user", checkUser);
