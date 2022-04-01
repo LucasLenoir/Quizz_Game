@@ -69,23 +69,27 @@ module.exports.getStats = async (req, res) => {
 
 //!Update Users after a game
 module.exports.updateStats = async (req, res) => {
-  const data = req.body;
-  const id_user = req.body.id_user;
-  const id_category = req.body.id_category;
-  const score = req.body.score;
-  const number_question = req.body.number_question;
+  const datas = req.body;
+  for (i in datas) {
+    const id_user = datas[i].id_user;
+    const id_category = datas[i].id_category;
+    const score = datas[i].score;
+    const number_question = datas[i].number_question;
 
-  const updateStatsRes = await statsModel.create({
-    id_user: id_user,
-    id_category: id_category,
-    score: score,
-    number_question: number_question,
-  });
-  if (updateStatsRes) {
-    res.status(201).send("score updated");
-  } else {
-    res.status(401).send("ERROR SCORE NOT UPDATED");
+    const updateStatsRes = await statsModel.create({
+      id_user: id_user,
+      id_category: id_category,
+      score: score,
+      number_question: number_question,
+    });
   }
+
+  res.status(201).send("score updated");
+  // if (res.ok) {
+  //   res.status(201).send("score updated");
+  // } else {
+  //   res.status(401).send("ERROR SCORE NOT UPDATED");
+  // }
 };
 
 //!Create a Quizz

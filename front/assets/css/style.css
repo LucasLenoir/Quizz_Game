@@ -255,6 +255,12 @@ body {
   color: #fff;
   transform: translateY(-10px) scale(1.05);
 }
+.main .list__categorie__btn--active {
+  border-radius: 49px;
+  box-shadow: -2px 4px 20px -9px #872E9F, inset 3px 0px 7px 4px rgba(255, 255, 255, 0.7);
+  color: #fff;
+  transform: scale(1.05);
+}
 .main__user {
   margin: 0 10%;
 }
