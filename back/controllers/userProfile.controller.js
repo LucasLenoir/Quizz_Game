@@ -5,10 +5,13 @@ const questionModel = require("../models/Question");
 const responsesModel = require("../models/response");
 const quizzModel = require("../models/Quizz");
 const statsModel = require("../models/StatUsers");
+const checkUser = require("../middleware/auth.middleware");
 
 //!Get all user's info to display
 module.exports.getUserInfo = async (req, res) => {
+  const token = req.body.token;
   const id_user = req.body.id_user;
+  console.log(token);
 
   const infos = await userModel.findAll({ where: { id_user: id_user } });
   if (infos) {
@@ -17,7 +20,6 @@ module.exports.getUserInfo = async (req, res) => {
     res.status(401).send("ERROR COULDN'T FIND ANY INFO");
   }
 };
-
 //!update User Info
 module.exports.updateUserInfo = async (req, res) => {
   const datas = req.body;
@@ -31,6 +33,7 @@ module.exports.updateUserInfo = async (req, res) => {
 
   const udpatded = userModel.update(
     {
+      attributes: { exclude: ["password"] },
       username: username,
       password: password,
       picture: picture,
@@ -46,8 +49,9 @@ module.exports.updateUserInfo = async (req, res) => {
 };
 //!Get user's stats
 module.exports.getStats = async (req, res) => {
+  const token = req.body[0].token;
   const id_user = req.body[0].id_user;
-  console.log(id_user);
+
   const profile = await statsModel.findAll({
     attributes: [
       "id_user",
@@ -112,6 +116,7 @@ module.exports.createQuizz = async (req, res) => {
   for (i in datas) {
     question = datas[i].question;
     id_category = datas[i].id_category;
+
     id_quizz = datas[i].id_quizz;
     id_user = datas[i].id_user;
 

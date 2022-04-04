@@ -4,6 +4,7 @@ const { QueryTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const userModel = require("../models/User");
 const jwt = require("jsonwebtoken");
+
 require("dotenv").config({ path: "./config/.env" });
 const maxAge = 1 * 24 * 60 * 60 * 1000;
 
@@ -41,40 +42,30 @@ module.exports.signIn = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-
   const user = await userModel.findOne({ where: { username } });
   const { id_user } = user.dataValues;
 
   if (user) {
     //! compare the password from the front to the hashed one in the DB
     if (bcrypt.compareSync(password, user.password)) {
-      const token = jwt.sign({ id_user }, process.env.TOKEN_SECRET, {
-        expiresIn: maxAge,
-      });
+      let token = jwt.sign({ id_user }, process.env.TOKEN_SECRET);
 
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
 
-      res.cookie("jwt", token, { httpOnly: true, maxAge });
-      resToken = {
-        id_user: id_user,
-        name: "jwt",
-        value: token,
-        expires: maxAge,
-        httpOnly: true,
-      };
-      res.status(200).json(resToken);
+      res.status(200).send({ id_user, token });
+
       console.log("User found and logged");
     } else {
       res.status(401).send("error, password didn't match");
     }
   } else {
-    res.status(400);
+    res.status(400).send(Error);
     console.log("user not found");
   }
 };
 
 module.exports.logout = async (req, res) => {
-  res.cookie("jwt", "", { maxAge: 1 });
+  token = `jwt=""`;
 
-  res.status(200).json("USER LOGGED OUT");
+  res.status(200).json("USER LOGGED OUT", token);
 };

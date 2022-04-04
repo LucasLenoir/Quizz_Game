@@ -1,45 +1,33 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/User");
 require("dotenv").config({ path: "./config/.env" });
+let token;
 
 module.exports.checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if (err) {
-        res.locals.user = null;
-        res.cookie("jwt", "", { maxAge: 1 });
-        next();
-      } else {
-        let user = await userModel.findOne({
-          where: { id_user: decodedToken.id_user },
-        });
-        console.log("hello");
-        res.locals.user = user.id_user;
-        console.log(user);
-        next();
-      }
-    });
-  } else {
-    res.locals.user = null;
-    next();
-  }
-};
+  console.log("yo");
+  console.log(req.originalUrl);
+  if (req.originalUrl.startsWith("/api/user/profile/user")) {
+    token = req.body.token;
+    if (token) {
+      console.log(token);
+      jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+        if (err) {
+          throw err;
+        } else {
+          let user = await userModel.findOne({
+            where: { id_user: decodedToken.id_user },
+          });
+          console.log("hello");
 
-module.exports.requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(decodedToken.id_user);
-        res.locals.user = decodedToken.id_user;
-        next();
-      }
-    });
+          console.log(user);
+          res.status(200).send(user);
+        }
+      });
+    } else {
+      console.log("hello2");
+      res.status(400).send("Authentification failed");
+    }
   } else {
-    console.log("NO TOKEN");
     next();
   }
 };
