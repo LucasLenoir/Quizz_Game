@@ -27,26 +27,30 @@
         </div>
     </header>
     <main class="main__form">
-        <h1 class="main__title">Creer ton Quiz</h1>
+        <h1 class="main__title">Create ur Quiz</h1>
         <form>
-            <div class="main__form__unit_container">
+            <div class="main__form__unit_container main__form__unit_container__quiz__name">
                 <label for="nameQuiz">Nom du Quiz</label>
                 <input type="text" name="nameQuiz" id="nameQuiz" placeholder="Le joli Quiz" required>
-            </div>
-            <div class="main__form__unit_container">
-                <label for="categorie">Categorie</label>
-                <input type="text" name="categorie" id="categorie" placeholder="animal" required>
             </div>
             <div class="block__question">
                 <div class="main__form__unit_container">
                     <label for="question">Question 1</label>
                     <input type="text" name="question" id="question"
                         placeholder="Quelle est la couleur du poussin jaune?" required>
+                    <div class="main__form__unit_container">
+                        <label for="categorie">Categorie</label>
+                        <select name="categorie" id="categorie">
+                            <option value="3">Culture G</option>
+                            <option value="2">Sport</option>
+                            <option value="1">Cine</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="main__form__unit_container__response main__form__unit_container">
                     <div>
                         <div class=" main__form__unit_container">
-                            <label for="response_1">Response 1</label>
+                            <label for="response_1">True response</label>
                             <input type="text" name="response_1" id="response_1" placeholder="Jaune" required>
                         </div>
                         <div class=" main__form__unit_container">

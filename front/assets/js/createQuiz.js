@@ -2,6 +2,7 @@ const params = new URLSearchParams(location.search);
 const idUser = params.get('id');
 const btnNextQuestion = document.getElementById('next__question');
 const btnValidateQuiz = document.getElementById('validateQuiz');
+
 //Take all input
 const inputName = document.getElementById('nameQuiz');
 const inputCategorie = document.getElementById('categorie');
@@ -10,8 +11,10 @@ const inputResponse1 = document.getElementById('response_1');
 const inputResponse2 = document.getElementById('response_2');
 const inputResponse3 = document.getElementById('response_3');
 const inputResponse4 = document.getElementById('response_4');
+//variable
 const arrayQuestion = [];
-console.log(inputQuestion);
+let nbrQuestion = 0;
+console.log(inputName.labels[0]);
 
 btnNextQuestion.addEventListener("click", (e) => {
     e.preventDefault();
@@ -25,5 +28,26 @@ btnNextQuestion.addEventListener("click", (e) => {
         response_3: inputResponse3.value,
         response_4: inputResponse4.value,
     }
-    console.log(body);
+    if (inputName.value && inputQuestion.value && inputResponse1.value && inputResponse2.value && inputResponse3.value && inputResponse4.value) {
+        arrayQuestion.push(body);
+        nbrQuestion++;
+        inputQuestion.value = "";
+        inputResponse1.value = "";
+        inputResponse2.value = "";
+        inputResponse3.value = "";
+        inputResponse4.value = "";
+        inputQuestion.labels[0].innerHTML = `Question ${nbrQuestion + 1}`;
+        inputName.style.display = "none";
+        inputName.labels[0].style.display = "none";
+    } else {
+        alert('Remplissez les champs vide');
+    }
+});
+btnValidateQuiz.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (arrayQuestion.length < 4) {
+        alert(`Il vous reste ${5 - nbrQuestion} questions à faire minimum`);
+    } else {
+
+    }
 })

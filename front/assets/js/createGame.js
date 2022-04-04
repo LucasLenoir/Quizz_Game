@@ -255,10 +255,37 @@ const pushScoreDown = (idCategorie) => {
         if (idCategorie == el.id_category) el.score -= 10;
     });
 };
-const seeScore = (section) => {
+const seeScore = () => {
+    const section = document.createElement('div');
+    const titleStats = document.createElement('h2');
+    titleStats.innerHTML = "Stats";
+    section.classList.add('main__container__stats');
+    section.appendChild(titleStats);
     arrayPoint.forEach(el => {
-        console.log(el);
+        const categorie = el.id_category;
+        const divCategorie = document.createElement('h3');
+        const divQuestion = document.createElement('p');
+        const divStats = document.createElement('p');
+        const divContainerStat = document.createElement('div');
+        const containerGrid = document.createElement('div');
+        containerGrid.classList.add('main__container__stats__grid');
+        divStats.innerHTML = `Points : ${el.score}`;
+        divQuestion.innerHTML = `Nombres de questions : ${el.number_question}`;
+        if (categorie == 3) {
+            divCategorie.innerHTML = `Culture G`;
+        } else if (categorie == 2) {
+            divCategorie.innerHTML = `Sport`;
+        } else if (categorie == 1) {
+            divCategorie.innerHTML = `Cine`;
+        }
+        divContainerStat.appendChild(divCategorie);
+        divContainerStat.appendChild(divCategorie);
+        divContainerStat.appendChild(divQuestion);
+        divContainerStat.appendChild(divStats);
+        containerGrid.appendChild(divContainerStat);
+        section.appendChild(containerGrid);
     })
+    main.appendChild(section);
 }
 // EXPORT FUNCTION
 export { chooseCategories };

@@ -80,5 +80,19 @@
 
 // FORM CREATE QUIZZ
 .btn__container {
-    @include flex(space-around);
+    @include flex($align: center, $direction: column);
+
+    button {
+        margin: 2rem auto;
+    }
+}
+
+.main__form {
+    select {
+        @include styleInput;
+
+        & option {
+            background-color: $bg-primary;
+        }
+    }
 }

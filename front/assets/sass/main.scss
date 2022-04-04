@@ -66,6 +66,7 @@ body {
                 transform: scale(1.05);
             }
         }
+
     }
 
     &__user {
@@ -74,6 +75,29 @@ body {
     }
 
     // GAME START
+    &__container__stats {
+        @include paddingTB;
+        text-align: center;
+
+        h2 {
+            @include styleTitle();
+        }
+
+        h3 {
+            @include styleTitle(20px);
+        }
+
+        p {
+            @include styleText;
+        }
+
+        &__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+    }
 
     &__section {
         text-align: center;
