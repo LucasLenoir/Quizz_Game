@@ -16,10 +16,10 @@ const req = (input) => {
     })
     .then((res) => {
       const { id_user, token } = res;
-      document.cookie = token;
-      console.log(token);
+      localStorage.setItem("token", token);
+      // console.log(token);
 
-       return window.location.assign(`../pages/user.html?id=${id_user}`);
+      return window.location.assign(`../pages/user.html?id=${id_user}`);
     });
 };
 myForm.addEventListener("submit", (e) => {

@@ -50,7 +50,6 @@ module.exports.signIn = async (req, res) => {
     if (bcrypt.compareSync(password, user.password)) {
       let token = jwt.sign({ id_user }, process.env.TOKEN_SECRET);
 
-      token = `jwt=${token}; `;
       //! create the token and store it in cookies (httpOnly means only our server can acces it)
 
       res.status(200).send({ id_user, token });

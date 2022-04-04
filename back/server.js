@@ -15,21 +15,10 @@ const corsOptions = {
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use("profile/user", checkUser);
-// app.use("/", requireAuth, (req, res) => {
-//   console.log(res.lcals.user);
-//   res.status(200).json(res.olocals.user);
-// });
+app.use("*", checkUser);
 
 //!routes
-app.use("/", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-type, Accept"
-  );
-  next();
-});
+
 app.use("/api/", categoriesRoutes);
 app.use("/api/user", userRoutes);
 
