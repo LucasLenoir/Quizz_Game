@@ -3,13 +3,12 @@ const params = new URLSearchParams(location.search);
 const btnAccueil = document.getElementById("accueil");
 const section = document.querySelector(".profil__quiz__container");
 const createQuiz = document.querySelector(".profil__create__quizz");
-const navUser = document.querySelectorAll(".profil__nav__link");
 const username = document.getElementById("username");
 const emailUser = document.getElementById("email");
+const navUser = document.querySelectorAll(".profil__nav__link");
 const myQuiz = navUser[0];
 const myStats = navUser[1];
 const edit = navUser[2];
-const table = 3;
 const idUser = params.get("id");
 const token = localStorage.getItem("token");
 const myUser = {
@@ -32,8 +31,8 @@ const req = () => {
       return response;
     })
     .then((arrayUser) => {
-      username.innerHTML = arrayUser.username;
-      emailUser.innerHTML = arrayUser.email;
+      username.innerHTML = arrayUser[0].username;
+      emailUser.innerHTML = arrayUser[0].email;
     });
 };
 //CREATE ARTICLE FOR ANY QUIZZ OF USER
@@ -58,6 +57,9 @@ const myQuizz = () => {
         nameQuiz.innerHTML = user.name;
         category(user.id_category, categorieQuiz);
         btnPlay.innerHTML = "Play";
+        btnPlay.addEventListener("click", () => {
+          return window.location.assign(`../../index.html?id=${idUser}&idQuizz=${user.id_quizz}`);
+        })
         article.appendChild(nameQuiz);
         article.appendChild(categorieQuiz);
         article.appendChild(btnPlay);

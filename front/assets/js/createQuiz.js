@@ -1,4 +1,4 @@
-const path = "http://localhost:8000/api/user/profile/create";
+const path = "http://localhost:8000/api/user/profile/user/create";
 const params = new URLSearchParams(location.search);
 const idUser = params.get('id');
 const btnNextQuestion = document.getElementById('next__question');

@@ -9,14 +9,8 @@ const checkUser = require("../middleware/auth.middleware");
 
 //!Get all user's info to display
 module.exports.getUserInfo = async (req, res) => {
-<<<<<<< HEAD
   const token = req.body.token;
   const id_user = req.body.id_user;
-=======
-  let token = req.body.token;
-  let id_user = req.body.id_user;
-  console.log(token);
->>>>>>> 39621eccc7f1c3a3a969d790025275aec86cd3a0
 
   const infos = await userModel.findAll({
     attributes: { exclude: ["password"] },

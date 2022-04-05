@@ -2,6 +2,7 @@
 const path = 'http://localhost:8000/api/';
 const params = new URLSearchParams(location.search);
 const idUser = params.get('id');
+const idQuizz = params.get('idQuizz');
 const main = document.querySelector("main");
 const containerCat = document.querySelector(".main__container");
 const btnPlay = document.querySelector(".main__form__btn");
@@ -36,10 +37,35 @@ const startGame = () => {
     btnPlay.addEventListener("click", (e) => {
         e.preventDefault();
         valueNumber = btnNumber.value;
-        !arrayCategories[0] ? alert('Choisi une catégorie') : runSession();
+        !arrayCategories[0] ? alert('Choisi une catégorie') : runSession(path);
     });
 };
-const runSession = () => {
+const runQuizz = () => {
+    //fetch
+    const bodyQuizz = {
+        id_quizz: idQuizz
+    }
+    const myInit = {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bodyQuizz)
+    }
+    fetch(`${path}user/profile/id_quizz`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(response => {
+            console.log(response);
+            main.removeChild(containerCat);
+            main.removeChild(mainForm);
+            const allQuestions = response;
+            shuffleArray(allQuestions);
+            allQuestions.splice(valueNumber);
+            createSection(allQuestions);
+        })
+
+}
+const runSession = (path) => {
     main.removeChild(containerCat);
     main.removeChild(mainForm);
     reqQuestion(path);
@@ -196,7 +222,7 @@ const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion
 const switchQuestion = (title, section, grid, array, timeBar, nextQuestion) => {
     if (array.length == 0) {
         setTimeout(() => {
-            idUser != null ? postScore() : console.log("user don't found");
+            idUser != null ? postScore() : console.log("user not found");
             title.innerHTML = `Score final : ${points}`;
             console.log("session terminé");
             main.removeChild(section);
@@ -287,6 +313,7 @@ const seeScore = () => {
     section.appendChild(containerGrid);
     main.appendChild(section);
 }
+if (idQuizz != null) runQuizz();
 // EXPORT FUNCTION
 export { chooseCategories };
 export { startGame };
