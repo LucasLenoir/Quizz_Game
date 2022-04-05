@@ -1,7 +1,7 @@
 const sequelize = require("../config/dbConfig");
 const { DataTypes } = require("sequelize");
 
-const Responses = sequelize.define(
+const responsesModel = sequelize.define(
   "responses",
   {
     //Model attributes are defined here
@@ -32,4 +32,4 @@ const Responses = sequelize.define(
   }
 );
 
-module.exports = Responses;
+module.exports = responsesModel;
