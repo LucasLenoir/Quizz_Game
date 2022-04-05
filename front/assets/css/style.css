@@ -520,9 +520,11 @@ body {
 .profil__quiz__article h3 {
   font-weight: normal;
   margin: auto 0;
+  min-width: 30%;
 }
 .profil__quiz__article p {
   margin: auto 0;
+  min-width: 30%;
 }
 .profil__btn {
   font-size: 30px;

@@ -1,3 +1,4 @@
+const path = "http://localhost:8000/api/user/profile/create";
 const params = new URLSearchParams(location.search);
 const idUser = params.get('id');
 const btnNextQuestion = document.getElementById('next__question');
@@ -48,6 +49,18 @@ btnValidateQuiz.addEventListener("click", (e) => {
     if (arrayQuestion.length < 4) {
         alert(`Il vous reste ${5 - nbrQuestion} questions à faire minimum`);
     } else {
-
+        postQuiz(arrayQuestion);
     }
 })
+const postQuiz = (array) => {
+    const myInit = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(array)
+    };
+    fetch(path, myInit)
+        .then(() => {
+            alert('Quiz Créé !');
+            return window.location.assign(`./user.html?id=${idUser}`);
+        })
+};

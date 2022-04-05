@@ -11,7 +11,6 @@ const checkUser = require("../middleware/auth.middleware");
 module.exports.getUserInfo = async (req, res) => {
   const token = req.body.token;
   const id_user = req.body.id_user;
-  console.log(token);
 
   const infos = await userModel.findAll({ where: { id_user: id_user } });
   if (infos) {
@@ -23,13 +22,11 @@ module.exports.getUserInfo = async (req, res) => {
 //!update User Info
 module.exports.updateUserInfo = async (req, res) => {
   const datas = req.body;
-  console.log(datas);
   const id_user = datas[0].id_user;
   const username = datas[0].username;
   const password = datas[0].password;
   const picture = datas[0].picture;
   const bio = datas[0].bio;
-  console.log(id_user);
 
   const udpatded = userModel.update(
     {
@@ -98,16 +95,14 @@ module.exports.updateStats = async (req, res) => {
 module.exports.createQuizz = async (req, res) => {
   const datas = req.body;
 
-  id_category = datas[0].id_category;
-  id_user = datas[0].id_user;
-  name = datas[0].name;
-  console.log(id_category);
+  let id_category = datas[0].id_category;
+  let id_user = datas[0].id_user;
+  let name = datas[0].name;
   const reqQuizz = await quizzModel.create({
     id_category: id_category,
     name: name,
     id_user: id_user,
   });
-  console.log(reqQuizz);
   const { id_quizz } = await quizzModel.findOne({
     attributes: ["id_quizz"],
     where: { name: name },
@@ -116,14 +111,12 @@ module.exports.createQuizz = async (req, res) => {
   for (i in datas) {
     question = datas[i].question;
     id_category = datas[i].id_category;
-
-    id_quizz = datas[i].id_quizz;
     id_user = datas[i].id_user;
 
     await questionModel.create({
       id_category: id_category,
       question: question,
-      id_quizz: id_quizz,
+      id_quizz,
       id_user: id_user,
     });
 
@@ -144,8 +137,7 @@ module.exports.createQuizz = async (req, res) => {
 };
 //!Fetch all user's quizz already created
 module.exports.getAllQuizz = async (req, res) => {
-  const id_user = req.body;
-
+  const id_user = req.body.id_user;
   const quizz = await quizzModel.findAll({ where: { id_user: id_user } });
 
   if (quizz) {

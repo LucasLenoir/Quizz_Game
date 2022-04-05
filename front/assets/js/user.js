@@ -1,3 +1,4 @@
+const path = "http://localhost:8000/api/user/profile";
 const params = new URLSearchParams(location.search);
 const btnAccueil = document.getElementById("accueil");
 const section = document.querySelector(".profil__quiz__container");
@@ -11,114 +12,143 @@ const edit = navUser[2];
 const table = 3;
 const idUser = params.get("id");
 const token = localStorage.getItem("token");
+const myUser = {
+  id_user: idUser,
+  token: token,
+};
+const myInit = {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+
+  body: JSON.stringify(myUser),
+};
 const req = () => {
-  const myUser = {
-    id_user: idUser,
-    token: token,
-  };
 
-  //   console.log(token);
-  const myInit = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-
-    body: JSON.stringify(myUser),
-  };
-  const path = "http://localhost:8000/api/user/profile/user";
-  fetch(path, myInit)
+  fetch(`${path}/user`, myInit)
     .then((res) => {
-    //   console.log(res);
       return res.json();
     })
     .then((response) => {
-      console.log(response);
       return response;
     })
     .then((arrayUser) => {
-      console.log(arrayUser);
       username.innerHTML = arrayUser.username;
       emailUser.innerHTML = arrayUser.email;
     });
 };
 //CREATE ARTICLE FOR ANY QUIZZ OF USER
 const myQuizz = () => {
-  myStats.classList.remove("profil__nav__link--active");
-  edit.classList.remove("profil__nav__link--active");
-  myQuiz.classList.add("profil__nav__link--active");
-  section.innerHTML = "";
-  for (let i = 0; i < table; i++) {
-    const article = document.createElement("article");
-    const nameQuiz = document.createElement("h3");
-    const categorieQuiz = document.createElement("p");
-    const nbrQuestion = document.createElement("p");
-    const btnPlay = document.createElement("button");
-    article.className = "profil__quiz__article";
-    btnPlay.classList.add("profil__btn", "profil__btn--play");
-    nameQuiz.innerHTML = `Name quiz ${table}`;
-    categorieQuiz.innerHTML = "Categorie quiz";
-    nbrQuestion.innerHTML = "nbr question";
-    btnPlay.innerHTML = "Play";
-    article.appendChild(nameQuiz);
-    article.appendChild(categorieQuiz);
-    article.appendChild(nbrQuestion);
-    article.appendChild(btnPlay);
-    section.appendChild(article);
-  }
+  fetch(`${path}`, myInit)
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+      myStats.classList.remove("profil__nav__link--active");
+      edit.classList.remove("profil__nav__link--active");
+      myQuiz.classList.add("profil__nav__link--active");
+      section.innerHTML = "";
+      for (let i = 0; i < response.length; i++) {
+        let user = response[i];
+        const article = document.createElement("article");
+        const nameQuiz = document.createElement("h3");
+        const categorieQuiz = document.createElement("p");
+        const btnPlay = document.createElement("button");
+        article.className = "profil__quiz__article";
+        btnPlay.classList.add("profil__btn", "profil__btn--play");
+        nameQuiz.innerHTML = user.name;
+        category(user.id_category, categorieQuiz);
+        btnPlay.innerHTML = "Play";
+        article.appendChild(nameQuiz);
+        article.appendChild(categorieQuiz);
+        article.appendChild(btnPlay);
+        section.appendChild(article);
+      }
+    })
 };
 //CREATE ARTICLE FOREACH QUIZZ PLAYING
 const myStat = () => {
-  myQuiz.classList.remove("profil__nav__link--active");
-  edit.classList.remove("profil__nav__link--active");
-  myStats.classList.add("profil__nav__link--active");
-  section.innerHTML = "";
-  for (let i = 0; i < table; i++) {
-    const article = document.createElement("article");
-    const nameQuiz = document.createElement("h3");
-    const result = document.createElement("p");
-    const resultTime = document.createElement("p");
-    article.className = "profil__quiz__article";
-    nameQuiz.innerHTML = `Name quiz ${table}`;
-    result.innerHTML = `résult : 10/20`;
-    resultTime.innerHTML = `01:20`;
-    article.appendChild(nameQuiz);
-    article.appendChild(result);
-    article.appendChild(resultTime);
-    section.appendChild(article);
-  }
+  fetch(`${path}`, myInit)
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+
+      myQuiz.classList.remove("profil__nav__link--active");
+      edit.classList.remove("profil__nav__link--active");
+      myStats.classList.add("profil__nav__link--active");
+      section.innerHTML = "";
+      for (let i = 0; i < response.length; i++) {
+        let user = response[i];
+        const article = document.createElement("article");
+        const nameQuiz = document.createElement("h3");
+        const result = document.createElement("p");
+        const resultTime = document.createElement("p");
+        article.className = "profil__quiz__article";
+        nameQuiz.innerHTML = user.name;
+        result.innerHTML = `résult : 10/20`;
+        resultTime.innerHTML = `01:20`;
+        article.appendChild(nameQuiz);
+        article.appendChild(result);
+        article.appendChild(resultTime);
+        section.appendChild(article);
+      }
+    })
 };
 //CREATE EDIT QUIZ FOREACH USER QUIZ
 const myEdit = () => {
-  myStats.classList.remove("profil__nav__link--active");
-  myQuiz.classList.remove("profil__nav__link--active");
-  edit.classList.add("profil__nav__link--active");
-  section.innerHTML = "";
-  for (let i = 0; i < table; i++) {
-    const article = document.createElement("article");
-    const nameQuiz = document.createElement("h3");
-    const categorieQuiz = document.createElement("p");
-    const nbrQuestion = document.createElement("p");
-    const btnEdit = document.createElement("button");
-    article.className = "profil__quiz__article";
-    nameQuiz.innerHTML = `Name quiz ${table}`;
-    categorieQuiz.innerHTML = "Categorie quiz";
-    nbrQuestion.innerHTML = "nbr question";
-    btnEdit.classList.add("profil__btn", "profil__btn--edit");
-    btnEdit.innerHTML = "Edit";
-    article.appendChild(nameQuiz);
-    article.appendChild(categorieQuiz);
-    article.appendChild(nbrQuestion);
-    article.appendChild(btnEdit);
-    section.appendChild(article);
-  }
+  fetch(`${path}`, myInit)
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+      myStats.classList.remove("profil__nav__link--active");
+      myQuiz.classList.remove("profil__nav__link--active");
+      edit.classList.add("profil__nav__link--active");
+      section.innerHTML = "";
+      for (let i = 0; i < response.length; i++) {
+        let user = response[i];
+        const article = document.createElement("article");
+        const nameQuiz = document.createElement("h3");
+        const categorieQuiz = document.createElement("p");
+        const btnEdit = document.createElement("button");
+        article.className = "profil__quiz__article";
+        nameQuiz.innerHTML = user.name;
+        category(user.id_category, categorieQuiz);
+        btnEdit.classList.add("profil__btn", "profil__btn--edit");
+        btnEdit.innerHTML = "Edit";
+        article.appendChild(nameQuiz);
+        article.appendChild(categorieQuiz);
+        article.appendChild(btnEdit);
+        section.appendChild(article);
+      }
+    })
 };
-req();
-myQuizz();
-myQuiz.addEventListener("click", myQuizz);
-myStats.addEventListener("click", myStat);
-edit.addEventListener("click", myEdit);
+// myQuizz();
 createQuiz.addEventListener("click", () => {
   return window.location.assign(`./createQuiz.html?id=${idUser}`);
 });
 btnAccueil.addEventListener("click", () => {
   return window.location.assign(`../../index.html?id=${idUser}`);
 });
+const category = (idCategory, div) => {
+  let nameCategory = "hello";
+  if (idCategory == 3) nameCategory = "Culture G";
+  if (idCategory == 2) nameCategory = "Sport";
+  if (idCategory == 1) nameCategory = "Cine";
+  div.innerHTML = nameCategory;
+};
+const reqQuiz = () => {
+  fetch(`${path}`, myInit)
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+      myQuizz(response);
+    })
+};
+req();
+reqQuiz();
+// EVENT CLICK
+myQuiz.addEventListener("click", myQuizz);
+myStats.addEventListener("click", myStat);
+edit.addEventListener("click", myEdit);

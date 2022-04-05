@@ -29,8 +29,6 @@ body {
         @include max-media("middle-desktop") {
             font-size: 3rem;
         }
-
-        // letter-spacing: .5rem;
     }
 
     .list__categorie {
@@ -97,7 +95,6 @@ body {
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-
     }
 
     &__section {
@@ -110,6 +107,7 @@ body {
                 width: 90%;
                 height: 1.8rem;
                 @include boxShadow($radius: 2rem);
+                filter: url('#wave');
             }
         }
 
@@ -284,10 +282,12 @@ body {
         h3 {
             font-weight: normal;
             margin: auto 0;
+            min-width: 30%;
         }
 
         p {
             margin: auto 0;
+            min-width: 30%;
         }
     }
 
