@@ -17,10 +17,8 @@ module.exports.checkUser = (req, res, next) => {
           let user = await userModel.findOne({
             where: { id_user: decodedToken.id_user },
           });
-          console.log("hello");
-
-          console.log(user);
-          res.status(200).send(user);
+          console.log("helloMiddlewareCheckUser");
+          next();
         }
       });
     } else {

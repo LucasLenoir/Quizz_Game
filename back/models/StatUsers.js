@@ -1,6 +1,5 @@
 const sequelize = require("../config/dbConfig");
 const { DataTypes } = require("sequelize");
-const userModel = require("./User");
 
 const userStatModel = sequelize.define(
   "stat_users",
@@ -33,8 +32,4 @@ const userStatModel = sequelize.define(
   }
 );
 
-userStatModel.belongsTo(userModel, {
-  foreignKey: "id_user",
-  targetKey: "id_user",
-});
 module.exports = userStatModel;
