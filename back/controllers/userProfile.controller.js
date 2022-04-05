@@ -13,7 +13,10 @@ module.exports.getUserInfo = async (req, res) => {
   const id_user = req.body.id_user;
   console.log(token);
 
-  const infos = await userModel.findAll({ where: { id_user: id_user } });
+  const infos = await userModel.findAll({
+    attributes: { exclude: ["password"] },
+    where: { id_user: id_user },
+  });
   if (infos) {
     res.status(200).send(infos);
   } else {
@@ -33,7 +36,6 @@ module.exports.updateUserInfo = async (req, res) => {
 
   const udpatded = userModel.update(
     {
-      attributes: { exclude: ["password"] },
       username: username,
       password: password,
       picture: picture,
@@ -85,22 +87,16 @@ module.exports.updateStats = async (req, res) => {
       number_question: number_question,
     });
   }
-
   res.status(201).send("score updated");
-  // if (res.ok) {
-  //   res.status(201).send("score updated");
-  // } else {
-  //   res.status(401).send("ERROR SCORE NOT UPDATED");
-  // }
 };
 
 //!Create a Quizz
 module.exports.createQuizz = async (req, res) => {
   const datas = req.body;
 
-  id_category = datas[0].id_category;
-  id_user = datas[0].id_user;
-  name = datas[0].name;
+  let id_category = datas[0].id_category;
+  let id_user = datas[0].id_user;
+  let name = datas[0].name;
   console.log(id_category);
   const reqQuizz = await quizzModel.create({
     id_category: id_category,
@@ -115,15 +111,14 @@ module.exports.createQuizz = async (req, res) => {
 
   for (i in datas) {
     question = datas[i].question;
-    id_category = datas[i].id_category;
+    let id_category = datas[i].id_category;
 
-    id_quizz = datas[i].id_quizz;
-    id_user = datas[i].id_user;
-
+    let id_user = datas[i].id_user;
+    console.log(id_quizz);
     await questionModel.create({
-      id_category: id_category,
+      id_category,
       question: question,
-      id_quizz: id_quizz,
+      id_quizz,
       id_user: id_user,
     });
 
@@ -169,8 +164,10 @@ module.exports.getQuestionsByQuizz = async (req, res) => {
 //!update Quizz Info, Quizz Q and Quizz R
 module.exports.updateQuizz = async (req, res) => {
   const datas = req.body;
+  console.log(datas);
   for (i in datas) {
     const id_quizz = datas[i].id_quizz;
+    const id_user = datas[i].id_user;
     const name = datas[i].name;
     const id_question = datas[i].id_question;
     const id_category = datas[i].id_category;
@@ -180,37 +177,35 @@ module.exports.updateQuizz = async (req, res) => {
     const response_3 = datas[i].response_3;
     const response_4 = datas[i].response_4;
 
-    const updatedQuizzInfo = await quizzModel.update(
-      { id_category: id_category, name: name },
-      { where: id_quizz }
-    );
-  }
-  if (updatedQuizzInfo) {
-    res.status(201).send("Quizz Info updated");
-  } else {
-    res.status(400).send("ERROR COULDN'T UPDATE QUIZZ INFO");
-  }
+    try {
+      const updatedQuizzInfo = await quizzModel.update(
+        {
+          id_category: id_category,
+          name: name,
+          id_user: id_user,
+        },
+        { where: { id_quizz: id_quizz } }
+      );
 
-  const updatedquizzQuestion = await questionModel.update(
-    { id_category: id_category, name: name },
-    { where: id_question }
-  );
+      const updatedQuestionInfo = await questionModel.update(
+        {
+          question: question,
+        },
+        { where: { id_question: id_question } }
+      );
 
-  if (updatedquizzQuestion) {
-    res.status(201).send("Quizz Question updated");
-  } else {
-    res.status(400).send("ERROR COULDN'T UPDATE QUIZZ QUESTION");
+      const updatedResponseInfo = await responsesModel.update(
+        {
+          response_1,
+          response_2,
+          response_3,
+          response_4,
+        },
+        { where: { id_question: id_question } }
+      );
+    } catch (error) {
+      res.status(404).send(error, "update failed");
+    }
   }
-
-  const updateResponseQuizz = await responsesModel.update({
-    response_1: response_1,
-    response_2: response_2,
-    response_3: response_3,
-    response_4: response_4,
-  });
-  if (updatedquizzQuestion) {
-    res.status(201).send("Quizz Responses updated");
-  } else {
-    res.status(400).send("ERROR COULDN'T UPDATE QUIZZ RESPONSES");
-  }
+  res.status(201).send("quizz updated");
 };
