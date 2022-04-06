@@ -16,7 +16,8 @@
     }
   }
 
-  #questions {
+  #questions,
+  #id__quiz {
     @include styleInput;
     width: 5%;
     text-align: end;

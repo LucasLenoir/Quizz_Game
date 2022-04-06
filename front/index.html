@@ -26,7 +26,7 @@
                     <li class="nav__link"><a id="coUser" href="./assets/pages/connexion.html">Connexion</a></li>
                     <li class="nav__link"><a href="./index.html">List Quiz</a></li>
                     <li class="nav__link"><a href="./assets/pages/contact.html">Contacts</a></li>
-                    <li class="nav__link nav__link--active"><a href="./index.html">Accueil</a></li>
+                    <li class="nav__link nav__link--active"><a id="accueil" href="./index.html">Accueil</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,22 +34,48 @@
 
     <!-- MAIN -->
     <main class="main">
-        <h2 class="main__title">CHOOSE UR CATEGORY</h2>
-        <div class="main__container">
-            <ul class="list__categorie">
-                <li class="list__categorie__btn" data-number="3">Culture Du Point G</li>
-                <li class="list__categorie__btn" data-number="2">Sport</li>
-                <li class="list__categorie__btn" data-number="1">Cine</li>
-            </ul>
+        <h1 class="main__title" id="welcome__title">Welcome to the best quiz ever</h1>
+        <div class="main__grid" id="main__welcome">
+            <div class="main__container">
+                <h3>Play a random quiz?</h3>
+                <button class="main__form__btn" id="btn__random__quiz">Click here</button>
+            </div>
+            <div class="main__container">
+                <h3>Play a quiz already create? </h3>
+                <button class="main__form__btn" id="btn__quiz__created">Click here</button>
+            </div>
+
         </div>
-        <form action="#" class="main__form">
+        <h2 class="main__title" id="title__category">CHOOSE UR CATEGORY</h2>
+        <div class="main__container__block" id="block__random__quiz">
+            <div class="main__container">
+                <ul class="list__categorie">
+                    <li class="list__categorie__btn" data-number="3">Culture Du Point G</li>
+                    <li class="list__categorie__btn" data-number="2">Sport</li>
+                    <li class="list__categorie__btn" data-number="1">Cine</li>
+                </ul>
+            </div>
             <form action="#" class="main__form">
-                <div>
-                    <label for="questions">Number of questions : </label>
-                    <input type="number" name="questions" id="questions" placeholder="10" min="5" max="20" value="5">
-                </div>
-                <button type="submit" class="main__form__btn">PLAY</button>
-            </form>
+                <form action="#" class="main__form">
+                    <div>
+                        <label for="questions">Number of questions : </label>
+                        <input type="number" name="questions" id="questions" placeholder="10" min="5" max="20"
+                            value="5">
+                    </div>
+                    <button type="submit" class="main__form__btn" id="play__random__quiz">PLAY</button>
+                </form>
+        </div>
+        <div class="main__container__block" id="block__id__quiz">
+            <h2 class="main__title">Enter ur id quiz</h2>
+            <form action="#" class="main__form">
+                <form action="#" class="main__form">
+                    <div>
+                        <label for="id__quiz">ID QUIZ : </label>
+                        <input type="number" name="id__quiz" id="id__quiz" placeholder="10" min="5" max="20">
+                    </div>
+                    <button type="submit" class="main__form__btn" id="btn__run__quiz">PLAY</button>
+                </form>
+        </div>
     </main>
     <!-- SCRIPTS -->
     <!-- <script src="./app.js"></script> -->

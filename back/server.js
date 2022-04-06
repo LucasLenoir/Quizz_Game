@@ -7,10 +7,6 @@ const categoriesRoutes = require("./routes/categories.routes");
 const userRoutes = require("./routes/user.routes");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 
-const corsOptions = {
-  origin: "http://127.0.0.1:5500",
-  optionsSuccessStatus: 200,
-};
 //!Middleware
 app.use(cors());
 app.use(express.json());

@@ -4,13 +4,16 @@ const params = new URLSearchParams(location.search);
 const idUser = params.get('id');
 const idQuizz = params.get('idQuizz');
 const main = document.querySelector("main");
-const containerCat = document.querySelector(".main__container");
-const btnPlay = document.querySelector(".main__form__btn");
-const mainForm = document.querySelector(".main__form");
-const titleMain = document.querySelector(".main__title");
+const containerCat = document.getElementById('block__random__quiz');
+const btnPlay = document.getElementById('play__random__quiz');
+const catTitle = document.getElementById("title__category");
 const btnCategory = document.querySelectorAll(".list__categorie__btn");
 const divScore = document.createElement('div');
 const btnNumber = document.getElementById('questions');
+const mainWelcome = document.getElementById('main__welcome');
+const welcomeTitle = document.getElementById('welcome__title');
+const btnRunQuiz = document.getElementById('btn__run__quiz');
+const blockCreatedQuiz = document.getElementById('block__id__quiz');
 let valueNumber = 5;
 //ARRAY
 let arrayCategories = [];
@@ -40,10 +43,11 @@ const startGame = () => {
         !arrayCategories[0] ? alert('Choisi une catégorie') : runSession(path);
     });
 };
-const runQuizz = () => {
+const runQuizz = (idQuiz) => {
     //fetch
+    catTitle.style.display = "block";
     const bodyQuizz = {
-        id_quizz: idQuizz
+        id_quizz: idQuiz
     }
     const myInit = {
         method: "POST",
@@ -55,21 +59,21 @@ const runQuizz = () => {
             return res.json();
         })
         .then(response => {
-            console.log(response);
+            catTitle.style.display = "block";
+            main.removeChild(mainWelcome);
+            main.removeChild(welcomeTitle);
+            main.removeChild(blockCreatedQuiz);
+            console.log(catTitle);
             main.removeChild(containerCat);
-            main.removeChild(mainForm);
             const allQuestions = response;
             shuffleArray(allQuestions);
             allQuestions.splice(valueNumber);
             createSection(allQuestions);
         })
-
-}
+};
 const runSession = (path) => {
     main.removeChild(containerCat);
-    main.removeChild(mainForm);
     reqQuestion(path);
-
 };
 // FUNCTION REQUEST
 const reqQuestion = (path) => {
@@ -138,7 +142,7 @@ const createSection = (fetchResponse) => {
     score();
 
     //racine function
-    createQuestion(titleMain, fetchResponse, sectionMain, divTime, newQuestion);
+    createQuestion(catTitle, fetchResponse, sectionMain, divTime, newQuestion);
 };
 const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     let arrayResponse = [];
@@ -313,7 +317,12 @@ const seeScore = () => {
     section.appendChild(containerGrid);
     main.appendChild(section);
 }
-if (idQuizz != null) runQuizz();
+if (idQuizz != null) runQuizz(idQuizz);
 // EXPORT FUNCTION
 export { chooseCategories };
 export { startGame };
+btnRunQuiz.addEventListener("click", (e) => {
+    e.preventDefault();
+    const numberQuiz = document.getElementById('id__quiz');
+    runQuizz(numberQuiz.value);
+})

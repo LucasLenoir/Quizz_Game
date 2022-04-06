@@ -50,8 +50,8 @@ module.exports.updateUserInfo = async (req, res) => {
 };
 //!Get user's stats
 module.exports.getStats = async (req, res) => {
-  let token = req.body[0].token;
-  let id_user = req.body[0].id_user;
+  let token = req.body.token;
+  let id_user = req.body.id_user;
   console.log(id_user);
 
   const profile = await statsModel.findAll({
@@ -79,13 +79,13 @@ module.exports.updateStats = async (req, res) => {
     let id_user = datas[i].id_user;
     let id_category = datas[i].id_category;
     let score = datas[i].score;
-    letnumber_question = datas[i].number_question;
+    let number_question = datas[i].number_question;
 
     const updateStatsRes = await statsModel.create({
       id_user: id_user,
       id_category: id_category,
       score: score,
-      number_question: number_question,
+      number_question,
     });
   }
   res.status(201).send("score updated");
@@ -172,29 +172,6 @@ module.exports.getQuizzById = async (req, res) => {
 
   res.send(resQuestions);
 };
-// module.exports.getQuizzByID = async (req, res) => {
-//   let id_quizz = req.body.id_quizz;
-
-//   try {
-//     let quizzQ = await questionModel.findAll({
-//       where: { id_quizz: id_quizz },
-//     });
-
-//     for (i in quizzQ) {
-//       id_question = quizzQ[i].id_question;
-//       quizzQ[i].response = await responsesModel.findAll({
-//         where: { id_question },
-//       });
-//       if (i == quizzQ.length - 1) {
-//         res.status(201).send({ quizzQ });
-//       }
-//       console.log(quizzQ[i].id_response);
-//     }
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-//!update Quizz Info, Quizz Q and Quizz R
 module.exports.updateQuizz = async (req, res) => {
   let datas = req.body;
   console.log(datas);

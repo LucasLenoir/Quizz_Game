@@ -21,6 +21,36 @@ body {
     @include marginLR;
     @include marginTop;
 
+    &__grid {
+        @include marginTop(10rem);
+        @include centerText;
+        position: relative;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+
+        h3 {
+            @include styleTitle(1.8rem);
+            @include textShadow;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 150%;
+            width: 1px;
+            transform: translate(-50%, -50%);
+            background-color: $color-purple;
+            box-shadow: 0 0 10px $color-white;
+        }
+    }
+
+    #title__category {
+        display: none;
+    }
+
     &__title {
         @include styleTitle(65px);
         @include centerText;
@@ -29,6 +59,10 @@ body {
         @include max-media("middle-desktop") {
             font-size: 3rem;
         }
+    }
+
+    &__container__block {
+        display: none;
     }
 
     .list__categorie {
@@ -282,12 +316,13 @@ body {
         h3 {
             font-weight: normal;
             margin: auto 0;
-            min-width: 30%;
+            min-width: 20%;
         }
 
         p {
             margin: auto 0;
-            min-width: 30%;
+            min-width: 20%;
+            text-align: justify;
         }
     }
 

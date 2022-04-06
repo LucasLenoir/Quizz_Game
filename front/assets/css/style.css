@@ -111,7 +111,8 @@ header .header .nav__link:hover {
 .main__form input:valid {
   border-color: #00BD56;
 }
-.main__form #questions {
+.main__form #questions,
+.main__form #id__quiz {
   font-size: 2rem;
   font-family: "Game Sans Serif";
   color: #fff;
@@ -219,6 +220,36 @@ body {
   margin: 0 10%;
   margin-top: 2rem;
 }
+.main__grid {
+  margin-top: 10rem;
+  text-align: center;
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+.main__grid h3 {
+  font-size: 1.8rem;
+  font-family: "Many Years Higher";
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-shadow: 0px 4px 12px #872E9F;
+}
+.main__grid::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 150%;
+  width: 1px;
+  transform: translate(-50%, -50%);
+  background-color: #872E9F;
+  box-shadow: 0 0 10px #fff;
+}
+.main #title__category {
+  display: none;
+}
 .main__title {
   font-size: 65px;
   font-family: "Many Years Higher";
@@ -232,6 +263,9 @@ body {
   .main__title {
     font-size: 3rem;
   }
+}
+.main__container__block {
+  display: none;
 }
 .main .list__categorie {
   margin-top: 0rem;
@@ -322,6 +356,7 @@ body {
   height: 1.8rem;
   border-radius: 2rem;
   box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+  filter: url("#wave");
 }
 .main__section__grid {
   margin-top: 6rem;
@@ -520,11 +555,12 @@ body {
 .profil__quiz__article h3 {
   font-weight: normal;
   margin: auto 0;
-  min-width: 30%;
+  min-width: 20%;
 }
 .profil__quiz__article p {
   margin: auto 0;
-  min-width: 30%;
+  min-width: 20%;
+  text-align: justify;
 }
 .profil__btn {
   font-size: 30px;
