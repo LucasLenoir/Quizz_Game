@@ -59,6 +59,7 @@ const runQuizz = (idQuiz) => {
             return res.json();
         })
         .then(response => {
+            console.table(response)
             catTitle.style.display = "block";
             main.removeChild(mainWelcome);
             main.removeChild(welcomeTitle);

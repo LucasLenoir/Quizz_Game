@@ -161,7 +161,7 @@ module.exports.getQuestionsByQuizz = async (req, res) => {
 module.exports.getQuizzById = async (req, res) => {
   const id_quizz = req.body;
   const resQuestions = await sequelize.query(
-    "SELECT q.id_question, id_category,	question, response_1, response_2, response_3, response_4  FROM questions  q JOIN responses  r ON q.id_question = r.id_question WHERE q.id_quizz =(:id_quizz)",
+    "SELECT id_category,	question, response_1, response_2, response_3, response_4  FROM questions  q JOIN responses  r ON q.id_question = r.id_question WHERE q.id_quizz =(:id_quizz)",
     {
       raw: true,
       replacements: id_quizz,
@@ -229,4 +229,18 @@ module.exports.getEditQuizzById = async (req, res) => {
   );
 
   res.send(resQuestions);
+};
+
+module.exports.GetAdminQuizzToDisplay = async (req, res) => {
+  let id_user = 4;
+
+  const quizzList = await sequelize.query(
+    "SELECT COUNT(q.question)AS number_question, quizz.name AS quizzName, quizz.id_quizz, c.name AS nameCategory FROM questions  q JOIN categories c ON quizz.id_category = c.id_category  JOIN quizz ON quizz.id_quizz = q.id_quizz WHERE quizz.id_user = 4 GROUP BY quizz.id_quizz",
+    {
+      raw: true,
+      replacements: id_user,
+      type: QueryTypes.SELECT,
+    }
+  );
+  res.status(201).send(quizzList);
 };

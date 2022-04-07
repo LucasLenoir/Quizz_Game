@@ -1,6 +1,5 @@
 const path = "http://localhost:8000/api/user/profile";
 const params = new URLSearchParams(location.search);
-const btnAccueil = document.getElementById("accueil");
 const section = document.querySelector(".profil__quiz__container");
 const createQuiz = document.querySelector(".profil__create__quizz");
 const username = document.getElementById("username");
@@ -11,6 +10,13 @@ const myStats = navUser[1];
 const edit = navUser[2];
 const idUser = params.get("id");
 const token = localStorage.getItem("token");
+//HEADER
+const btnListQuiz = document.getElementById("list__quizz");
+const accueil = document.getElementById("accueil");
+if (idUser != null) {
+  btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
+  accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+}
 const myUser = {
   id_user: idUser,
   token: token,
@@ -169,12 +175,8 @@ const myEdit = () => {
       }
     })
 };
-// myQuizz();
 createQuiz.addEventListener("click", () => {
   return window.location.assign(`./createQuiz.html?id=${idUser}`);
-});
-btnAccueil.addEventListener("click", () => {
-  return window.location.assign(`../../index.html?id=${idUser}`);
 });
 const category = (idCategory, div) => {
   let nameCategory = "hello";

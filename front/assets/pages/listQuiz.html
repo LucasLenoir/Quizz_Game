@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Big Brain Quizz / Contacts</title>
+    <title>Big Brain Quizz / Connexion</title>
 </head>
 
 <body>
+
     <header>
         <div class="header">
             <figure class="header__logo">
@@ -19,14 +20,22 @@
             <nav class="nav">
                 <ul>
                     <li class="nav__link"><a href="./inscription.html">Inscription</a></li>
-                    <li class="nav__link"><a href="./connexion.html">Connexion</a></li>
-                    <li class="nav__link"><a href="./listQuiz.html">List Quiz</a></li>
-                    <li class="nav__link nav__link--active"><a href="./contact.html">Contacts</a></li>
-                    <li class="nav__link"><a href="../../index.html">Accueil</a></li>
+                    <li class="nav__link"><a id="coUser" href="./connexion.html">Connexion</a></li>
+                    <li class="nav__link nav__link--active"><a id="list__quizz" href="./listQuiz.html">List Quiz</a>
+                    </li>
+                    <li class="nav__link"><a href="./contact.html">Contacts</a></li>
+                    <li class="nav__link"><a id="accueil" href="../../index.html">Accueil</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+    <!-- MAIN -->
+    <main class="main">
+        <h1 class="main__title">Choisi ton Quizz !</h1>
+        <section class="profil__quiz__container">
+        </section>
+    </main>
+    <script src="../js/listQuiz.js"></script>
 </body>
 
 </html>

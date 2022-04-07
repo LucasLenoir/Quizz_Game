@@ -6,6 +6,7 @@ const nav = document.querySelector('.nav ul');
 const navBar = document.querySelectorAll('.nav__link');
 const connexion = document.getElementById('coUser');
 const accueil = document.getElementById('accueil');
+const btnListQuiz = document.getElementById("list__quizz");
 // ALL BTN
 const btnChooseRandom = document.getElementById('btn__random__quiz');
 const btnChooseCreated = document.getElementById('btn__quiz__created');
@@ -15,12 +16,14 @@ const blockCreatedQuiz = document.getElementById('block__id__quiz');
 const mainWelcome = document.getElementById('main__welcome');
 const welcomeTitle = document.getElementById('welcome__title');
 const catTitle = document.getElementById("title__category");
+
 if (idUser != null) {
     const inscription = navBar[0];
     nav.removeChild(inscription);
     connexion.innerHTML = "Profil";
     connexion.setAttribute("href", `./assets/pages/user.html?id=${idUser}`);
     accueil.setAttribute("href", `./index.html?id=${idUser}`);
+    btnListQuiz.setAttribute("href", `./assets/pages/listQuiz.html?id=${idUser}`);
 }
 btnChooseRandom.addEventListener("click", (e) => {
     e.preventDefault();
