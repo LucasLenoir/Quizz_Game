@@ -603,4 +603,28 @@ body {
   transform: scale(1.05);
 }
 
+.block__response {
+  padding: 2rem 0;
+  position: relative;
+}
+.block__response::after {
+  content: "";
+  position: absolute;
+  bottom: -2%;
+  left: -5%;
+  height: 1px;
+  width: 110%;
+  background-color: #872E9F;
+  box-shadow: 0 0 10px #fff;
+}
+
+.form__response {
+  display: flex;
+  flex-direction: column;
+}
+.form__response label {
+  text-align: center;
+  padding: 1rem 0;
+}
+
 /*# sourceMappingURL=style.css.map */

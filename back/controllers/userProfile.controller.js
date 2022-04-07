@@ -160,9 +160,8 @@ module.exports.getQuestionsByQuizz = async (req, res) => {
 
 module.exports.getQuizzById = async (req, res) => {
   const id_quizz = req.body;
-
   const resQuestions = await sequelize.query(
-    "SELECT id_category,	question, response_1, response_2, response_3, response_4  FROM questions  q JOIN responses  r ON q.id_question = r.id_question WHERE q.id_quizz =(:id_quizz)",
+    "SELECT q.id_question, id_category,	question, response_1, response_2, response_3, response_4  FROM questions  q JOIN responses  r ON q.id_question = r.id_question WHERE q.id_quizz =(:id_quizz)",
     {
       raw: true,
       replacements: id_quizz,
@@ -174,13 +173,12 @@ module.exports.getQuizzById = async (req, res) => {
 };
 module.exports.updateQuizz = async (req, res) => {
   let datas = req.body;
-  console.log(datas);
   for (i in datas) {
-    let id_quizz = datas[i].id_quizz;
-    let id_user = datas[i].id_user;
-    let name = datas[i].name;
+    // let id_quizz = datas[i].id_quizz;
+    // let id_user = datas[i].id_user;
+    // let name = datas[i].name;
     let id_question = datas[i].id_question;
-    let id_category = datas[i].id_category;
+    // let id_category = datas[i].id_category;
     let question = datas[i].question;
     let response_1 = datas[i].response_1;
     let response_2 = datas[i].response_2;
@@ -188,14 +186,14 @@ module.exports.updateQuizz = async (req, res) => {
     let response_4 = datas[i].response_4;
 
     try {
-      const updatedQuizzInfo = await quizzModel.update(
-        {
-          id_category: id_category,
-          name: name,
-          id_user: id_user,
-        },
-        { where: { id_quizz: id_quizz } }
-      );
+      // const updatedQuizzInfo = await quizzModel.update(
+      //   {
+      //     id_category: id_category,
+      //     name: name,
+      //     id_user: id_user,
+      //   },
+      //   { where: { id_quizz: id_quizz } }
+      // );
 
       const updatedQuestionInfo = await questionModel.update(
         {
@@ -218,4 +216,17 @@ module.exports.updateQuizz = async (req, res) => {
     }
   }
   res.status(201).send("quizz updated");
+};
+module.exports.getEditQuizzById = async (req, res) => {
+  const id_quizz = req.body;
+  const resQuestions = await sequelize.query(
+    "SELECT q.id_question,	question, response_1, response_2, response_3, response_4  FROM questions  q JOIN responses  r ON q.id_question = r.id_question WHERE q.id_quizz =(:id_quizz)",
+    {
+      raw: true,
+      replacements: id_quizz,
+      type: QueryTypes.SELECT,
+    }
+  );
+
+  res.send(resQuestions);
 };

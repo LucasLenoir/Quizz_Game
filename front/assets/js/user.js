@@ -158,6 +158,10 @@ const myEdit = () => {
         category(user.id_category, categorieQuiz);
         btnEdit.classList.add("profil__btn", "profil__btn--edit");
         btnEdit.innerHTML = "Edit";
+        btnEdit.addEventListener("click", (e) => {
+          e.preventDefault();
+          return window.location.assign(`./edit.html?id=${idUser}&idQuizz=${user.id_quizz}`)
+        })
         article.appendChild(nameQuiz);
         article.appendChild(categorieQuiz);
         article.appendChild(btnEdit);

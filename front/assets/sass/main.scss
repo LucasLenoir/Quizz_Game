@@ -366,3 +366,29 @@ body {
         }
     }
 }
+
+.block__response {
+    @include paddingTB;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -2%;
+        left: -5%;
+        height: 1px;
+        width: 110%;
+        background-color: $color-purple;
+        box-shadow: 0 0 10px $color-white;
+    }
+}
+
+.form__response {
+    display: flex;
+    flex-direction: column;
+
+    & label {
+        text-align: center;
+        @include paddingTB(1rem);
+    }
+}
