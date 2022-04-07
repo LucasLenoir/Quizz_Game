@@ -47,6 +47,7 @@ const objCat = [
     number_question: 0
   }
 ];
+// REQ FETCH
 const req = () => {
 
   fetch(`${path}/user`, myInit)
@@ -61,6 +62,22 @@ const req = () => {
       emailUser.innerHTML = arrayUser[0].email;
     });
 };
+const reqDelete = (idQuiz) => {
+  let thisQuiz = {
+    token: token,
+    id_quizz: idQuiz
+  };
+  const init = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(thisQuiz)
+  }
+  fetch(`${path}/user/id_quizz/delete`, init)
+    .then(el => {
+      alert('Quizz Supprimé!');
+      location.reload();
+    })
+}
 //CREATE ARTICLE FOR ANY QUIZZ OF USER
 const myQuizz = () => {
   fetch(`${path}`, myInit)
@@ -158,19 +175,29 @@ const myEdit = () => {
         const article = document.createElement("article");
         const nameQuiz = document.createElement("h3");
         const categorieQuiz = document.createElement("p");
+        const blockBtn = document.createElement('div');
         const btnEdit = document.createElement("button");
+        const btnDelete = document.createElement("button");
         article.className = "profil__quiz__article";
         nameQuiz.innerHTML = user.name;
         category(user.id_category, categorieQuiz);
         btnEdit.classList.add("profil__btn", "profil__btn--edit");
+        btnDelete.classList.add("profil__btn", "profil__btn--delete");
+        blockBtn.className = "block__btn";
         btnEdit.innerHTML = "Edit";
+        btnDelete.innerHTML = "Delete";
         btnEdit.addEventListener("click", (e) => {
           e.preventDefault();
           return window.location.assign(`./edit.html?id=${idUser}&idQuizz=${user.id_quizz}`)
         })
+        btnDelete.addEventListener("click", (e) => {
+          reqDelete(user.id_quizz);
+        })
+        blockBtn.appendChild(btnEdit);
+        blockBtn.appendChild(btnDelete);
         article.appendChild(nameQuiz);
         article.appendChild(categorieQuiz);
-        article.appendChild(btnEdit);
+        article.appendChild(blockBtn);
         section.appendChild(article);
       }
     })

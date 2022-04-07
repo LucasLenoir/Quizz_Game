@@ -587,6 +587,7 @@ body {
 }
 .profil__btn--edit {
   color: #fff;
+  margin-right: 2rem;
 }
 .profil__btn--edit::after {
   content: "";
@@ -597,6 +598,20 @@ body {
   width: 100%;
   height: 100%;
   background-color: #2824D3;
+  filter: blur(0.9rem);
+}
+.profil__btn--delete {
+  color: #fff;
+}
+.profil__btn--delete::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #D82148;
   filter: blur(0.9rem);
 }
 .profil__btn:hover {
