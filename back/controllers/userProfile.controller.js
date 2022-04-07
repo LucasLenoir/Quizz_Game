@@ -158,6 +158,7 @@ module.exports.getQuestionsByQuizz = async (req, res) => {
   }
 };
 
+//!fetch a quizz with Q and R by its ID
 module.exports.getQuizzById = async (req, res) => {
   const id_quizz = req.body;
 
@@ -172,15 +173,15 @@ module.exports.getQuizzById = async (req, res) => {
 
   res.send(resQuestions);
 };
+
+//! Upadting Q and R
 module.exports.updateQuizz = async (req, res) => {
   let datas = req.body;
   console.log(datas);
   for (i in datas) {
-    let id_quizz = datas[i].id_quizz;
     let id_user = datas[i].id_user;
-    let name = datas[i].name;
     let id_question = datas[i].id_question;
-    let id_category = datas[i].id_category;
+
     let question = datas[i].question;
     let response_1 = datas[i].response_1;
     let response_2 = datas[i].response_2;
@@ -188,15 +189,6 @@ module.exports.updateQuizz = async (req, res) => {
     let response_4 = datas[i].response_4;
 
     try {
-      const updatedQuizzInfo = await quizzModel.update(
-        {
-          id_category: id_category,
-          name: name,
-          id_user: id_user,
-        },
-        { where: { id_quizz: id_quizz } }
-      );
-
       const updatedQuestionInfo = await questionModel.update(
         {
           question: question,
@@ -220,12 +212,9 @@ module.exports.updateQuizz = async (req, res) => {
   res.status(201).send("quizz updated");
 };
 
+//!Fetch Admin's Quizz for List Quizz Display
 module.exports.GetAdminQuizzToDisplay = async (req, res) => {
   let id_user = 4;
-
-  // const quizzIdReq = await quizzModel.findAll({ where: { id_user: id_user } });
-
-  // console.log(quizzIdReq);
 
   const quizzList = await sequelize.query(
     "SELECT COUNT(q.question)AS number_question, quizz.name AS quizzName, quizz.id_quizz, c.name AS nameCategory FROM questions  q JOIN categories c ON quizz.id_category = c.id_category  JOIN quizz ON quizz.id_quizz = q.id_quizz WHERE quizz.id_user = 4 GROUP BY quizz.id_quizz",
@@ -236,4 +225,47 @@ module.exports.GetAdminQuizzToDisplay = async (req, res) => {
     }
   );
   res.status(201).send(quizzList);
+};
+
+//!Delete quizz
+module.exports.deleteQuizz = async (req, res) => {
+  let datas = req.body;
+
+  for (i in datas) {
+    let name = datas[i].name;
+    question = datas[i].question;
+    let id_category = datas[i].id_category;
+    let id_user = datas[i].id_user;
+
+    const { id_question } = await questionModel.findOne({
+      attributes: ["id_question"],
+      where: { question: question },
+    });
+
+    responsesModel.delete(
+      {
+        id_question,
+        // response_1: datas[i].response_1,
+        // response_2: datas[i].response_2,
+        // response_3: datas[i].response_3,
+        // response_4: datas[i].response_4,
+      },
+      { where: { id_question: id_question } }
+    );
+
+    await questionModel.deleteAll(
+      {
+        id_category,
+        question: question,
+        id_quizz,
+        id_user: id_user,
+      },
+      { where: { id_question: id_question } }
+    );
+  }
+  await quizzModel.delete({
+    id_quizz,
+  });
+
+  res.status(201).send("Quizz Deleted");
 };

@@ -17,6 +17,7 @@ router.post("/profile/user/id_quizz", userProfile.getQuestionsByQuizz);
 router.post("/profile/id_quizz", userProfile.getQuizzById);
 router.post("/profile/user/id_quizz/update", userProfile.updateQuizz);
 router.post("/profile/endGame", userProfile.updateStats);
-router.post("/create", userProfile.createQuizz);
+router.post("/profile/user/create", userProfile.createQuizz);
+router.post("/profile/user/delate", userProfile.deleteQuizz);
 
 module.exports = router;
