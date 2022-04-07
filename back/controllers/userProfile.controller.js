@@ -219,3 +219,21 @@ module.exports.updateQuizz = async (req, res) => {
   }
   res.status(201).send("quizz updated");
 };
+
+module.exports.GetAdminQuizzToDisplay = async (req, res) => {
+  let id_user = 4;
+
+  // const quizzIdReq = await quizzModel.findAll({ where: { id_user: id_user } });
+
+  // console.log(quizzIdReq);
+
+  const quizzList = await sequelize.query(
+    "SELECT COUNT(q.question)AS number_question, quizz.name AS quizzName, quizz.id_quizz, c.name AS nameCategory FROM questions  q JOIN categories c ON quizz.id_category = c.id_category  JOIN quizz ON quizz.id_quizz = q.id_quizz WHERE quizz.id_user = 4 GROUP BY quizz.id_quizz",
+    {
+      raw: true,
+      replacements: id_user,
+      type: QueryTypes.SELECT,
+    }
+  );
+  res.status(201).send(quizzList);
+};

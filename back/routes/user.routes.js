@@ -9,6 +9,7 @@ router.post("/logout", authController.logout);
 
 //! user display
 router.post("/profile", userProfile.getAllQuizz);
+router.post("/profile/list", userProfile.GetAdminQuizzToDisplay);
 router.post("/profile/user", userProfile.getUserInfo);
 router.post("/profile/user/update", userProfile.updateUserInfo);
 router.post("/profile/user/stats", userProfile.getStats);
