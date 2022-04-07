@@ -25,13 +25,11 @@ module.exports.getUserInfo = async (req, res) => {
 //!update User Info
 module.exports.updateUserInfo = async (req, res) => {
   const datas = req.body;
-  console.log(datas);
   let id_user = datas[0].id_user;
   let username = datas[0].username;
   let password = datas[0].password;
   let picture = datas[0].picture;
   let bio = datas[0].bio;
-  console.log(id_user);
 
   const udpatded = userModel.update(
     {
@@ -52,7 +50,6 @@ module.exports.updateUserInfo = async (req, res) => {
 module.exports.getStats = async (req, res) => {
   let token = req.body.token;
   let id_user = req.body.id_user;
-  console.log(id_user);
 
   const profile = await statsModel.findAll({
     attributes: [
@@ -64,7 +61,6 @@ module.exports.getStats = async (req, res) => {
     ],
     where: { id_user: id_user },
   });
-  console.log(profile);
   if (profile) {
     res.status(200).send(profile);
   } else {

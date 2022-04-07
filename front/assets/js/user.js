@@ -13,6 +13,10 @@ const token = localStorage.getItem("token");
 //HEADER
 const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById("accueil");
+const btnLogout = document.getElementById("logout");
+btnLogout.addEventListener("click", () => {
+  localStorage.clear();
+})
 if (idUser != null) {
   btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
   accueil.setAttribute("href", `../../index.html?id=${idUser}`);
