@@ -1,6 +1,6 @@
 const userModel = require("../models/User");
 const sequelize = require("../config/dbConfig");
-const { QueryTypes } = require("sequelize");
+const { QueryTypes, Op } = require("sequelize");
 const questionModel = require("../models/Question");
 const responsesModel = require("../models/response");
 const quizzModel = require("../models/Quizz");
@@ -240,43 +240,23 @@ module.exports.GetAdminQuizzToDisplay = async (req, res) => {
 
 //!Delete quizz
 module.exports.deleteQuizz = async (req, res) => {
-  let datas = req.body;
 
-  for (i in datas) {
-    let name = datas[i].name;
-    question = datas[i].question;
-    let id_category = datas[i].id_category;
-    let id_user = datas[i].id_user;
+  id_quizz = req.body.id_quizz;
 
-    const { id_question } = await questionModel.findOne({
-      attributes: ["id_question"],
-      where: { question: question },
-    });
-
-    responsesModel.delete(
-      {
-        id_question,
-        // response_1: datas[i].response_1,
-        // response_2: datas[i].response_2,
-        // response_3: datas[i].response_3,
-        // response_4: datas[i].response_4,
-      },
-      { where: { id_question: id_question } }
-    );
-
-    await questionModel.deleteAll(
-      {
-        id_category,
-        question: question,
-        id_quizz,
-        id_user: id_user,
-      },
-      { where: { id_question: id_question } }
-    );
-  }
-  await quizzModel.delete({
-    id_quizz,
+  const id_question = await questionModel.findAll({
+    attributes: ["id_question"],
+    where: { id_quizz: id_quizz },
+    raw: true
   });
-
-  res.status(201).send("Quizz Deleted");
+  let id = [];
+  id_question.forEach(q => {
+    id.push(q.id_question)
+  });
+  //DELETE RESPONSES
+  const resp = await responsesModel.destroy({ where: { [Op.or]: { id_question: id } }, raw: true });
+  //DELETE QUESTIONS
+  const quest = await questionModel.destroy({ where: { [Op.or]: { id_question: id } }, raw: true });
+  //DELETE QUIZZ
+  const quiz = await quizzModel.destroy({ where: { id_quizz: id_quizz }, raw: true })
+  res.status(201).send('destroy quiz');
 };
