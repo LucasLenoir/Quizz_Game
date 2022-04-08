@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+svg {
+  display: none;
+}
+
 @font-face {
   font-family: "Game Sans Serif";
   src: url("../../assets/font/game_sans_serif_7.ttf");

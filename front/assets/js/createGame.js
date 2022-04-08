@@ -14,6 +14,7 @@ const mainWelcome = document.getElementById('main__welcome');
 const welcomeTitle = document.getElementById('welcome__title');
 const btnRunQuiz = document.getElementById('btn__run__quiz');
 const blockCreatedQuiz = document.getElementById('block__id__quiz');
+const turbulence = document.querySelector('feTurbulence');
 let valueNumber = 5;
 //ARRAY
 let arrayCategories = [];
@@ -134,6 +135,7 @@ const createSection = (fetchResponse) => {
 
     //add to DOM
     timeBar.style.backgroundColor = "green";
+    timeBar.style.filter = 'url("#turb")';
     imgTimer.src = "./assets/img/ClockTimer.png";
     divTime.appendChild(imgTimer);
     divTime.appendChild(timeBar);
@@ -156,8 +158,10 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     j++;
     let timeColor = "green";
     let progress = 100;
+    turbulence.setAttribute('baseFrequency', '0.0001 0.0001');
     setTimeout(() => {
         let timeDown = setInterval(() => {
+            let verticalFrequency = 0.0001;
             if (progress <= 0) {
                 clearInterval(timeDown);
                 pushScoreDown(idCategorie);
@@ -166,7 +170,8 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
                 switchQuestion(title, section, grid, array, timeBar, nextQuestion);
             } else {
                 progress -= 0.10;
-                timesUp(progress, timeColor);
+                verticalFrequency += 0.1;
+                timesUp(progress, timeColor, verticalFrequency);
             }
         }, 10);
         for (let i = 2; i < testArr.length; i++) {
@@ -252,14 +257,23 @@ const shuffleArray = (arr) => {
     arr.sort(() => Math.random() - 0.5);
 };
 // FUNCTION TIMEBAR
-const timesUp = (progress, timeColor) => {
-
+const timesUp = (progress, timeColor, turb) => {
 
     const timeBar = document.querySelector('.main__section__timer__bar');
     if (progress < 65 && progress > 30) {
         timeColor = "orange";
+        turbulence.setAttribute('baseFrequency', `${turb} 0.0001`);
+        setTimeout(() => {
+            turb = 0.0001;
+            turbulence.setAttribute('baseFrequency', `${turb} 0.0041`);
+        }, 50)
     } else if (progress < 30) {
         timeColor = "red";
+        turbulence.setAttribute('baseFrequency', `${turb} 0.0001`);
+        setTimeout(() => {
+            turb = 0.0001;
+            turbulence.setAttribute('baseFrequency', `${turb} 0.0001`);
+        }, 0.4)
     }
     timeBar.style.background = `linear-gradient(to right,  ${timeColor} ${progress}%, #111 0%)`;
 };
