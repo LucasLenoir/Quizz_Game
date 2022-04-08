@@ -410,3 +410,19 @@ body {
         @include paddingTB(1rem);
     }
 }
+
+#update__profile {
+    display: inline-block;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    color: $btn-color-delete;
+    padding: 2px 5px;
+    @include hoverTransitionElement;
+    @include textShadow;
+    @include boxShadow;
+
+    &:hover {
+        transform: scale(0.1);
+    }
+
+}

@@ -5,6 +5,8 @@ const createQuiz = document.querySelector(".profil__create__quizz");
 const username = document.getElementById("username");
 const emailUser = document.getElementById("email");
 const navUser = document.querySelectorAll(".profil__nav__link");
+const imgUser = document.getElementById("profil__user");
+const btnUpdateUser = document.getElementById("update__profile");
 const myQuiz = navUser[0];
 const myStats = navUser[1];
 const edit = navUser[2];
@@ -62,8 +64,11 @@ const req = () => {
       return response;
     })
     .then((arrayUser) => {
+      console.log(arrayUser);
       username.innerHTML = arrayUser[0].username;
       emailUser.innerHTML = arrayUser[0].email;
+      imgUser.src = `../../../back/images/${arrayUser[0].picture}`
+
     });
 };
 const reqDelete = (idQuiz) => {
@@ -231,3 +236,6 @@ reqQuiz();
 myQuiz.addEventListener("click", myQuizz);
 myStats.addEventListener("click", myStat);
 edit.addEventListener("click", myEdit);
+btnUpdateUser.addEventListener('click', () => {
+  return window.location.assign(`./userInfoUpdate.html?id=${idUser}`);
+});

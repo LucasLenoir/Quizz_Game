@@ -14,10 +14,9 @@ const updateUserInfo = (input) => {
   const myInit = {
     method: "POST",
     body: input,
-    // headers: { "Content-Type": "application/json" },
   };
   fetch(`${path}infos/update`, myInit).then((response) => {
-    if (response.ok) window.location.assign(`./user.html?id=${id}`);
+    if (response.ok) window.location.assign(`./user.html?id=${idUser}`);
   });
 };
 myUserUpdateForm.addEventListener("submit", (e) => {

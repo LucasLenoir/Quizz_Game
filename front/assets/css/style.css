@@ -646,4 +646,20 @@ body {
   padding: 1rem 0;
 }
 
+#update__profile {
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  color: #D82148;
+  padding: 2px 5px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  text-shadow: 0px 4px 12px #872E9F;
+  border-radius: 0;
+  box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
+}
+#update__profile:hover {
+  transform: scale(0.1);
+}
+
 /*# sourceMappingURL=style.css.map */
