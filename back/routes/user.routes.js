@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const userProfile = require("../controllers/userProfile.controller");
-
+const multer = require('../middleware/multer');
 //! authentification
 router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);
@@ -11,7 +11,7 @@ router.post("/logout", authController.logout);
 router.post("/profile", userProfile.getAllQuizz);
 router.post("/profile/list", userProfile.GetAdminQuizzToDisplay);
 router.post("/profile/user", userProfile.getUserInfo);
-router.post("/profile/user/update", userProfile.updateUserInfo);
+router.post("/profile/infos/update", multer, userProfile.updateUserInfo);
 router.post("/profile/user/stats", userProfile.getStats);
 router.post("/profile/user/id_quizz", userProfile.getQuestionsByQuizz);
 router.post("/profile/id_quizz", userProfile.getQuizzById);

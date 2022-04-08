@@ -25,16 +25,16 @@ module.exports.getUserInfo = async (req, res) => {
 //!update User Info
 module.exports.updateUserInfo = async (req, res) => {
   const datas = req.body;
-  let id_user = datas[0].id_user;
-  let username = datas[0].username;
-  let password = datas[0].password;
-  let picture = datas[0].picture;
-  let bio = datas[0].bio;
+  let id_user = datas.id_user;
+  let username = datas.username;
+  let picture = req.filename;
+  let email = datas.email;
+  let bio = datas.bio;
 
   const udpatded = userModel.update(
     {
       username: username,
-      password: password,
+      email: email,
       picture: picture,
       bio: bio,
     },
