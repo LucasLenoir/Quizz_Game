@@ -149,6 +149,13 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     let arrayResponse = [];
     let testArr = Object.values(array[0]);
     title.innerHTML = testArr[1];
+    title.style.fontFamily = "Game Sans Serif";
+    console.log(title.textContent.length);
+    if (title.textContent.length > 50) {
+        title.style.fontSize = "45px";
+    } else {
+        title.style.fontSize = "55px";
+    };
     let j = 0;
     const idCategorie = testArr[0];
     pushQuestionCat(idCategorie);
@@ -158,7 +165,7 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     j++;
     let timeColor = "green";
     let progress = 100;
-    turbulence.setAttribute('baseFrequency', '0.0001 0.0001');
+    turbulence.setAttribute('baseFrequency', '0.00001 0.0001');
     setTimeout(() => {
         let timeDown = setInterval(() => {
             let verticalFrequency = 0.0001;
