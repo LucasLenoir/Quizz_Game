@@ -24,7 +24,6 @@ const reqAllQuizz = () => {
             return res.json();
         })
         .then(response => {
-            console.log(response);
             for (let i = 0; i < response.length; i++) {
                 let user = response[i];
                 const article = document.createElement("article");

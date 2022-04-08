@@ -30,7 +30,6 @@ const chooseCategories = () => {
                 el.classList.remove('list__categorie__btn--active');
                 arrayCategories.splice(arrayCategories.indexOf(el.dataset["number"]), 1);
             }
-            console.log(arrayCategories);
         });
 
     });
@@ -59,16 +58,15 @@ const runQuizz = (idQuiz) => {
             return res.json();
         })
         .then(response => {
+            arrayCategories.push(response[0].id_category);
             console.table(response)
             catTitle.style.display = "block";
             main.removeChild(mainWelcome);
             main.removeChild(welcomeTitle);
             main.removeChild(blockCreatedQuiz);
-            console.log(catTitle);
             main.removeChild(containerCat);
             const allQuestions = response;
             shuffleArray(allQuestions);
-            allQuestions.splice(valueNumber);
             createSection(allQuestions);
         })
 };
@@ -309,7 +307,6 @@ const seeScore = () => {
         } else if (categorie == 1) {
             divCategorie.innerHTML = `Cine`;
         }
-        divContainerStat.appendChild(divCategorie);
         divContainerStat.appendChild(divCategorie);
         divContainerStat.appendChild(divQuestion);
         divContainerStat.appendChild(divStats);
