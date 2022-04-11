@@ -1,16 +1,28 @@
 const path = "http://localhost:8000/api/user/profile";
 const params = new URLSearchParams(location.search);
-const btnAccueil = document.getElementById("accueil");
 const section = document.querySelector(".profil__quiz__container");
 const createQuiz = document.querySelector(".profil__create__quizz");
 const username = document.getElementById("username");
 const emailUser = document.getElementById("email");
 const navUser = document.querySelectorAll(".profil__nav__link");
+const imgUser = document.getElementById("profil__user");
+const btnUpdateUser = document.getElementById("update__profile");
 const myQuiz = navUser[0];
 const myStats = navUser[1];
 const edit = navUser[2];
 const idUser = params.get("id");
 const token = localStorage.getItem("token");
+//HEADER
+const btnListQuiz = document.getElementById("list__quizz");
+const accueil = document.getElementById("accueil");
+const btnLogout = document.getElementById("logout");
+btnLogout.addEventListener("click", () => {
+  localStorage.clear();
+})
+if (idUser != null) {
+  btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
+  accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+}
 const myUser = {
   id_user: idUser,
   token: token,
@@ -41,6 +53,7 @@ const objCat = [
     number_question: 0
   }
 ];
+// REQ FETCH
 const req = () => {
 
   fetch(`${path}/user`, myInit)
@@ -51,10 +64,29 @@ const req = () => {
       return response;
     })
     .then((arrayUser) => {
+      console.log(arrayUser);
       username.innerHTML = arrayUser[0].username;
       emailUser.innerHTML = arrayUser[0].email;
+      imgUser.src = `../../../back/images/${arrayUser[0].picture}`
+
     });
 };
+const reqDelete = (idQuiz) => {
+  let thisQuiz = {
+    token: token,
+    id_quizz: idQuiz
+  };
+  const init = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(thisQuiz)
+  }
+  fetch(`${path}/user/id_quizz/delete`, init)
+    .then(el => {
+      alert('Quizz Supprimé!');
+      location.reload();
+    })
+}
 //CREATE ARTICLE FOR ANY QUIZZ OF USER
 const myQuizz = () => {
   fetch(`${path}`, myInit)
@@ -62,6 +94,7 @@ const myQuizz = () => {
       return res.json();
     })
     .then(response => {
+      console.log(response);
       myStats.classList.remove("profil__nav__link--active");
       edit.classList.remove("profil__nav__link--active");
       myQuiz.classList.add("profil__nav__link--active");
@@ -152,25 +185,35 @@ const myEdit = () => {
         const article = document.createElement("article");
         const nameQuiz = document.createElement("h3");
         const categorieQuiz = document.createElement("p");
+        const blockBtn = document.createElement('div');
         const btnEdit = document.createElement("button");
+        const btnDelete = document.createElement("button");
         article.className = "profil__quiz__article";
         nameQuiz.innerHTML = user.name;
         category(user.id_category, categorieQuiz);
         btnEdit.classList.add("profil__btn", "profil__btn--edit");
+        btnDelete.classList.add("profil__btn", "profil__btn--delete");
+        blockBtn.className = "block__btn";
         btnEdit.innerHTML = "Edit";
+        btnDelete.innerHTML = "Delete";
+        btnEdit.addEventListener("click", (e) => {
+          e.preventDefault();
+          return window.location.assign(`./edit.html?id=${idUser}&idQuizz=${user.id_quizz}`)
+        })
+        btnDelete.addEventListener("click", (e) => {
+          reqDelete(user.id_quizz);
+        })
+        blockBtn.appendChild(btnEdit);
+        blockBtn.appendChild(btnDelete);
         article.appendChild(nameQuiz);
         article.appendChild(categorieQuiz);
-        article.appendChild(btnEdit);
+        article.appendChild(blockBtn);
         section.appendChild(article);
       }
     })
 };
-// myQuizz();
 createQuiz.addEventListener("click", () => {
   return window.location.assign(`./createQuiz.html?id=${idUser}`);
-});
-btnAccueil.addEventListener("click", () => {
-  return window.location.assign(`../../index.html?id=${idUser}`);
 });
 const category = (idCategory, div) => {
   let nameCategory = "hello";
@@ -185,6 +228,7 @@ const reqQuiz = () => {
       return res.json();
     })
     .then(response => {
+      console.log(response);
       myQuizz(response);
     })
 };
@@ -194,3 +238,6 @@ reqQuiz();
 myQuiz.addEventListener("click", myQuizz);
 myStats.addEventListener("click", myStat);
 edit.addEventListener("click", myEdit);
+btnUpdateUser.addEventListener('click', () => {
+  return window.location.assign(`./userInfoUpdate.html?id=${idUser}`);
+});

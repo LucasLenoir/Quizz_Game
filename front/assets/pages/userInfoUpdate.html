@@ -31,26 +31,29 @@
 
     <!-- MAIN -->
     <main class="main">
-        <h1 class="main__title">Inscrit toi mon cochon !</h1>
+        <h1 class="main__title">Update Your Info !</h1>
         </div>
-        <form class="main__form" id="my_form">
+        <form class="main__form" id="my_userUpdateForm" enctype="multipart/form-data">
             <div class="main__form__unit_container">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" placeholder="Jean Gerard" required>
+                <label for="updatedUsername">Username</label>
+                <input type="text" name="username" id="updatedUsername" placeholder="Username" required>
             </div>
             <div class="main__form__unit_container">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Gerard.Ladiesdou@gmoul.com" required>
+                <label for="updatedEmail">Email</label>
+                <input type="email" name="email" id="updatedEmail" placeholder=">Email" required>
             </div>
             <div class="main__form__unit_container">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Zeé34@~#'%*$q,fr65FZEfsdf"
-                    autocomplete="off" required>
+                <label for="image">Picture</label>
+                <input type="file" name="image" id="image">
             </div>
-            <button type="submit" class="main__form__btn main__form__btn--blue" id="inscriptionBtn">Valider</button>
+            <div class="main__form__unit_container">
+                <label for="bio">bio</label>
+                <input type="text" name="bio" id="bio" placeholder="bio" autocomplete="off">
+            </div>
+            <button type="submit" class="main__form__btn main__form__btn--blue" id="updateUserInfoBtn">Submit</button>
         </form>
     </main>
-    <script type="module" src="../js/register.js"></script>
+    <script type="module" src="../js/updateInfoUser.js"></script>
 </body>
 
 </html>

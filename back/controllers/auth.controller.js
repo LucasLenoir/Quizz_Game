@@ -4,15 +4,7 @@ const { QueryTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const userModel = require("../models/User");
 const jwt = require("jsonwebtoken");
-
 require("dotenv").config({ path: "./config/.env" });
-const maxAge = 1 * 24 * 60 * 60 * 1000;
-
-const createToken = (id_user) => {
-  return jwt.sign(id_user, process.env.TOKEN_SECRET, {
-    expiresIn: maxAge,
-  });
-};
 
 //!check user in DB And create One
 module.exports.signUp = async (req, res) => {

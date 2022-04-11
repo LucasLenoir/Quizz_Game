@@ -1,6 +1,7 @@
-const path = "http://localhost:8000/api/user/create";
+const path = "http://localhost:8000/api/user/profile/user/create";
 const params = new URLSearchParams(location.search);
 const idUser = params.get('id');
+const token = localStorage.getItem("token");
 const btnNextQuestion = document.getElementById('next__question');
 const btnValidateQuiz = document.getElementById('validateQuiz');
 
@@ -20,6 +21,7 @@ console.log(inputName.labels[0]);
 btnNextQuestion.addEventListener("click", (e) => {
     e.preventDefault();
     const body = {
+        token: token,
         id_user: idUser,
         name: inputName.value,
         id_category: inputCategorie.value,
