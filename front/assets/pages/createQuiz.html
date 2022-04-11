@@ -18,28 +18,28 @@
             </figure>
             <nav class="nav">
                 <ul>
-                    <li class="nav__link"><a href="./inscription.html">Deconnexion</a></li>
-                    <li class="nav__link" id="list__quizz"><a href="./listQuiz.html">List Quiz</a></li>
+                    <li class="nav__link"><a href="./inscription.html">Logout</a></li>
+                    <li class="nav__link" id="list__quizz"><a href="./listQuiz.html">Quizz List</a></li>
                     <li class="nav__link"><a href="./contact.html">Contacts</a></li>
-                    <li class="nav__link"><a href="../../index.html">Accueil</a></li>
+                    <li class="nav__link"><a href="../../index.html">Home</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main class="main__form">
-        <h1 class="main__title">Create ur Quiz</h1>
+        <h1 class="main__title">Create a Quiz</h1>
         <form>
             <div class="main__form__unit_container main__form__unit_container__quiz__name">
-                <label for="nameQuiz">Nom du Quiz</label>
+                <label for="nameQuiz">Quizz Name</label>
                 <input type="text" name="nameQuiz" id="nameQuiz" placeholder="Le joli Quiz" required>
             </div>
             <div class="block__question">
                 <div class="main__form__unit_container">
-                    <label for="question">Question 1</label>
+                    <label for="question">Question #1</label>
                     <input type="text" name="question" id="question"
                         placeholder="Quelle est la couleur du poussin jaune?" required>
                     <div class="main__form__unit_container">
-                        <label for="categorie">Categorie</label>
+                        <label for="categorie">Category</label>
                         <select name="categorie" id="categorie">
                             <option value="3">Culture G</option>
                             <option value="2">Sport</option>
@@ -50,29 +50,29 @@
                 <div class="main__form__unit_container__response main__form__unit_container">
                     <div>
                         <div class=" main__form__unit_container">
-                            <label for="response_1">True response</label>
-                            <input type="text" name="response_1" id="response_1" placeholder="Jaune" required>
+                            <label for="response_1">Correct Anwser</label>
+                            <input type="text" name="response_1" id="response_1" placeholder="Correct" required>
                         </div>
                         <div class=" main__form__unit_container">
-                            <label for="response_2">Response 2</label>
-                            <input type="text" name="response_2" id="response_2" placeholder="Jaune" required>
+                            <label for="response_2">Anwser #2</label>
+                            <input type="text" name="response_2" id="response_2" placeholder="Incorrect" required>
                         </div>
                     </div>
                     <div>
                         <div class=" main__form__unit_container">
-                            <label for="response_3">Response 3</label>
-                            <input type="text" name="response_3" id="response_3" placeholder="Jaune" required>
+                            <label for="response_3">Anwser #3</label>
+                            <input type="text" name="response_3" id="response_3" placeholder="Incorrect" required>
                         </div>
                         <div class=" main__form__unit_container">
-                            <label for="response_4">Response 4</label>
-                            <input type="text" name="response_4" id="response_4" placeholder="Jaune" required>
+                            <label for="response_4">Anwser #4</label>
+                            <input type="text" name="response_4" id="response_4" placeholder="Incorrect" required>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="btn__container">
-                <button id="next__question" class="main__form__btn">Question suivante</button>
-                <button type="submit" class="main__form__btn main__form__btn--blue" id="validateQuiz">Valider
+                <button id="next__question" class="main__form__btn">Next Question</button>
+                <button type="submit" class="main__form__btn main__form__btn--blue" id="validateQuiz">Submit
                     Quiz</button>
             </div>
         </form>

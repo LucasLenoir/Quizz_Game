@@ -7,7 +7,7 @@ const updatedPassword = document.getElementById("updatedPassword");
 const bio = document.getElementById("bio");
 const image = document.getElementById("image");
 const params = new URLSearchParams(location.search);
-const idUser = params.get('id');
+const idUser = params.get("id");
 
 //! Upadte User Info
 const updateUserInfo = (input) => {
@@ -22,7 +22,8 @@ const updateUserInfo = (input) => {
 myUserUpdateForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const myForm = new FormData(myUserUpdateForm);
-  myForm.append('id_user', idUser);
-  myForm.append('token', token);
+  myForm.append("id_user", idUser);
+  myForm.append("token", token);
+  console.log(myForm.values());
   updateUserInfo(myForm);
 });

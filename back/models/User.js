@@ -35,8 +35,15 @@ const userModel = sequelize.define(
   {
     hooks: {
       beforeCreate: (users) => {
+        console.log('helloCreate');
         const salt = bcrypt.genSaltSync();
         users.password = bcrypt.hashSync(users.password, salt);
+      },
+      beforeUpdate: (users) => {
+        const salt = bcrypt.genSaltSync();
+        users.password = bcrypt.hashSync(users.password, salt);
+        console.log(users.password);
+        console.log('hello');
       },
     },
 
@@ -45,7 +52,5 @@ const userModel = sequelize.define(
     tableName: "users",
   }
 );
-
-
 
 module.exports = userModel;

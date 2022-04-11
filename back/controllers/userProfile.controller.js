@@ -29,21 +29,40 @@ module.exports.updateUserInfo = async (req, res) => {
   let username = datas.username;
   let picture = req.filename;
   let email = datas.email;
+  let password = datas.password;
   let bio = datas.bio;
+  console.log(datas);
+  if (password == "password.value" || password == undefined || !password) {
+    console.log("passwordNotupdated");
+    const udpatded = userModel.update(
+      {
+        attributes: { exclude: ["password"] },
+        username: username,
+        email: email,
+        picture: picture,
+        bio: bio,
+      },
+      { where: { id_user }, individualHooks: true }
+    );
 
-  const udpatded = userModel.update(
-    {
-      username: username,
-      email: email,
-      picture: picture,
-      bio: bio,
-    },
-    { where: { id_user } }
-  );
-  if (udpatded) {
-    res.status(200).send("profile updated");
+    udpatded
+      ? res.status(200).send("profile updated")
+      : res.status(401).send("ERROR COULDN'T UPDATE INFO");
   } else {
-    res.status(401).send("ERROR COULDN'T UPDATE INFO");
+    console.log("passwordUpdated");
+    const udpatded = userModel.update(
+      {
+        username: username,
+        email: email,
+        password: password,
+        picture: picture,
+        bio: bio,
+      },
+      { where: { id_user }, individualHooks: true }
+    );
+    udpatded
+      ? res.status(200).send("profile updated")
+      : res.status(401).send("ERROR COULDN'T UPDATE INFO");
   }
 };
 //!Get user's stats
@@ -236,23 +255,31 @@ module.exports.GetAdminQuizzToDisplay = async (req, res) => {
 
 //!Delete quizz
 module.exports.deleteQuizz = async (req, res) => {
-
   id_quizz = req.body.id_quizz;
 
   const id_question = await questionModel.findAll({
     attributes: ["id_question"],
     where: { id_quizz: id_quizz },
-    raw: true
+    raw: true,
   });
   let id = [];
-  id_question.forEach(q => {
-    id.push(q.id_question)
+  id_question.forEach((q) => {
+    id.push(q.id_question);
   });
   //DELETE RESPONSES
-  const resp = await responsesModel.destroy({ where: { [Op.or]: { id_question: id } }, raw: true });
+  const resp = await responsesModel.destroy({
+    where: { [Op.or]: { id_question: id } },
+    raw: true,
+  });
   //DELETE QUESTIONS
-  const quest = await questionModel.destroy({ where: { [Op.or]: { id_question: id } }, raw: true });
+  const quest = await questionModel.destroy({
+    where: { [Op.or]: { id_question: id } },
+    raw: true,
+  });
   //DELETE QUIZZ
-  const quiz = await quizzModel.destroy({ where: { id_quizz: id_quizz }, raw: true })
-  res.status(201).send('destroy quiz');
+  const quiz = await quizzModel.destroy({
+    where: { id_quizz: id_quizz },
+    raw: true,
+  });
+  res.status(201).send("destroy quiz");
 };

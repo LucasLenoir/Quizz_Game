@@ -17,7 +17,7 @@ const req = (input) => {
     .then((res) => {
       const { id_user, token } = res;
       localStorage.setItem("token", token);
-      // console.log(token);
+      localStorage.setItem("id_user", id_user);
 
       return window.location.assign(`../pages/user.html?id=${id_user}`);
     });
