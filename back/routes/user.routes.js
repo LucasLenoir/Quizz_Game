@@ -17,7 +17,7 @@ router.post("/profile/user/id_quizz", userProfile.getQuestionsByQuizz);
 router.post("/profile/id_quizz", userProfile.getQuizzById);
 router.post("/profile/endGame", userProfile.updateStats);
 //CRUD QUIZZ
-router.post("profile/user/create", userProfile.createQuizz);
+router.post("/profile/user/create", userProfile.createQuizz);
 router.post("/profile/user/id_quizz/edit", userProfile.getEditQuizzById);
 router.post("/profile/user/id_quizz/update", userProfile.updateQuizz);
 router.delete("/profile/user/id_quizz/delete", userProfile.deleteQuizz);

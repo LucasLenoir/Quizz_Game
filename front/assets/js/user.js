@@ -94,6 +94,7 @@ const myQuizz = () => {
       return res.json();
     })
     .then(response => {
+      console.log(response);
       myStats.classList.remove("profil__nav__link--active");
       edit.classList.remove("profil__nav__link--active");
       myQuiz.classList.add("profil__nav__link--active");
@@ -227,6 +228,7 @@ const reqQuiz = () => {
       return res.json();
     })
     .then(response => {
+      console.log(response);
       myQuizz(response);
     })
 };
