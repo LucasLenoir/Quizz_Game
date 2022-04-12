@@ -8,11 +8,19 @@ header {
     .header {
         @include marginLR;
 
+        @include max-media("phone") {
+            margin: 0 5%;
+        }
+
         &__logo {
             width: 350px;
 
             @include max-media("middle-desktop") {
                 width: 250px;
+            }
+
+            @include max-media("phone") {
+                width: 200px;
             }
 
             img {
@@ -100,6 +108,10 @@ header {
 
         @include max-media("pad") {
             display: block;
+        }
+
+        @include max-media("phone") {
+            font-size: 4rem;
         }
     }
 }

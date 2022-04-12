@@ -81,4 +81,18 @@ toggleBtn.addEventListener("click", (e) => {
         toggleBtn.innerHTML = "&#x02717";
     }
 
-})
+});
+
+
+//HEADER
+const btnListQuiz = document.getElementById("list__quizz");
+const accueil = document.getElementById('accueil');
+const profil = document.getElementById('coUser');
+//FUNCTION USER LOGIN NAV HEADER
+if (idUser != null) {
+    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`)
+    accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+    profil.setAttribute("href", `./user.html?id=${idUser}`);
+    const linkLogo = document.getElementById("link__logo");
+    linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
+}

@@ -8,11 +8,14 @@ const myForm = document.getElementById('my_form');
 const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById("accueil");
 const connexion = document.getElementById('coUser');
+
+//FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
-    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`)
-    connexion.innerHTML = "Profil";
+    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
     connexion.setAttribute("href", `./user.html?id=${idUser}`);
     accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+    const linkLogo = document.getElementById("link__logo");
+    linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
 }
 //
 const arrayQuest = [];

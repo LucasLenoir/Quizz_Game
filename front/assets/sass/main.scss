@@ -32,6 +32,14 @@ body {
         h3 {
             @include styleTitle(1.8rem);
             @include textShadow;
+
+            @include max-media("pad") {
+                font-size: 1.5rem;
+            }
+
+            @include max-media("phone") {
+                font-size: 1rem;
+            }
         }
 
         &::after {
@@ -49,6 +57,10 @@ body {
 
     #title__category {
         display: none;
+
+        @include max-media("pad") {
+            font-size: 2rem;
+        }
     }
 
     &__title {
@@ -58,6 +70,10 @@ body {
 
         @include max-media("middle-desktop") {
             font-size: 3rem;
+        }
+
+        @include max-media("phone") {
+            font-size: 2.1rem;
         }
     }
 
@@ -85,6 +101,10 @@ body {
 
             @include max-media("middle-desktop") {
                 padding: 10px;
+            }
+
+            @include max-media("phone") {
+                font-size: 1.5rem;
             }
 
             &:hover {
@@ -137,6 +157,12 @@ body {
         &__timer {
             @include flex($item-align: center);
 
+            img {
+                @include max-media("pad") {
+                    display: none;
+                }
+            }
+
             &__bar {
                 width: 90%;
                 height: 1.8rem;
@@ -184,6 +210,16 @@ body {
         bottom: 0;
         right: 20%;
         @include styleTitle;
+
+        @include max-media("pad") {
+            bottom: 25%;
+            right: 38%;
+        }
+
+        @include max-media("phone") {
+            bottom: 0;
+            right: 25%;
+        }
     }
 }
 
@@ -313,16 +349,22 @@ body {
         @include styleText;
         @include paddingTB;
 
+        @include max-media("phone") {
+            font-size: 1.1rem;
+        }
+
         h3 {
             font-weight: normal;
             margin: auto 0;
             min-width: 20%;
+            max-width: 20%;
         }
 
         p {
             margin: auto 0;
             min-width: 20%;
-            text-align: justify;
+            max-width: 20%;
+            text-align: left;
         }
     }
 
@@ -422,7 +464,15 @@ body {
     @include boxShadow;
 
     &:hover {
-        transform: scale(0.1);
+        transform: scale(1.1);
     }
 
+}
+
+//MAIN BLOCK ID QUIZZ
+
+#block__id__quiz {
+    @include max-media("pad") {
+        margin-top: 14rem;
+    }
 }

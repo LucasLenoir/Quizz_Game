@@ -9,13 +9,16 @@ const navBar = document.querySelectorAll('.nav__link');
 const connexion = document.getElementById('coUser');
 const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById('accueil');
+//FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
-    const inscription = navBar[0];
+    const inscription = navBar[3];
     nav.removeChild(inscription);
+    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`)
     connexion.innerHTML = "Profil";
     connexion.setAttribute("href", `./user.html?id=${idUser}`);
     accueil.setAttribute("href", `../../index.html?id=${idUser}`);
-    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
+    const linkLogo = document.getElementById("link__logo");
+    linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
 }
 const reqAllQuizz = () => {
 

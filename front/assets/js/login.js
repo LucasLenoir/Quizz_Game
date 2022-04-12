@@ -43,5 +43,4 @@ toggleBtn.addEventListener("click", (e) => {
   } else {
     toggleBtn.innerHTML = "&#x02717";
   }
-
 })

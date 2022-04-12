@@ -16,12 +16,14 @@ const token = localStorage.getItem("token");
 const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById("accueil");
 const btnLogout = document.getElementById("logout");
-btnLogout.addEventListener("click", () => {
-  localStorage.clear();
-})
+
+
+//FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
   btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
   accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+  const linkLogo = document.getElementById("link__logo");
+  linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
 }
 const myUser = {
   id_user: idUser,
@@ -242,6 +244,9 @@ edit.addEventListener("click", myEdit);
 btnUpdateUser.addEventListener('click', () => {
   return window.location.assign(`./userInfoUpdate.html?id=${idUser}`);
 });
+btnLogout.addEventListener("click", () => {
+  localStorage.clear();
+})
 
 // NAV
 const navi = document.querySelector(".nav");

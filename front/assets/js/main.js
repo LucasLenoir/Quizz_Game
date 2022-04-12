@@ -17,15 +17,19 @@ const blockCreatedQuiz = document.getElementById('block__id__quiz');
 const mainWelcome = document.getElementById('main__welcome');
 const welcomeTitle = document.getElementById('welcome__title');
 const catTitle = document.getElementById("title__category");
+const linkLogo = document.getElementById("link__logo");
 
+//FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
-    const inscription = navBar[0];
+    const inscription = navBar[3];
     nav.removeChild(inscription);
     connexion.innerHTML = "Profil";
     connexion.setAttribute("href", `./assets/pages/user.html?id=${idUser}`);
     accueil.setAttribute("href", `./index.html?id=${idUser}`);
     btnListQuiz.setAttribute("href", `./assets/pages/listQuiz.html?id=${idUser}`);
+    linkLogo.setAttribute("href", `./index.html?id=${idUser}`);
 }
+
 btnChooseRandom.addEventListener("click", (e) => {
     e.preventDefault();
     console.log('hello');
