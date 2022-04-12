@@ -2,6 +2,7 @@ import { chooseCategories, startGame } from "./createGame.js";
 const params = new URLSearchParams(location.search);
 const idUser = params.get('id');
 // NAV HEADER
+const navi = document.querySelector(".nav");
 const nav = document.querySelector('.nav ul');
 const navBar = document.querySelectorAll('.nav__link');
 const connexion = document.getElementById('coUser');
@@ -42,3 +43,14 @@ btnChooseCreated.addEventListener("click", (e) => {
 });
 chooseCategories();
 startGame();
+const toggleBtn = document.getElementById("wrap");
+toggleBtn.addEventListener("click", (e) => {
+    nav.classList.toggle("nav__ul--active");
+    navi.classList.toggle("nav__top");
+    if (toggleBtn.innerHTML === "✗") {
+        toggleBtn.innerHTML = "≡";
+    } else {
+        toggleBtn.innerHTML = "&#x02717";
+    }
+
+})

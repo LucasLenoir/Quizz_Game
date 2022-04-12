@@ -67,7 +67,8 @@ const req = () => {
       console.log(arrayUser);
       username.innerHTML = arrayUser[0].username;
       emailUser.innerHTML = arrayUser[0].email;
-      imgUser.src = `../../../back/images/${arrayUser[0].picture}`
+      arrayUser[0].picture == null ? imgUser.src = "../img/avatarUser/avatar.png" : imgUser.src = `../../../back/images/${arrayUser[0].picture}`;
+
 
     });
 };
@@ -241,3 +242,18 @@ edit.addEventListener("click", myEdit);
 btnUpdateUser.addEventListener('click', () => {
   return window.location.assign(`./userInfoUpdate.html?id=${idUser}`);
 });
+
+// NAV
+const navi = document.querySelector(".nav");
+const nav = document.querySelector('.nav ul');
+const toggleBtn = document.getElementById("wrap");
+toggleBtn.addEventListener("click", (e) => {
+  nav.classList.toggle("nav__ul--active");
+  navi.classList.toggle("nav__top");
+  if (toggleBtn.innerHTML === "✗") {
+    toggleBtn.innerHTML = "≡";
+  } else {
+    toggleBtn.innerHTML = "&#x02717";
+  }
+
+})

@@ -4,43 +4,102 @@
 
 header {
     @include boxShadow;
+
     .header {
         @include marginLR;
+
         &__logo {
             width: 350px;
-            @include max-media("middle-desktop"){
+
+            @include max-media("middle-desktop") {
                 width: 250px;
             }
+
             img {
                 width: 100%;
             }
         }
+
         @include flex;
+
         .nav {
             width: 65%;
             @include centerBlock;
+
+            @include max-media("pad") {
+                position: absolute;
+                right: 0;
+                top: -100%;
+                width: 100%;
+                z-index: 100;
+                transition: all .5s linear;
+            }
+
             ul {
                 @include flex;
+
+                @include max-media("pad") {
+                    text-align: center;
+                    background-color: $bg-primary;
+                    height: 100vh;
+                    display: none;
+                    justify-content: center;
+                    padding-top: 20%;
+                }
+
+                ;
             }
+
             &__link {
                 @include styleNone;
-                transition: all .3s linear;
+
+                @include max-media("pad") {
+                    @include paddingTB;
+                }
+
                 a {
                     @include styleNone;
                     @include styleText;
-                    display: block;
-                    @include max-media("middle-desktop"){
+                    display: inline-block;
+                    transition: all .3s linear;
+
+                    @include max-media("middle-desktop") {
                         font-size: 1.2rem;
                     }
+
                     @include max-media("pad") {
-                        font-size: .9rem
+                        font-size: 2rem;
+                    }
+
+                    &:hover {
+                        @include textShadow;
+                        transform: translateY(-10px) scale(1.3);
                     }
                 }
-                &:hover {
-                    @include textShadow;
-                    transform: translateY(-10px)scale(1.3);
-                }
             }
+
+            .nav__ul--active {
+                display: block;
+            }
+
+            &__top {
+                top: 0%;
+            }
+        }
+    }
+
+    #wrap {
+        @include styleText(5rem);
+        @include textShadow;
+        @include hoverTransitionElement;
+        position: absolute;
+        z-index: 200;
+        top: 0%;
+        right: 5%;
+        display: none;
+
+        @include max-media("pad") {
+            display: block;
         }
     }
 }

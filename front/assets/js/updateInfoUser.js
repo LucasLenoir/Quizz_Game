@@ -26,3 +26,19 @@ myUserUpdateForm.addEventListener("submit", (e) => {
   myForm.append('token', token);
   updateUserInfo(myForm);
 });
+
+
+// NAV
+const navi = document.querySelector(".nav");
+const nav = document.querySelector('.nav ul');
+const toggleBtn = document.getElementById("wrap");
+toggleBtn.addEventListener("click", (e) => {
+  nav.classList.toggle("nav__ul--active");
+  navi.classList.toggle("nav__top");
+  if (toggleBtn.innerHTML === "✗") {
+    toggleBtn.innerHTML = "≡";
+  } else {
+    toggleBtn.innerHTML = "&#x02717";
+  }
+
+})
