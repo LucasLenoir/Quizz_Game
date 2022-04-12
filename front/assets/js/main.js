@@ -4,6 +4,7 @@ const idUser = params.get('id');
 // NAV HEADER
 const navi = document.querySelector(".nav");
 const nav = document.querySelector('.nav ul');
+console.log(nav);
 const navBar = document.querySelectorAll('.nav__link');
 const connexion = document.getElementById('coUser');
 const accueil = document.getElementById('accueil');
@@ -21,7 +22,7 @@ const linkLogo = document.getElementById("link__logo");
 
 //FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
-    const inscription = navBar[3];
+    const inscription = navBar[2];
     nav.removeChild(inscription);
     connexion.innerHTML = "Profil";
     connexion.setAttribute("href", `./assets/pages/user.html?id=${idUser}`);

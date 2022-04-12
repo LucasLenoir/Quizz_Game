@@ -159,7 +159,7 @@ const myStat = () => {
         const result = document.createElement("p");
         const nbrQuestion = document.createElement('p');
         const resultTime = document.createElement("p");
-        article.className = "profil__quiz__article";
+        article.className = "profil__quiz__article profil__quiz__article__stats";
         nameQuiz.innerHTML = el.name;
         nbrQuestion.innerHTML = "nombre de questions : " + el.number_question;
         result.innerHTML = `score : ${el.score}`;
@@ -191,7 +191,7 @@ const myEdit = () => {
         const blockBtn = document.createElement('div');
         const btnEdit = document.createElement("button");
         const btnDelete = document.createElement("button");
-        article.className = "profil__quiz__article";
+        article.className = "profil__quiz__article profil__quiz__article__edit";
         nameQuiz.innerHTML = user.name;
         category(user.id_category, categorieQuiz);
         btnEdit.classList.add("profil__btn", "profil__btn--edit");

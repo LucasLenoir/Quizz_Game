@@ -221,11 +221,22 @@ header #wrap {
   min-width: 10%;
   text-align: left;
 }
+@media screen and (max-width: 850px) {
+  .main__form__unit_container label {
+    min-width: 30%;
+  }
+}
 .main__form__unit_container__response {
   display: flex;
   justify-content: space-around;
   flex-direction: initial;
   align-items: initial;
+}
+@media screen and (max-width: 599px) {
+  .main__form__unit_container__response {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 .main__form__btn {
   font-size: 45px;
@@ -244,11 +255,8 @@ header #wrap {
 @media screen and (max-width: 850px) {
   .main__form__btn {
     font-size: 2rem;
-  }
-}
-@media screen and (max-width: 599px) {
-  .main__form__btn {
-    font-size: 1rem;
+    padding: 1rem 2rem;
+    width: initial;
   }
 }
 .main__form__btn::after {
@@ -293,6 +301,11 @@ header #wrap {
   background: transparent;
   padding: 0.5rem;
 }
+@media screen and (max-width: 850px) {
+  .main__form select {
+    font-size: 1.5rem;
+  }
+}
 .main__form select option {
   background-color: #111;
 }
@@ -309,6 +322,11 @@ body {
 .main {
   margin: 0 10%;
   margin-top: 2rem;
+}
+@media screen and (max-width: 599px) {
+  .main {
+    margin: 0 5%;
+  }
 }
 .main__grid {
   margin-top: 10rem;
@@ -355,6 +373,11 @@ body {
     font-size: 2rem;
   }
 }
+@media screen and (max-width: 599px) {
+  .main #title__category {
+    margin-top: 2rem;
+  }
+}
 .main__title {
   font-size: 65px;
   font-family: "Many Years Higher";
@@ -372,6 +395,7 @@ body {
 @media screen and (max-width: 599px) {
   .main__title {
     font-size: 2.1rem;
+    margin-top: 1rem;
   }
 }
 .main__container__block {
@@ -429,6 +453,11 @@ body {
 .main__user {
   margin: 0 10%;
 }
+@media screen and (max-width: 850px) {
+  .main__user {
+    margin: 0 5%;
+  }
+}
 .main__container__stats {
   padding: 2rem 0;
   text-align: center;
@@ -447,6 +476,11 @@ body {
   text-transform: uppercase;
   font-weight: normal;
 }
+@media screen and (max-width: 599px) {
+  .main__container__stats h3 {
+    font-size: 1.8rem;
+  }
+}
 .main__container__stats p {
   font-size: 25px;
   font-family: "Game Sans Serif";
@@ -456,6 +490,12 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+@media screen and (max-width: 599px) {
+  .main__container__stats__grid {
+    margin-top: 3rem;
+    grid-template-columns: 1fr;
+  }
 }
 .main__section {
   text-align: center;
@@ -476,7 +516,6 @@ body {
   height: 1.8rem;
   border-radius: 2rem;
   box-shadow: -2px 4px 20px -9px #fff, inset 3px 0px 7px 4px rgba(0, 0, 0, 0.7);
-  filter: url("#wave");
 }
 .main__section__grid {
   margin-top: 6rem;
@@ -534,6 +573,7 @@ body {
 }
 @media screen and (max-width: 599px) {
   .main__score {
+    display: none;
     bottom: 0;
     right: 25%;
   }
@@ -550,6 +590,11 @@ body {
   text-transform: uppercase;
   font-weight: normal;
 }
+@media screen and (max-width: 599px) {
+  .next__question {
+    font-size: 4rem;
+  }
+}
 
 .profil {
   display: flex;
@@ -558,11 +603,17 @@ body {
   align-items: initial;
   padding: 2rem 0;
 }
+@media screen and (max-width: 599px) {
+  .profil {
+    flex-direction: column;
+  }
+}
 .profil__avatar {
   display: flex;
   justify-content: space-between;
   flex-direction: initial;
   align-items: center;
+  margin-bottom: 1rem;
 }
 .profil__avatar p {
   padding-left: 10px;
@@ -575,10 +626,20 @@ body {
   opacity: 0.5;
   font-size: 1rem;
 }
+@media screen and (max-width: 850px) {
+  .profil__avatar #email {
+    font-size: 0.7rem;
+  }
+}
 .profil__avatar__img {
   width: 200px;
   border-radius: 50%;
   box-shadow: -18px 12px 24px -6px rgba(17, 17, 17, 0.7), inset 0px 4px 48px 15px #000000;
+}
+@media screen and (max-width: 850px) {
+  .profil__avatar__img {
+    width: 150px;
+  }
 }
 .profil__avatar__img img {
   width: 100%;
@@ -604,6 +665,17 @@ body {
   height: 8rem;
   margin: auto 0;
 }
+@media screen and (max-width: 850px) {
+  .profil__create__quizz {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (max-width: 599px) {
+  .profil__create__quizz {
+    height: initial;
+    font-size: 1.7rem;
+  }
+}
 .profil__create__quizz:hover {
   transform: scale(1.02);
 }
@@ -620,6 +692,13 @@ body {
   padding: 1rem 0;
   position: relative;
   width: 80%;
+}
+@media screen and (max-width: 599px) {
+  .profil__nav {
+    font-size: 1.1rem;
+    justify-content: space-between;
+    width: 98%;
+  }
 }
 .profil__nav__container {
   display: flex;
@@ -694,12 +773,58 @@ body {
   margin: auto 0;
   min-width: 20%;
   max-width: 20%;
+  font-size: 1rem;
+}
+@media screen and (max-width: 599px) {
+  .profil__quiz__article h3 {
+    min-width: 30%;
+  }
 }
 .profil__quiz__article p {
   margin: auto 0;
   min-width: 20%;
   max-width: 20%;
   text-align: left;
+}
+@media screen and (max-width: 599px) {
+  .profil__quiz__article p {
+    font-size: 0.8rem;
+    padding-right: 0.3rem;
+  }
+}
+@media screen and (max-width: 850px) {
+  .profil__quiz__article__stats {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 599px) {
+  .profil__quiz__article__stats {
+    font-size: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profil__quiz__article__stats h3 {
+    max-width: initial;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0px 4px 12px #872E9F;
+  }
+  .profil__quiz__article__stats p {
+    max-width: initial;
+  }
+}
+.profil__quiz__article__edit h3 {
+  max-width: 30%;
+  min-width: 30%;
+  font-size: 1rem;
+  padding: 0;
+}
+@media screen and (max-width: 599px) {
+  .profil__quiz__article .block__btn {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+  }
 }
 .profil__btn {
   font-size: 30px;
@@ -712,6 +837,11 @@ body {
   border: none;
   position: relative;
   background: transparent;
+}
+@media screen and (max-width: 599px) {
+  .profil__btn {
+    font-size: 1rem;
+  }
 }
 .profil__btn--play::after {
   content: "";
@@ -727,6 +857,11 @@ body {
 .profil__btn--edit {
   color: #fff;
   margin-right: 2rem;
+}
+@media screen and (max-width: 599px) {
+  .profil__btn--edit {
+    margin: 0 0 2rem 0;
+  }
 }
 .profil__btn--edit::after {
   content: "";

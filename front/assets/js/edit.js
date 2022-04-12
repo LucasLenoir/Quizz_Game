@@ -37,7 +37,7 @@ const editQuiz = () => {
             let j = 0;
             const btnEditLast = document.createElement('button');
             btnEditLast.classList.add('main__form__btn', 'main__form__btn--blue', 'btn__edit');
-            btnEditLast.innerHTML = "Valider";
+            btnEditLast.innerHTML = "Submit";
             btnEditLast.style.marginBottom = "3rem";
             response.forEach(el => {
                 j++

@@ -19,9 +19,8 @@
             </figure>
             <nav class="nav">
                 <ul>
-                    <li class="nav__link nav__link--active"><a id="accueil" href="#">Accueil</a></li>
-                    <li class="nav__link"><a id="list__quizz" href="./listQuiz.html">List Quiz</a></li>
-                    <li class="nav__link"><a href="./contact.html">Contacts</a></li>
+                    <li class="nav__link nav__link--active"><a id="accueil" href="#">Home</a></li>
+                    <li class="nav__link"><a id="list__quizz" href="./listQuiz.html">Quizz List</a></li>
                     <li class="nav__link"><a id="coUser" href="../../index.html">Profil</a></li>
                 </ul>
             </nav>
@@ -31,10 +30,10 @@
         </div>
     </header>
     <main class="main__form">
-        <h1 class="main__title">Create ur Quiz</h1>
+        <h1 class="main__title">Create a Quizz</h1>
         <form>
             <div class="main__form__unit_container main__form__unit_container__quiz__name">
-                <label for="nameQuiz">Nom du Quiz</label>
+                <label for="nameQuiz">Quizz's name</label>
                 <input type="text" name="nameQuiz" id="nameQuiz" placeholder="Le joli Quiz" required>
             </div>
             <div class="block__question">
@@ -43,7 +42,7 @@
                     <input type="text" name="question" id="question"
                         placeholder="Quelle est la couleur du poussin jaune?" required>
                     <div class="main__form__unit_container">
-                        <label for="categorie">Categorie</label>
+                        <label for="categorie">Category</label>
                         <select name="categorie" id="categorie">
                             <option value="3">Culture G</option>
                             <option value="2">Sport</option>
@@ -75,9 +74,9 @@
                 </div>
             </div>
             <div class="btn__container">
-                <button id="next__question" class="main__form__btn">Question suivante</button>
-                <button type="submit" class="main__form__btn main__form__btn--blue" id="validateQuiz">Valider
-                    Quiz</button>
+                <button id="next__question" class="main__form__btn">Next question</button>
+                <button type="submit" class="main__form__btn main__form__btn--blue" id="validateQuiz">Submit
+                    Quizz</button>
             </div>
         </form>
     </main>

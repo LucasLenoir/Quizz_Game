@@ -11,7 +11,7 @@ const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById('accueil');
 //FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
-    const inscription = navBar[3];
+    const inscription = navBar[2];
     nav.removeChild(inscription);
     btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`)
     connexion.innerHTML = "Profil";

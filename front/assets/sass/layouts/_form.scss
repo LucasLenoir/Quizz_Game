@@ -45,10 +45,19 @@
       display: inline-block;
       min-width: 10%;
       text-align: left;
+
+      @include max-media("pad") {
+        min-width: 30%;
+      }
     }
 
     &__response {
       @include flex(space-around);
+
+      @include max-media("phone") {
+        flex-direction: column;
+        justify-content: center
+      }
     }
   }
 
@@ -59,10 +68,8 @@
 
     @include max-media("pad") {
       font-size: 2rem;
-    }
-
-    @include max-media("phone") {
-      font-size: 1rem;
+      padding: 1rem 2rem;
+      width: initial;
     }
 
     position: relative;
@@ -109,6 +116,10 @@
 .main__form {
   select {
     @include styleInput;
+
+    @include max-media("pad") {
+      font-size: 1.5rem;
+    }
 
     & option {
       background-color: $bg-primary;
