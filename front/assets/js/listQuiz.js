@@ -9,13 +9,16 @@ const navBar = document.querySelectorAll('.nav__link');
 const connexion = document.getElementById('coUser');
 const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById('accueil');
+//FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
-    const inscription = navBar[0];
+    const inscription = navBar[2];
     nav.removeChild(inscription);
+    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`)
     connexion.innerHTML = "Profil";
     connexion.setAttribute("href", `./user.html?id=${idUser}`);
     accueil.setAttribute("href", `../../index.html?id=${idUser}`);
-    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
+    const linkLogo = document.getElementById("link__logo");
+    linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
 }
 const reqAllQuizz = () => {
 
@@ -46,3 +49,16 @@ const reqAllQuizz = () => {
         })
 }
 reqAllQuizz();
+// NAV
+const navi = document.querySelector(".nav");
+const toggleBtn = document.getElementById("wrap");
+toggleBtn.addEventListener("click", (e) => {
+    nav.classList.toggle("nav__ul--active");
+    navi.classList.toggle("nav__top");
+    if (toggleBtn.innerHTML === "✗") {
+        toggleBtn.innerHTML = "≡";
+    } else {
+        toggleBtn.innerHTML = "&#x02717";
+    }
+
+})

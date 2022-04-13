@@ -150,12 +150,8 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     let testArr = Object.values(array[0]);
     title.innerHTML = testArr[1];
     title.style.fontFamily = "Game Sans Serif";
-    console.log(title.textContent.length);
-    if (title.textContent.length > 50) {
-        title.style.fontSize = "45px";
-    } else {
-        title.style.fontSize = "55px";
-    };
+    responsive(title);
+
     let j = 0;
     const idCategorie = testArr[0];
     pushQuestionCat(idCategorie);
@@ -163,9 +159,9 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
     grid.className = `main__section__grid`;
     grid.setAttribute('id', `${j}`);
     j++;
-    let timeColor = "green";
+    let timeColor = "#25E2A1";
     let progress = 100;
-    turbulence.setAttribute('baseFrequency', '0.00001 0.0001');
+    turbulence.setAttribute('baseFrequency', '0.00001 0.00001');
     setTimeout(() => {
         let timeDown = setInterval(() => {
             let verticalFrequency = 0.0001;
@@ -198,7 +194,7 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
         })
     }, 1000)
     //Implémente les réponses et créer les block en fonction du nombre de réponse
-
+    section.style.pointerEvents = "auto";
     section.appendChild(grid);
     main.appendChild(section);
     const barTime = document.querySelector('.main__section__timer__bar');
@@ -209,9 +205,10 @@ const createQuestion = (title, array, section, timeBar, nextQuestion) => {
 // FUNCTION BTN
 const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion, timeDown, idCategorie) => {
     btn.addEventListener("click", (e) => {
+        section.style.pointerEvents = "none";
         clearInterval(timeDown);
         const barTime = document.querySelector('.main__section__timer__bar');
-        barTime.style.backgroundColor = "green";
+        barTime.style.backgroundColor = "#25E2A1";
         e.preventDefault();
         if (btn.dataset.id != 1) {
             btn.style.backgroundColor = 'red';
@@ -222,7 +219,7 @@ const verificationBtn = (btn, title, section, grid, array, timeBar, nextQuestion
             }, 1000);
             switchQuestion(title, section, grid, array, timeBar, nextQuestion);
         } else {
-            btn.style.backgroundColor = 'green';
+            btn.style.backgroundColor = '#25E2A1';
             points += 100;
             pushScoreUp(idCategorie);
             setTimeout(() => {
@@ -268,7 +265,7 @@ const timesUp = (progress, timeColor, turb) => {
 
     const timeBar = document.querySelector('.main__section__timer__bar');
     if (progress < 65 && progress > 30) {
-        timeColor = "orange";
+        timeColor = "#FF8C32";
         turbulence.setAttribute('baseFrequency', `${turb} 0.0001`);
         setTimeout(() => {
             turb = 0.0001;
@@ -335,6 +332,18 @@ const seeScore = () => {
     })
     section.appendChild(containerGrid);
     main.appendChild(section);
+}
+//FUNCTION RESPONSIVE
+const responsive = (title) => {
+    const windowWidth = window.innerWidth;
+    if (title.textContent.length > 50) {
+        if (windowWidth <= 599) title.style.fontSize = "1.2rem";
+        else if (windowWidth > 599) title.style.fontSize = "2rem";
+    } else {
+        if (windowWidth <= 599) title.style.fontSize = "1.3rem";
+        else if (windowWidth > 599) title.style.fontSize = "2.5rem";
+    };
+
 }
 if (idQuizz != null) runQuizz(idQuizz);
 // EXPORT FUNCTION

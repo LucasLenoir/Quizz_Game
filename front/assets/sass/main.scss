@@ -21,6 +21,10 @@ body {
     @include marginLR;
     @include marginTop;
 
+    @include max-media("phone") {
+        margin: 0 5%;
+    }
+
     &__grid {
         @include marginTop(10rem);
         @include centerText;
@@ -32,6 +36,14 @@ body {
         h3 {
             @include styleTitle(1.8rem);
             @include textShadow;
+
+            @include max-media("pad") {
+                font-size: 1.5rem;
+            }
+
+            @include max-media("phone") {
+                font-size: 1rem;
+            }
         }
 
         &::after {
@@ -49,6 +61,14 @@ body {
 
     #title__category {
         display: none;
+
+        @include max-media("pad") {
+            font-size: 2rem;
+        }
+
+        @include max-media("phone") {
+            margin-top: 2rem
+        }
     }
 
     &__title {
@@ -58,6 +78,11 @@ body {
 
         @include max-media("middle-desktop") {
             font-size: 3rem;
+        }
+
+        @include max-media("phone") {
+            font-size: 2.1rem;
+            margin-top: 1rem;
         }
     }
 
@@ -87,6 +112,10 @@ body {
                 padding: 10px;
             }
 
+            @include max-media("phone") {
+                font-size: 1.5rem;
+            }
+
             &:hover {
                 @include boxShadow($radius: 49px, $color: $color-purple, $color-inside: $color-white);
                 color: $primary-color;
@@ -105,6 +134,10 @@ body {
     &__user {
 
         @include marginLR;
+
+        @include max-media("pad") {
+            margin: 0 5%;
+        }
     }
 
     // GAME START
@@ -118,6 +151,10 @@ body {
 
         h3 {
             @include styleTitle(20px);
+
+            @include max-media("phone") {
+                font-size: 1.8rem;
+            }
         }
 
         p {
@@ -128,6 +165,11 @@ body {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
+
+            @include max-media("phone") {
+                margin-top: 3rem;
+                grid-template-columns: 1fr;
+            }
         }
     }
 
@@ -137,11 +179,16 @@ body {
         &__timer {
             @include flex($item-align: center);
 
+            img {
+                @include max-media("pad") {
+                    display: none;
+                }
+            }
+
             &__bar {
                 width: 90%;
                 height: 1.8rem;
                 @include boxShadow($radius: 2rem);
-                filter: url('#wave');
             }
         }
 
@@ -184,6 +231,17 @@ body {
         bottom: 0;
         right: 20%;
         @include styleTitle;
+
+        @include max-media("pad") {
+            bottom: 25%;
+            right: 38%;
+        }
+
+        @include max-media("phone") {
+            display: none;
+            bottom: 0;
+            right: 25%;
+        }
     }
 }
 
@@ -193,6 +251,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     @include styleTitle(90px);
+
+    @include max-media("phone") {
+        font-size: 4rem;
+    }
 }
 
 //  PAGE USER
@@ -201,8 +263,13 @@ body {
     @include flex;
     @include paddingTB;
 
+    @include max-media("phone") {
+        flex-direction: column;
+    }
+
     &__avatar {
         @include flex($item-align: center);
+        margin-bottom: 1rem;
 
         p {
             padding-left: 10px;
@@ -213,14 +280,21 @@ body {
             padding-top: 1rem;
             opacity: 0.5;
             font-size: 1rem;
+
+            @include max-media("pad") {
+                font-size: 0.7rem;
+            }
         }
 
         &__img {
+            @include max-media("pad") {
+                width: 150px;
+            }
 
             width: 200px;
             border-radius: 50%;
             box-shadow: -18px 12px 24px -6px rgba(17, 17, 17, 0.7),
-                inset 0px 4px 48px 15px #000000;
+            inset 0px 4px 48px 15px #000000;
 
             img {
                 width: 100%;
@@ -234,6 +308,16 @@ body {
         @include styleInput;
         @include styleTitle;
         @include hoverTransitionElement;
+
+        @include max-media("pad") {
+            font-size: 1.6rem;
+        }
+
+        @include max-media("phone") {
+            height: initial;
+            font-size: 1.7rem;
+        }
+
         border-radius: 2rem;
         height: 8rem;
         margin: auto 0;
@@ -249,6 +333,13 @@ body {
         @include styleText;
         @include styleNone;
         @include paddingTB(1rem);
+
+        @include max-media("phone") {
+            font-size: 1.1rem;
+            justify-content: space-between;
+            width: 98%;
+        }
+
         position: relative;
         width: 80%;
 
@@ -313,16 +404,74 @@ body {
         @include styleText;
         @include paddingTB;
 
+        @include max-media("phone") {
+            font-size: 1.1rem;
+
+        }
+
         h3 {
             font-weight: normal;
             margin: auto 0;
             min-width: 20%;
+            max-width: 20%;
+            font-size: 1rem;
+
+            @include max-media("phone") {
+                min-width: 30%;
+            }
         }
 
         p {
             margin: auto 0;
             min-width: 20%;
-            text-align: justify;
+            max-width: 20%;
+            text-align: left;
+
+            @include max-media("phone") {
+                font-size: .8rem;
+                padding-right: 0.3rem;
+            }
+        }
+
+        &__stats {
+            @include max-media("pad") {
+                font-size: 1.2rem;
+            }
+
+            @include max-media("phone") {
+                font-size: 1rem;
+                flex-direction: column;
+                align-items: center;
+
+                h3 {
+                    max-width: initial;
+                    text-align: center;
+                    text-transform: uppercase;
+                    @include textShadow;
+                }
+
+                p {
+                    max-width: initial;
+                }
+            }
+        }
+
+        &__edit {
+            h3 {
+                max-width: 30%;
+                min-width: 30%;
+                font-size: 1rem;
+                padding: 0;
+
+            }
+        }
+
+        .block__btn {
+            @include max-media("phone") {
+                display: flex;
+                flex-direction: column;
+                font-size: 1rem;
+            }
         }
     }
 
@@ -332,6 +481,10 @@ body {
         border: none;
         position: relative;
         background: transparent;
+
+        @include max-media("phone") {
+            font-size: 1rem;
+        }
 
         &--play::after {
             content: "";
@@ -346,6 +499,10 @@ body {
         }
 
         &--edit {
+            @include max-media("phone") {
+                margin: 0 0 2rem 0;
+            }
+
             color: $color-white;
             margin-right: 2rem;
 
@@ -422,7 +579,15 @@ body {
     @include boxShadow;
 
     &:hover {
-        transform: scale(0.1);
+        transform: scale(1.1);
     }
 
+}
+
+//MAIN BLOCK ID QUIZZ
+
+#block__id__quiz {
+    @include max-media("pad") {
+        margin-top: 14rem;
+    }
 }

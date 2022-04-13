@@ -8,11 +8,14 @@ const myForm = document.getElementById('my_form');
 const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById("accueil");
 const connexion = document.getElementById('coUser');
+
+//FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
-    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`)
-    connexion.innerHTML = "Profil";
+    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
     connexion.setAttribute("href", `./user.html?id=${idUser}`);
     accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+    const linkLogo = document.getElementById("link__logo");
+    linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
 }
 //
 const arrayQuest = [];
@@ -34,7 +37,7 @@ const editQuiz = () => {
             let j = 0;
             const btnEditLast = document.createElement('button');
             btnEditLast.classList.add('main__form__btn', 'main__form__btn--blue', 'btn__edit');
-            btnEditLast.innerHTML = "Valider";
+            btnEditLast.innerHTML = "Submit";
             btnEditLast.style.marginBottom = "3rem";
             response.forEach(el => {
                 j++
@@ -120,3 +123,19 @@ const reqUpdate = (path, array) => {
 }
 editQuiz();
 //HEADER CLICK
+
+
+// NAV
+const navi = document.querySelector(".nav");
+const nav = document.querySelector('.nav ul');
+const toggleBtn = document.getElementById("wrap");
+toggleBtn.addEventListener("click", (e) => {
+    nav.classList.toggle("nav__ul--active");
+    navi.classList.toggle("nav__top");
+    if (toggleBtn.innerHTML === "✗") {
+        toggleBtn.innerHTML = "≡";
+    } else {
+        toggleBtn.innerHTML = "&#x02717";
+    }
+
+})

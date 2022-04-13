@@ -16,12 +16,14 @@ const token = localStorage.getItem("token");
 const btnListQuiz = document.getElementById("list__quizz");
 const accueil = document.getElementById("accueil");
 const btnLogout = document.getElementById("logout");
-btnLogout.addEventListener("click", () => {
-  localStorage.clear();
-})
+
+
+//FUNCTION USER LOGIN NAV HEADER
 if (idUser != null) {
   btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`);
   accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+  const linkLogo = document.getElementById("link__logo");
+  linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
 }
 const myUser = {
   id_user: idUser,
@@ -67,7 +69,8 @@ const req = () => {
       console.log(arrayUser);
       username.innerHTML = arrayUser[0].username;
       emailUser.innerHTML = arrayUser[0].email;
-      imgUser.src = `../../../back/images/${arrayUser[0].picture}`
+      arrayUser[0].picture == null ? imgUser.src = "../img/avatarUser/avatar.png" : imgUser.src = `../../../back/images/${arrayUser[0].picture}`;
+
 
     });
 };
@@ -156,7 +159,7 @@ const myStat = () => {
         const result = document.createElement("p");
         const nbrQuestion = document.createElement('p');
         const resultTime = document.createElement("p");
-        article.className = "profil__quiz__article";
+        article.className = "profil__quiz__article profil__quiz__article__stats";
         nameQuiz.innerHTML = el.name;
         nbrQuestion.innerHTML = "nombre de questions : " + el.number_question;
         result.innerHTML = `score : ${el.score}`;
@@ -188,7 +191,7 @@ const myEdit = () => {
         const blockBtn = document.createElement('div');
         const btnEdit = document.createElement("button");
         const btnDelete = document.createElement("button");
-        article.className = "profil__quiz__article";
+        article.className = "profil__quiz__article profil__quiz__article__edit";
         nameQuiz.innerHTML = user.name;
         category(user.id_category, categorieQuiz);
         btnEdit.classList.add("profil__btn", "profil__btn--edit");
@@ -241,3 +244,21 @@ edit.addEventListener("click", myEdit);
 btnUpdateUser.addEventListener('click', () => {
   return window.location.assign(`./userInfoUpdate.html?id=${idUser}`);
 });
+btnLogout.addEventListener("click", () => {
+  localStorage.clear();
+})
+
+// NAV
+const navi = document.querySelector(".nav");
+const nav = document.querySelector('.nav ul');
+const toggleBtn = document.getElementById("wrap");
+toggleBtn.addEventListener("click", (e) => {
+  nav.classList.toggle("nav__ul--active");
+  navi.classList.toggle("nav__top");
+  if (toggleBtn.innerHTML === "✗") {
+    toggleBtn.innerHTML = "≡";
+  } else {
+    toggleBtn.innerHTML = "&#x02717";
+  }
+
+})

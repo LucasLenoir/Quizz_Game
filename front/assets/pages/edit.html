@@ -14,26 +14,29 @@
     <header>
         <div class="header">
             <figure class="header__logo">
-                <a href="../../index.html"></a>
-                <img src="../img/logo.png" alt="Logo site">
+                <a id="link__logo" href="../../index.html">
+                    <img src="../img/logo.png" alt="Logo site">
+                </a>
             </figure>
             <nav class="nav">
                 <ul>
-                    <li class="nav__link"><a id="coUser" href="../../index.html">Home</a></li>
-                    <li class="nav__link"><a id="list__quizz" href="#">Quizz List</a></li>
-                    <li class="nav__link"><a href="./contact.html">Contacts</a></li>
                     <li class="nav__link"><a id="accueil" href="#">Home</a></li>
+                    <li class="nav__link"><a id="list__quizz" href="#">Quizz List</a></li>
+                    <li class="nav__link"><a id="coUser" href="../../index.html">Profil</a></li>
                 </ul>
             </nav>
+            <div>
+                <p id="wrap">&#x02261</p>
+            </div>
         </div>
     </header>
 
     <!-- MAIN -->
     <main class="main">
-        <h1 class="main__title">Edit ur quiz</h1>
+        <h1 class="main__title">Edit quizz</h1>
         </div>
         <form class="main__form yoyo" id="my_form">
-            <button type="submit" class="main__form__btn main__form__btn--blue btn__edit">Valider</button>
+            <button type="submit" class="main__form__btn main__form__btn--blue btn__edit">Submit</button>
         </form>
     </main>
     <script src="../js/edit.js"></script>

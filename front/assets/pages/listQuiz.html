@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Big Brain Quizz / Connexion</title>
+    <title>Big Brain Quizz / Quizz List</title>
 </head>
 
 <body>
@@ -14,19 +14,23 @@
     <header>
         <div class="header">
             <figure class="header__logo">
-                <a href="../../index.html"></a>
-                <img src="../img/logo.png" alt="Logo site">
+                <a id="link__logo" href="../../index.html">
+                    <img src="../img/logo.png" alt="Logo site">
+                </a>
             </figure>
             <nav class="nav">
                 <ul>
+                    <li class="nav__link"><a id="accueil" href="../../index.html">Home</a></li>
+                    <li class="nav__link nav__link--active">
+                        <a id="list__quizz" href="./listQuiz.html">Quizz List</a>
+                    </li>
                     <li class="nav__link"><a href="./inscription.html">Sign Up</a></li>
                     <li class="nav__link"><a id="coUser" href="./connexion.html">Sign In</a></li>
-                    <li class="nav__link nav__link--active"><a id="list__quizz" href="./listQuiz.html">Quizz List</a>
-                    </li>
-                    <li class="nav__link"><a href="./contact.html">Contacts</a></li>
-                    <li class="nav__link"><a id="accueil" href="../../index.html">Home</a></li>
                 </ul>
             </nav>
+            <div>
+                <p id="wrap">&#x02261</p>
+            </div>
         </div>
     </header>
     <!-- MAIN -->

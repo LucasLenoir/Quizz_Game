@@ -14,18 +14,20 @@
     <header>
         <div class="header">
             <figure class="header__logo">
-                <a href="../../index.html"></a>
-                <img src="../img/logo.png" alt="Logo site">
+                <a id="link__logo" href="../../index.html">
+                    <img src="../img/logo.png" alt="Logo site">
+                </a>
             </figure>
             <nav class="nav">
                 <ul>
-                    <li class="nav__link nav__link--active"><a href="./inscription.html">Sign Up</a></li>
-                    <li class="nav__link"><a href="./connexion.html">Sign In</a></li>
-                    <li class="nav__link"><a href="./listQuiz.html"> Quizz List</a></li>
-                    <li class="nav__link"><a href="./contact.html">Contacts</a></li>
                     <li class="nav__link"><a href="../../index.html">Home</a></li>
+                    <li class="nav__link"><a id="list__quizz" href="./listQuiz.html">Quizz List</a></li>
+                    <li class="nav__link"><a id="coUser" href="../../index.html">Profil</a></li>
                 </ul>
             </nav>
+            <div>
+                <p id="wrap">&#x02261</p>
+            </div>
         </div>
     </header>
 
@@ -35,12 +37,12 @@
         </div>
         <form class="main__form" id="my_userUpdateForm" enctype="multipart/form-data">
             <div class="main__form__unit_container">
-                <label for="updatedUsername">Username</label>
-                <input type="text" name="username" id="updatedUsername" placeholder="Username" required>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Username" required>
             </div>
             <div class="main__form__unit_container">
-                <label for="updatedEmail">Email</label>
-                <input type="email" name="email" id="updatedEmail" placeholder=">Email" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email" required>
             </div>
             <div class="main__form__unit_container">
                 <label for="updatedPassword">Password</label>

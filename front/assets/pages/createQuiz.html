@@ -13,24 +13,27 @@
     <header>
         <div class="header">
             <figure class="header__logo">
-                <a href="../../index.html"></a>
-                <img src="../img/logo.png" alt="Logo site">
+                <a id="link__logo" href="../../index.html">
+                    <img src="../img/logo.png" alt="Logo site">
+                </a>
             </figure>
             <nav class="nav">
                 <ul>
-                    <li class="nav__link"><a href="./inscription.html">Logout</a></li>
-                    <li class="nav__link" id="list__quizz"><a href="./listQuiz.html">Quizz List</a></li>
-                    <li class="nav__link"><a href="./contact.html">Contacts</a></li>
-                    <li class="nav__link"><a href="../../index.html">Home</a></li>
+                    <li class="nav__link nav__link--active"><a id="accueil" href="#">Home</a></li>
+                    <li class="nav__link"><a id="list__quizz" href="./listQuiz.html">Quizz List</a></li>
+                    <li class="nav__link"><a id="coUser" href="../../index.html">Profil</a></li>
                 </ul>
             </nav>
+            <div>
+                <p id="wrap">&#x02261</p>
+            </div>
         </div>
     </header>
     <main class="main__form">
-        <h1 class="main__title">Create a Quiz</h1>
+        <h1 class="main__title">Create a Quizz</h1>
         <form>
             <div class="main__form__unit_container main__form__unit_container__quiz__name">
-                <label for="nameQuiz">Quizz Name</label>
+                <label for="nameQuiz">Quizz's name</label>
                 <input type="text" name="nameQuiz" id="nameQuiz" placeholder="Le joli Quiz" required>
             </div>
             <div class="block__question">
@@ -71,9 +74,15 @@
                 </div>
             </div>
             <div class="btn__container">
+<<<<<<< HEAD
                 <button id="next__question" class="main__form__btn">Next Question</button>
                 <button type="submit" class="main__form__btn main__form__btn--blue" id="validateQuiz">Submit
                     Quiz</button>
+=======
+                <button id="next__question" class="main__form__btn">Next question</button>
+                <button type="submit" class="main__form__btn main__form__btn--blue" id="validateQuiz">Submit
+                    Quizz</button>
+>>>>>>> 87ef6d9c91ef5756df4e0085943aedf2c9dec398
             </div>
         </form>
     </main>

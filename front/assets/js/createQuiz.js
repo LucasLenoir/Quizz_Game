@@ -66,3 +66,33 @@ const postQuiz = (array) => {
             return window.location.assign(`./user.html?id=${idUser}`);
         })
 };
+
+
+// NAV
+const navi = document.querySelector(".nav");
+const nav = document.querySelector('.nav ul');
+const toggleBtn = document.getElementById("wrap");
+toggleBtn.addEventListener("click", (e) => {
+    nav.classList.toggle("nav__ul--active");
+    navi.classList.toggle("nav__top");
+    if (toggleBtn.innerHTML === "✗") {
+        toggleBtn.innerHTML = "≡";
+    } else {
+        toggleBtn.innerHTML = "&#x02717";
+    }
+
+});
+
+
+//HEADER
+const btnListQuiz = document.getElementById("list__quizz");
+const accueil = document.getElementById('accueil');
+const profil = document.getElementById('coUser');
+//FUNCTION USER LOGIN NAV HEADER
+if (idUser != null) {
+    btnListQuiz.setAttribute("href", `./listQuiz.html?id=${idUser}`)
+    accueil.setAttribute("href", `../../index.html?id=${idUser}`);
+    profil.setAttribute("href", `./user.html?id=${idUser}`);
+    const linkLogo = document.getElementById("link__logo");
+    linkLogo.setAttribute("href", `../../index.html?id=${idUser}`);
+}
