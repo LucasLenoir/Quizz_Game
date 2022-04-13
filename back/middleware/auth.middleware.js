@@ -6,18 +6,16 @@ let token;
 module.exports.checkUser = (req, res, next) => {
   if (req.originalUrl.startsWith("/api/user/profile/user")) {
     token = req.body.token;
-    if (token === undefined || !token) {
+    if (token === undefined || !token || token === null) {
       token = req.body[0].token;
     }
     if (token) {
       jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-        if (err) {
-          throw err;
+        if (err) {   
+          console.log("Token authentification Failed");
+          throw err
+       
         } else {
-          let user = await userModel.findOne({
-            where: { id_user: decodedToken.id_user },
-          });
-          console.log("MiddlewareCheckUser");
           next();
         }
       });
