@@ -96,12 +96,14 @@ module.exports.updateStats = async (req, res) => {
     let score = datas[i].score;
     let number_question = datas[i].number_question;
 
-    const updateStatsRes = await statsModel.create({
-      id_user: id_user,
-      id_category: id_category,
-      score: score,
-      number_question,
-    });
+    setTimeout(() => {
+      const updateStatsRes = statsModel.create({
+        id_user: id_user,
+        id_category: id_category,
+        score: score,
+        number_question,
+      });
+    }, 8000);
   }
   res.status(201).send("score updated");
 };
